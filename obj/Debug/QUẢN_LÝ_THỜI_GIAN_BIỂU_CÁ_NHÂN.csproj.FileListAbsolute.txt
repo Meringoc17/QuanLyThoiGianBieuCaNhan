@@ -1,0 +1,11 @@
+C:\Users\Ngọc_Ánh\source\repos\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN\bin\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.exe.config
+C:\Users\Ngọc_Ánh\source\repos\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN\bin\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.exe
+C:\Users\Ngọc_Ánh\source\repos\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN\bin\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.pdb
+C:\Users\Ngọc_Ánh\source\repos\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.csproj.AssemblyReference.cache
+C:\Users\Ngọc_Ánh\source\repos\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Properties.Resources.resources
+C:\Users\Ngọc_Ánh\source\repos\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.csproj.GenerateResource.cache
+C:\Users\Ngọc_Ánh\source\repos\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.csproj.CoreCompileInputs.cache
+C:\Users\Ngọc_Ánh\source\repos\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.exe
+C:\Users\Ngọc_Ánh\source\repos\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.pdb
+C:\Users\Ngọc_Ánh\source\repos\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Form1.resources
+C:\Users\Ngọc_Ánh\source\repos\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.FormEvents.resources
