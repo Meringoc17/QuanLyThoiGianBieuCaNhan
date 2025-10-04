@@ -14,7 +14,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
     public partial class Form1 : Form
     {
         private DateTime currentMonth = DateTime.Today;
-     
+
         private Label[,] dayLabels = new Label[6, 7]; // 42 ô ngày
         BindingList<MyEvent> allEvents = new BindingList<MyEvent>();
         private Timer timerReminder;
@@ -131,7 +131,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
         /// <summary>
         /// Lùi tháng
         /// </summary>
-       
+
 
         /// <summary>
         /// Tăng tháng
@@ -168,7 +168,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             dgvEvents.Columns["Start"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
             dgvEvents.Columns["End"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
 
-           
+
             DisplayCalendar(currentMonth);
 
 
@@ -193,8 +193,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             MessageBox.Show("Đã thêm sự kiện thành công!");
         }
 
-        
-        
+
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -325,7 +325,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 }
             }
         }
-
     }
 
     /// <summary>
@@ -353,7 +352,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             prop.SetValue(control, enable, null);
         }
     }
-   
+
 
 
 
