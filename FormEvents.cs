@@ -38,5 +38,15 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
         {
             this.Close();
         }
+
+        private void lblDate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormEvents_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
