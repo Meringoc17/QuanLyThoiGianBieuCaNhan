@@ -21,10 +21,11 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
 
 
-
-
         public Form1()
         {
+            this.AutoScaleMode = AutoScaleMode.None; // Ngắt autoscale
+            this.Font = SystemFonts.DefaultFont;     // Reset font về chuẩn
+
             InitializeComponent();
             InitCalendarGrid();
 
@@ -37,6 +38,9 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             timerReminder.Tick += timerReminder_Tick;
             timerReminder.Start();
         }
+
+
+
         //------------------------------code cho sự kiện lịch ---------------------------------
         /// <summary>
         /// Khởi tạo 42 ô label trong bảng lịch
@@ -54,8 +58,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                     Label lbl = new Label
                     {
                         Dock = DockStyle.Fill,
-                        TextAlign = ContentAlignment.TopRight,
-                        BorderStyle = BorderStyle.FixedSingle,
+                        TextAlign = ContentAlignment.MiddleCenter,
+                        BorderStyle = BorderStyle.None,
                         Font = new Font("Segoe UI", 10, FontStyle.Regular),
                         Cursor = Cursors.Hand
                     };
@@ -72,7 +76,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
         private void DisplayCalendar(DateTime month)
         {
             tblCalendar.SuspendLayout();
-
+         
             lblMonthYear.Text = $"Tháng {month.Month} năm {month.Year}";
             DateTime firstDay = new DateTime(month.Year, month.Month, 1);
             int daysInMonth = DateTime.DaysInMonth(month.Year, month.Month);
@@ -81,8 +85,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             foreach (Label lbl in dayLabels)
             {
                 lbl.Text = "";
-                lbl.BackColor = Color.White;
-                lbl.ForeColor = Color.Black;
+                //lbl.BackColor = Color.White;
+                //lbl.ForeColor = Color.Black;
                 lbl.Tag = null;
             }
 
@@ -99,7 +103,11 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 lbl.Tag = date;
 
                 if (date.Date == DateTime.Today)
-                    lbl.BackColor = Color.LightBlue;
+                {
+                    lbl.BackColor = Color.Aquamarine;
+                    lbl.ForeColor = Color.DarkBlue;
+                    lbl.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+                }
 
                 if (allEvents.Any(ev => ev.Start.Date == date.Date))
                     lbl.ForeColor = Color.Red;
@@ -198,8 +206,18 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            tblCalendar.DoubleBuffered(true); // tránh flicker + tăng tốc
+
+            // tránh flicker + tăng tốc cho bảng
+            tblCalendar.DoubleBuffered(true);
+
+            // Ngăn form tự scale theo DPI/font
+            this.AutoScaleMode = AutoScaleMode.None;
+            this.Scale(new SizeF(1f, 1f));
+
+            // (tuỳ chọn) ép kích thước gốc, chỉ dùng nếu nó vẫn bị to bất thường
+            // this.Size = new Size(1200, 764);
         }
+
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -324,6 +342,47 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                     sk.DaNhacNho = true; // đánh dấu đã nhắc
                 }
             }
+        }
+
+
+        private void dgvEvents_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void tblCalendar_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lblUuTien_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpStart_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTitle_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lblMonthYear_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
