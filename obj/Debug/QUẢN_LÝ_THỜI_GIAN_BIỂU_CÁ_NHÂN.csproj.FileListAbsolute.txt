@@ -19,7 +19,6 @@ C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI
 C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.csproj.CoreCompileInputs.cache
 C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.exe
 C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.pdb
-C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.exe.config
 C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.MainForm.resources
 C:\Users\Ngọc_Ánh\source\repos\project oop\QuanLyThoiGianBieuCaNhan\bin\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.exe
 C:\Users\Ngọc_Ánh\source\repos\project oop\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.csproj.AssemblyReference.cache
