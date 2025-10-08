@@ -13,7 +13,6 @@ C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\bin\Debug\QUẢN_LÝ_THỜI
 C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\bin\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.exe
 C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\bin\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.pdb
 C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.csproj.AssemblyReference.cache
-C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Form1.resources
 C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.FormEvents.resources
 C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Properties.Resources.resources
 C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.csproj.GenerateResource.cache
@@ -21,3 +20,4 @@ C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI
 C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.exe
 C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.pdb
 C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.exe.config
+C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.MainForm.resources

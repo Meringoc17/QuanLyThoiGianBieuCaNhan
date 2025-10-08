@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         private DateTime currentMonth = DateTime.Today;
 
@@ -21,7 +21,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
 
 
-        public Form1()
+        public MainForm()
         {
             this.AutoScaleMode = AutoScaleMode.None; // Ngắt autoscale
             this.Font = SystemFonts.DefaultFont;     // Reset font về chuẩn
@@ -391,13 +391,14 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
     /// </summary>
     public class MyEvent
     {
+        public bool DaNhacNho { get; set; } = false;
         public string Title { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public string Type { get; set; }
         public string Priority { get; set; }
         // Thêm cờ để đánh dấu đã nhắc nhở rồi (tránh popup lặp nhiều lần)
-        public bool DaNhacNho { get; set; } = false;
+        
     }
 
     public static class ControlExtensions

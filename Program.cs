@@ -23,7 +23,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 SetProcessDPIAware();
             }
 
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
         }
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]

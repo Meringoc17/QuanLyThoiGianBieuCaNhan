@@ -49,24 +49,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Interfaces\ISerializer.cs" />
+    <Compile Include="Models\Calendar.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\EventBase.cs" />
+    <Compile Include="Models\OneTimeEvent.cs" />
+    <Compile Include="Models\RecurringEvent.cs" />
+    <Compile Include="Models\Reminder.cs" />
+    <Compile Include="Services\EventManager.cs" />
+    <Compile Include="Services\ReminderService.cs" />
+    <Compile Include="Services\ScheduleService.cs" />
+    <Compile Include="UI\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="UI\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormEvents.cs">
+    <Compile Include="UI\FormEvents.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormEvents.Designer.cs">
+    <Compile Include="UI\FormEvents.Designer.cs">
       <DependentUpon>FormEvents.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="UI\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormEvents.resx">
+    <EmbeddedResource Include="UI\FormEvents.resx">
       <DependentUpon>FormEvents.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

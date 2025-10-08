@@ -1,6 +1,6 @@
 ﻿namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,9 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelRight = new System.Windows.Forms.Panel();
             this.dgvEvents = new System.Windows.Forms.DataGridView();
@@ -63,7 +61,7 @@
             this.lblMonthYear = new System.Windows.Forms.Label();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrev = new System.Windows.Forms.Button();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonThem = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonLuu = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSua = new System.Windows.Forms.ToolStripButton();
@@ -83,7 +81,7 @@
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.toolStrip.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,26 +89,26 @@
             // 
             this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetPartial;
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.51492F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 61.48508F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.6383F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 61.3617F));
             this.tableLayoutPanel1.Controls.Add(this.panelRight, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 91);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 90);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1166, 616);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1154, 612);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // panelRight
             // 
             this.panelRight.Controls.Add(this.dgvEvents);
             this.panelRight.Controls.Add(this.panelunder);
-            this.panelRight.Location = new System.Drawing.Point(455, 8);
+            this.panelRight.Location = new System.Drawing.Point(452, 8);
             this.panelRight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panelRight.Name = "panelRight";
-            this.panelRight.Size = new System.Drawing.Size(704, 600);
+            this.panelRight.Size = new System.Drawing.Size(695, 596);
             this.panelRight.TabIndex = 1;
             // 
             // dgvEvents
@@ -118,28 +116,12 @@
             this.dgvEvents.AllowUserToResizeColumns = false;
             this.dgvEvents.AllowUserToResizeRows = false;
             this.dgvEvents.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEvents.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvEvents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEvents.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvEvents.Location = new System.Drawing.Point(9, 0);
+            this.dgvEvents.Location = new System.Drawing.Point(9, 5);
             this.dgvEvents.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvEvents.Name = "dgvEvents";
             this.dgvEvents.RowHeadersWidth = 82;
-            this.dgvEvents.Size = new System.Drawing.Size(688, 308);
+            this.dgvEvents.Size = new System.Drawing.Size(688, 303);
             this.dgvEvents.TabIndex = 1;
             this.dgvEvents.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEvents_CellContentClick);
             // 
@@ -330,7 +312,7 @@
             this.panel1.Location = new System.Drawing.Point(7, 8);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(437, 600);
+            this.panel1.Size = new System.Drawing.Size(434, 596);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -523,24 +505,24 @@
             this.btnPrev.UseVisualStyleBackColor = true;
             this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
             // 
-            // toolStrip1
+            // toolStrip
             // 
-            this.toolStrip1.AutoSize = false;
-            this.toolStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStrip.AutoSize = false;
+            this.toolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.toolStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonThem,
             this.toolStripButtonLuu,
             this.toolStripButtonSua,
             this.toolStripButtonXoa,
             this.toolStripButtonXuatCSV,
             this.toolStripButtonTai});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 33);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStrip1.Size = new System.Drawing.Size(1178, 54);
-            this.toolStrip1.TabIndex = 2;
-            this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip.Location = new System.Drawing.Point(0, 33);
+            this.toolStrip.Name = "toolStrip";
+            this.toolStrip.Padding = new System.Windows.Forms.Padding(0);
+            this.toolStrip.Size = new System.Drawing.Size(1178, 54);
+            this.toolStrip.TabIndex = 2;
+            this.toolStrip.Text = "ToolBar";
             // 
             // toolStripButtonThem
             // 
@@ -640,19 +622,20 @@
             this.timer1.Enabled = true;
             this.timer1.Interval = 60000;
             // 
-            // Form1
+            // MainForm
             // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(222)))), ((int)(((byte)(254)))));
-            this.ClientSize = new System.Drawing.Size(1178, 708);
-            this.Controls.Add(this.toolStrip1);
+            this.ClientSize = new System.Drawing.Size(1178, 714);
+            this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.ShowInTaskbar = false;
             this.Text = "Quản Lý Thời Gian Biểu Cá Nhân";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -664,8 +647,8 @@
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.toolStrip.ResumeLayout(false);
+            this.toolStrip.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -675,7 +658,7 @@
 
         #endregion
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.ToolStripButton toolStripButtonThem;
         private System.Windows.Forms.ToolStripButton toolStripButtonLuu;
         private System.Windows.Forms.ToolStripButton toolStripButtonSua;
