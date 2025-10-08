@@ -27,3 +27,4 @@ C:\Users\Ngọc_Ánh\source\repos\project oop\QuanLyThoiGianBieuCaNhan\obj\Debug
 C:\Users\Ngọc_Ánh\source\repos\project oop\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Properties.Resources.resources
 C:\Users\Ngọc_Ánh\source\repos\project oop\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.csproj.GenerateResource.cache
 C:\Users\Ngọc_Ánh\source\repos\project oop\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.exe.config
