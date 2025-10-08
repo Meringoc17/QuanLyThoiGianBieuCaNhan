@@ -69,11 +69,16 @@
             this.toolStripButtonXuatCSV = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonTai = new System.Windows.Forms.ToolStripButton();
             this.tệpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sựKiệnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trợGiúpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.xuấtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.côngCụToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xóaToànBộSựKiênToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.câuHỏiThườngGặpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hướngDẫnSửDụngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panelRight.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEvents)).BeginInit();
@@ -322,9 +327,9 @@
             this.tableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetDouble;
             this.tableLayoutPanel2.ColumnCount = 7;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.46905F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.24986F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.64027F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.02116F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.75661F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.55026F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.02116F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.55026F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.81481F));
@@ -372,7 +377,7 @@
             // 
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(69)))), ((int)(((byte)(163)))));
-            this.label5.Location = new System.Drawing.Point(164, 3);
+            this.label5.Location = new System.Drawing.Point(162, 3);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(43, 52);
@@ -384,7 +389,7 @@
             // 
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(69)))), ((int)(((byte)(163)))));
-            this.label4.Location = new System.Drawing.Point(109, 3);
+            this.label4.Location = new System.Drawing.Point(108, 3);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 52);
@@ -424,7 +429,7 @@
             this.label8.Location = new System.Drawing.Point(325, 3);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(44, 52);
+            this.label8.Size = new System.Drawing.Size(51, 52);
             this.label8.TabIndex = 6;
             this.label8.Text = "CN";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -436,10 +441,10 @@
             this.tblCalendar.ColumnCount = 7;
             this.tblCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.49206F));
             this.tblCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.75661F));
+            this.tblCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.55026F));
+            this.tblCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tblCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
             this.tblCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.81481F));
-            this.tblCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.02116F));
-            this.tblCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.02116F));
-            this.tblCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.07936F));
             this.tblCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.75661F));
             this.tblCalendar.Location = new System.Drawing.Point(27, 136);
             this.tblCalendar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -461,7 +466,7 @@
             this.panel2.Controls.Add(this.lblMonthYear);
             this.panel2.Controls.Add(this.btnNext);
             this.panel2.Controls.Add(this.btnPrev);
-            this.panel2.Location = new System.Drawing.Point(27, 23);
+            this.panel2.Location = new System.Drawing.Point(27, 24);
             this.panel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(381, 50);
@@ -579,15 +584,11 @@
             // 
             // tệpToolStripMenuItem
             // 
+            this.tệpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.xuấtToolStripMenuItem});
             this.tệpToolStripMenuItem.Name = "tệpToolStripMenuItem";
             this.tệpToolStripMenuItem.Size = new System.Drawing.Size(62, 29);
             this.tệpToolStripMenuItem.Text = "Tệp ";
-            // 
-            // sựKiệnToolStripMenuItem
-            // 
-            this.sựKiệnToolStripMenuItem.Name = "sựKiệnToolStripMenuItem";
-            this.sựKiệnToolStripMenuItem.Size = new System.Drawing.Size(87, 29);
-            this.sựKiệnToolStripMenuItem.Text = "Sự Kiện";
             // 
             // xemToolStripMenuItem
             // 
@@ -597,6 +598,9 @@
             // 
             // trợGiúpToolStripMenuItem1
             // 
+            this.trợGiúpToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.câuHỏiThườngGặpToolStripMenuItem,
+            this.hướngDẫnSửDụngToolStripMenuItem});
             this.trợGiúpToolStripMenuItem1.Name = "trợGiúpToolStripMenuItem1";
             this.trợGiúpToolStripMenuItem1.Size = new System.Drawing.Size(94, 29);
             this.trợGiúpToolStripMenuItem1.Text = "Trợ Giúp";
@@ -607,7 +611,7 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tệpToolStripMenuItem,
-            this.sựKiệnToolStripMenuItem,
+            this.côngCụToolStripMenuItem,
             this.xemToolStripMenuItem,
             this.trợGiúpToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -621,6 +625,39 @@
             // 
             this.timer1.Enabled = true;
             this.timer1.Interval = 60000;
+            // 
+            // xuấtToolStripMenuItem
+            // 
+            this.xuấtToolStripMenuItem.Name = "xuấtToolStripMenuItem";
+            this.xuấtToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.xuấtToolStripMenuItem.Text = "Xuất";
+            // 
+            // côngCụToolStripMenuItem
+            // 
+            this.côngCụToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.xóaToànBộSựKiênToolStripMenuItem});
+            this.côngCụToolStripMenuItem.Name = "côngCụToolStripMenuItem";
+            this.côngCụToolStripMenuItem.Size = new System.Drawing.Size(165, 29);
+            this.côngCụToolStripMenuItem.Text = "Công cụ bổ sung";
+            // 
+            // xóaToànBộSựKiênToolStripMenuItem
+            // 
+            this.xóaToànBộSựKiênToolStripMenuItem.Name = "xóaToànBộSựKiênToolStripMenuItem";
+            this.xóaToànBộSựKiênToolStripMenuItem.Size = new System.Drawing.Size(274, 34);
+            this.xóaToànBộSựKiênToolStripMenuItem.Text = "Xóa toàn bộ sự kiện";
+            // 
+            // câuHỏiThườngGặpToolStripMenuItem
+            // 
+            this.câuHỏiThườngGặpToolStripMenuItem.Image = global::QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Properties.Resources.fish;
+            this.câuHỏiThườngGặpToolStripMenuItem.Name = "câuHỏiThườngGặpToolStripMenuItem";
+            this.câuHỏiThườngGặpToolStripMenuItem.Size = new System.Drawing.Size(284, 42);
+            this.câuHỏiThườngGặpToolStripMenuItem.Text = "Câu hỏi thường gặp";
+            // 
+            // hướngDẫnSửDụngToolStripMenuItem
+            // 
+            this.hướngDẫnSửDụngToolStripMenuItem.Name = "hướngDẫnSửDụngToolStripMenuItem";
+            this.hướngDẫnSửDụngToolStripMenuItem.Size = new System.Drawing.Size(284, 42);
+            this.hướngDẫnSửDụngToolStripMenuItem.Text = "Hướng dẫn sử dụng";
             // 
             // MainForm
             // 
@@ -666,7 +703,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonXuatCSV;
         private System.Windows.Forms.ToolStripButton toolStripButtonTai;
         private System.Windows.Forms.ToolStripMenuItem tệpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sựKiệnToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem xemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem trợGiúpToolStripMenuItem1;
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -702,6 +738,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolStripMenuItem xuấtToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem côngCụToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem xóaToànBộSựKiênToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem câuHỏiThườngGặpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hướngDẫnSửDụngToolStripMenuItem;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
 
