@@ -19,6 +19,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             this.Status = status;
         }
 
+        public OneTimeEvent() { }
         public OneTimeEvent(EventBase e) 
         {
             e.Title = this.Title;

@@ -20,13 +20,14 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
         private DateTime currentMonth = DateTime.Today;
 
         private Label[,] dayLabels = new Label[6, 7]; // 42 ô ngày
-        BindingList<MyEvent> allEvents = new BindingList<MyEvent>();
+        
         private Timer timerReminder;
 
         private User currentUser;
         private Schedule currentUser_Sched;
         private Form dropDownForm;
         private RecurringEvent recurringEvt = new RecurringEvent();
+        private BindingList<EventBase> allEvents;
 
         //=========================================================================
 
@@ -38,10 +39,26 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             InitializeComponent();
             currentUser = user;
             currentUser_Sched = ScheduleService.ScheduleLoad(currentUser);
+            allEvents = new BindingList<EventBase>(currentUser_Sched.Events);
             InitCalendarGrid();
             // Gán BindingList vào DataGridView
+            allEvents.ListChanged += (s, e) =>
+            {
+                if (e.ListChangedType == ListChangedType.ItemAdded)
+                {
+                    EventBase added = allEvents[e.NewIndex];
+                    if (!currentUser_Sched.Events.Contains(added))
+                        currentUser_Sched.Events.Add(added);
+                }
+                else if (e.ListChangedType == ListChangedType.ItemDeleted)
+                {
+                    // Cập nhật theo index
+                    if (e.NewIndex >= 0 && e.NewIndex < currentUser_Sched.Events.Count)
+                        currentUser_Sched.Events.RemoveAt(e.NewIndex);
+                }
+            };
             dgvEvents.DataSource = allEvents;
-
+            
             // Khởi tạo Timer
             timerReminder = new Timer();
             timerReminder.Interval = 10000; // 1 phút
@@ -203,16 +220,22 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            MyEvent newEvent = new MyEvent
+            if (cbRepeat.Checked)
             {
-                Title = txtTitle.Text,
-                Start = dtpStart.Value,
-                End = dtpEnd.Value,
-                Type = cbType.Text,
-                Priority = cbPriority.Text
-            };
+                allEvents.Add(recurringEvt);   
 
-            allEvents.Add(newEvent); // ✅ BindingList tự động refresh DataGridView
+            }
+            else
+            {
+                OneTimeEvent OnetimeEvt = new OneTimeEvent
+                {
+                    Title = txtTitle.Text,
+                    Start = dtpStart.Value,
+                    End = dtpEnd.Value,
+                    Priority = cbPriority.SelectedItem.ToString()
+                };
+                allEvents.Add(OnetimeEvt);
+            }    
 
             // Làm mới lịch (tô đỏ ngày có sự kiện)
             DisplayCalendar(currentMonth);
@@ -466,6 +489,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                     Start = dtpStart.Value,
                     End = dtpEnd.Value,
                     Priority = cbPriority.SelectedItem.ToString()
+                    
                 };
 
                 RecurringEvtSettingForm repeatForm = new RecurringEvtSettingForm(recurringEvt);
@@ -504,17 +528,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
     /// <summary>
     /// Lớp sự kiện
     /// </summary>
-    public class MyEvent
-    {
-        public bool DaNhacNho { get; set; } = false;
-        public string Title { get; set; }
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
-        public string Type { get; set; }
-        public string Priority { get; set; }
-        // Thêm cờ để đánh dấu đã nhắc nhở rồi (tránh popup lặp nhiều lần)
-
-    }
+    
 
     public static class ControlExtensions
     {
