@@ -16,6 +16,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         private DateTime end;
         private string priority;
         private bool status;
+        public Reminder Reminder { get; set; }
+
         private List<string> categories;
         public bool DaNhacNho { get; set; } = false;
         public string Title { get; set; }

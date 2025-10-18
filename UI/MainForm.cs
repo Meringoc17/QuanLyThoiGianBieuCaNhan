@@ -220,28 +220,71 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (cbRepeat.Checked)
+            // 🧩 Kiểm tra dữ liệu đầu vào
+            if (string.IsNullOrWhiteSpace(txtTitle.Text))
             {
-                allEvents.Add(recurringEvt);   
+                MessageBox.Show("Vui lòng nhập tiêu đề cho sự kiện!", "Thiếu thông tin",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            if (dtpEnd.Value <= dtpStart.Value)
+            {
+                MessageBox.Show("Thời gian kết thúc phải sau thời gian bắt đầu!", "Lỗi thời gian",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (cbPriority.SelectedItem == null)
+            {
+                MessageBox.Show("Vui lòng chọn mức độ ưu tiên!", "Thiếu thông tin",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 🧠 Tạo sự kiện lặp lại hoặc 1 lần
+            if (cbRepeat.Checked && recurringEvt != null)
+            {
+                // Gán Reminder mặc định cho sự kiện lặp lại
+                recurringEvt.Reminder = new Reminder(
+                    TimeSpan.FromMinutes(10),
+                    "Chuẩn bị cho sự kiện lặp lại sắp diễn ra!"
+                );
+
+                allEvents.Add(recurringEvt);
             }
             else
             {
-                OneTimeEvent OnetimeEvt = new OneTimeEvent
+                // Sự kiện 1 lần
+                OneTimeEvent oneTimeEvent = new OneTimeEvent
                 {
                     Title = txtTitle.Text,
                     Start = dtpStart.Value,
                     End = dtpEnd.Value,
-                    Priority = cbPriority.SelectedItem.ToString()
+                    Priority = cbPriority.SelectedItem.ToString(),
+                    Type = cbType.SelectedItem != null ? cbType.SelectedItem.ToString() : "Công việc",
+                    Reminder = new Reminder(
+                        TimeSpan.FromMinutes(10),
+                        "Chuẩn bị cho sự kiện sắp diễn ra!"
+                    )
                 };
-                allEvents.Add(OnetimeEvt);
-            }    
 
-            // Làm mới lịch (tô đỏ ngày có sự kiện)
+                allEvents.Add(oneTimeEvent);
+            }
+
+            // 🔄 Làm mới hiển thị lịch
             DisplayCalendar(currentMonth);
 
-            MessageBox.Show("Đã thêm sự kiện thành công!");
+            // 🪶 Thông báo xác nhận
+            MessageBox.Show("Đã thêm sự kiện thành công!", "Thông báo",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private void timerReminder_Tick(object sender, EventArgs e)
+        {
+            ReminderService.CheckReminders(currentUser_Sched.Events);
+        }
+
 
 
 
@@ -365,27 +408,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             MessageBox.Show("Đã xuất file CSV!");
         }
 
-        private void timerReminder_Tick(object sender, EventArgs e)
-        {
-            DateTime now = DateTime.Now;
-
-            foreach (EventBase sk in currentUser_Sched.Events)
-            {
-                // Nếu còn <= 5 phút và chưa nhắc nhở
-                if (!sk.DaNhacNho && sk.End > now && (sk.End - now).TotalMinutes <= 5)
-                {
-                    MessageBox.Show(
-                        "Sắp đến hạn công việc: " + sk.Title +
-                        "\nDeadline: " + sk.End.ToString("dd/MM/yyyy HH:mm"),
-                        "Nhắc nhở",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning
-                    );
-
-                    sk.DaNhacNho = true; // đánh dấu đã nhắc
-                }
-            }
-        }
+        
 
 
         private void dgvEvents_CellContentClick(object sender, DataGridViewCellEventArgs e)
