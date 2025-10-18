@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,12 +19,14 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         public Reminder()
         {
         }
+
         // Constructor khởi tạo nhanh
         public Reminder(TimeSpan beforeStart, string message)
         {
             BeforeStart = beforeStart;
             Message = message;
         }
+
         // ✅ Constructor đặc biệt dùng khi Deserialization
         protected Reminder(SerializationInfo info, StreamingContext context)
         {

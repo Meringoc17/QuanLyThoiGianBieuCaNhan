@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\ISerializer.cs" />
-    <Compile Include="Models\Calendar.cs" />
+    <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\EventBase.cs" />
     <Compile Include="Models\OneTimeEvent.cs" />
@@ -60,11 +60,12 @@
     <Compile Include="Services\FileServices.cs" />
     <Compile Include="Services\ReminderService.cs" />
     <Compile Include="Services\ScheduleService.cs" />
-    <Compile Include="UI\Form1.cs">
+    <Compile Include="Services\UserManager.cs" />
+    <Compile Include="UI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="UI\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\FormEvents.cs">
       <SubType>Form</SubType>
@@ -75,8 +76,20 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="UI\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="UI\RecurringEvtSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\RecurringEvtSettingForm.Designer.cs">
+      <DependentUpon>RecurringEvtSettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UserLogin.Designer.cs">
+      <DependentUpon>UserLogin.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UI\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\FormEvents.resx">
@@ -92,6 +105,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\RecurringEvtSettingForm.resx">
+      <DependentUpon>RecurringEvtSettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserLogin.resx">
+      <DependentUpon>UserLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services;
+using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,8 +24,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             {
                 SetProcessDPIAware();
             }
-
-            Application.Run(new MainForm());
+            UserManager.Add_Admin();
+            Application.Run(new UserLogin());
         }
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]

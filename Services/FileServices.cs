@@ -8,7 +8,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
 {
     internal class FileService : ISerializer
     {
-        public void Save(Calendar calendar, string filePath)
+        public void Save(Schedule calendar, string filePath)
         {
             using (FileStream fs = new FileStream(filePath, FileMode.Create))
             {
@@ -19,13 +19,13 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             }
         }
 
-        public Calendar Load(string filePath)
+        public Schedule Load(string filePath)
         {
             using (FileStream fs = new FileStream(filePath, FileMode.Open))
             {
                 BinaryFormatter bf = new BinaryFormatter();
 
-                return (Calendar)bf.Deserialize(fs);
+                return (Schedule)bf.Deserialize(fs);
 
             }
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
 {
     [Serializable]
-    public abstract class EventBase // Lớp cơ bản cho Event chi tiết hơn?
+    public abstract class EventBase: ISerializable // Lớp cơ bản cho Event chi tiết hơn?
     {
 
         private bool daNhacnho;
@@ -15,15 +15,17 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         private DateTime start;
         private DateTime end;
         private string priority;
-        private string status;
-        private List<Category> categories;
+        private bool status;
+        private List<string> categories;
         public bool DaNhacNho { get; set; } = false;
         public string Title { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public string Type { get; set; }
         public string Priority { get; set; }
-        public string Status { get; set; }
+        public bool Status { get; set; }
+
+        public List<string> Categories { get; set; }
 
         public EventBase() { }
 
@@ -45,13 +47,14 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             info.AddValue("Priority", Priority);
         }
 
-        public override string ToString()
+        public virtual string ToString()
         {
-            return $"Sự kiện: {Title}, {Start:g} - {End:g}, Ưu tiên: {Priority}";
+            return $"";
         }
-        public virtual void DisplayInfo()
+        public virtual string DisplayInfo()
         {
-            Console.WriteLine($"📅 {Title} | {Start:g} - {End:g} | Loại: {Type} | Ưu tiên: {Priority}");
+            //📅 {Title} | {Start:g} - {End:g} | Loại: {Type} | Ưu tiên: {Priority}
+            return $"";
         }
     }
 }
