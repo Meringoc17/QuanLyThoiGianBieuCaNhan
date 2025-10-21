@@ -43,9 +43,14 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
                 lbl_LoginError.ForeColor = Color.Green;
                 lbl_LoginError.Text = "Đăng nhập thành công !";
                 lbl_LoginError.Visible = true;
+                Console.Beep(750, 150);
+                Console.Beep(850, 150);
+                Console.Beep(1000, 150);
+
                 MessageBox.Show($"Đăng nhập thành công! Xin chào {user.Name}",
                                 "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();
+                
                 MainForm mainForm = new MainForm(user);
                 mainForm.ShowDialog();
                 this.Close();

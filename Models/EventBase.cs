@@ -58,5 +58,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             //📅 {Title} | {Start:g} - {End:g} | Loại: {Type} | Ưu tiên: {Priority}
             return $"";
         }
+
+
     }
 }

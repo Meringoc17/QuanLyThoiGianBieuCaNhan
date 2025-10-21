@@ -15,22 +15,15 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
 
             foreach (EventBase ev in events)
             {
-                if (ev.Reminder != null && ev.DaNhacNho == false)
+                if (ev.Reminder != null && !ev.DaNhacNho)
                 {
                     DateTime remindTime = ev.Start - ev.Reminder.BeforeStart;
 
                     if (now >= remindTime && now < ev.Start)
                     {
-                        ev.Reminder.Notify(ev);
+                        // Gọi event thay vì MessageBox
+                        ev.Reminder.Trigger(ev);
                         ev.DaNhacNho = true;
-
-                        MessageBox.Show(
-                            ev.Reminder.Message + "\nSự kiện: " + ev.Title +
-                            "\nBắt đầu lúc: " + ev.Start.ToString("dd/MM/yyyy HH:mm"),
-                            "Nhắc nhở",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information
-                        );
                     }
                 }
             }

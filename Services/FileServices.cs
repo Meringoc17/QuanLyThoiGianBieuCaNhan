@@ -10,12 +10,15 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
     {
         public void Save(Schedule calendar, string filePath)
         {
-            using (FileStream fs = new FileStream(filePath, FileMode.Create))
+            unchecked
             {
-                BinaryFormatter bf = new BinaryFormatter();
+                using (FileStream fs = new FileStream(filePath, FileMode.Create))
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
 
-                bf.Serialize(fs, calendar);
+                    bf.Serialize(fs, calendar);
 
+                } 
             }
         }
 

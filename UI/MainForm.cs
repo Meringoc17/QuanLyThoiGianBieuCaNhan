@@ -7,7 +7,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -64,6 +63,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             timerReminder.Interval = 10000; // 1 phút
             timerReminder.Tick += timerReminder_Tick;
             timerReminder.Start();
+            lbl_SignInName.Text = $"Đang đăng nhập dưới tên {currentUser.Name}";
         }
 
 
@@ -213,10 +213,17 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             dgvEvents.DataSource = allEvents;
             dgvEvents.Columns["Start"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
             dgvEvents.Columns["End"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
-
+            dgvEvents.Columns["Reminder"].Visible = false;
+            dgvEvents.Columns["DaNhacNho"].Visible = false;
             DisplayCalendar(currentMonth);
+            foreach (EventBase ev in allEvents)
+            {
+                if (ev.Reminder != null)
+                    ev.Reminder.OnReminderTriggered += Reminder_OnTriggered;
+            }
 
         }
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -247,11 +254,22 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             {
                 // Gán Reminder mặc định cho sự kiện lặp lại
                 recurringEvt.Reminder = new Reminder(
-                    TimeSpan.FromMinutes(10),
+                    TimeSpan.FromMinutes(1), TimeSpan.Zero,
                     "Chuẩn bị cho sự kiện lặp lại sắp diễn ra!"
                 );
 
                 allEvents.Add(recurringEvt);
+                if (recurringEvt.Reminder != null)
+                {
+                    recurringEvt.Reminder.OnReminderTriggered += Reminder_OnTriggered;
+                    DateTime remindTime = recurringEvt.Start - recurringEvt.Reminder.BeforeStart;
+                    if (DateTime.Now >= remindTime && DateTime.Now < recurringEvt.Start)
+                    {
+                        // 👉 Nhắc ngay
+                        recurringEvt.Reminder.Trigger(recurringEvt);
+                        recurringEvt.DaNhacNho = true;
+                    }
+                }
             }
             else
             {
@@ -264,12 +282,25 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                     Priority = cbPriority.SelectedItem.ToString(),
                     Type = cbType.SelectedItem != null ? cbType.SelectedItem.ToString() : "Công việc",
                     Reminder = new Reminder(
-                        TimeSpan.FromMinutes(10),
+                        TimeSpan.FromMinutes(10), TimeSpan.Zero,
                         "Chuẩn bị cho sự kiện sắp diễn ra!"
+                    
                     )
+
                 };
 
                 allEvents.Add(oneTimeEvent);
+                if (oneTimeEvent.Reminder != null)
+                {
+                    oneTimeEvent.Reminder.OnReminderTriggered += Reminder_OnTriggered;
+                    DateTime remindTime = oneTimeEvent.Start - oneTimeEvent.Reminder.BeforeStart;
+                    if (DateTime.Now >= remindTime && DateTime.Now < oneTimeEvent.Start)
+                    {
+                        // 👉 Nhắc ngay
+                        oneTimeEvent.Reminder.Trigger(oneTimeEvent);
+                        oneTimeEvent.DaNhacNho = true;
+                    }
+                }
             }
 
             // 🔄 Làm mới hiển thị lịch
@@ -280,12 +311,16 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void timerReminder_Tick(object sender, EventArgs e)
+        private void Reminder_OnTriggered(Reminder sender, EventBase ev)
         {
-            ReminderService.CheckReminders(currentUser_Sched.Events);
+            ev.DaNhacNho = true;
+                MessageBox.Show(
+                    $"⏰ {sender.Message}\nSự kiện: {ev.Title}\nBắt đầu lúc: {ev.Start:g}",
+                    "Nhắc nhở",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                ); 
         }
-
-
 
 
         protected override void OnLoad(EventArgs e)
@@ -531,6 +566,23 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
         }
 
+
+        private void timerReminder_Tick(object sender, EventArgs e)
+        {
+            foreach (EventBase ev in currentUser_Sched.Events)
+            {
+                if (ev.Reminder == null || ev.DaNhacNho) continue;
+
+                DateTime remindTime = ev.Start - ev.Reminder.BeforeStart;
+                if (DateTime.Now >= remindTime && !ev.DaNhacNho)
+                {
+                    // 👉 Kích hoạt sự kiện Reminder
+                    ev.Reminder.Trigger(ev);
+                    
+                }
+            }
+        }
+
         private void SubscribeToRecurrEvtForm(RecurringEvtSettingForm r)
         {
             r.OnRecurrEvtSaved += RecurrEvtSavedHandler;
@@ -546,12 +598,17 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             }
 
         }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 
     /// <summary>
     /// Lớp sự kiện
     /// </summary>
-    
+
 
     public static class ControlExtensions
     {
