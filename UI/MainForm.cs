@@ -103,19 +103,27 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
         {
             tblCalendar.SuspendLayout();
 
-            lblMonthYear.Text = $"Tháng {month.Month} năm {month.Year}";
+            lblMonthYear.Text = "Tháng " + month.Month + " năm " + month.Year;
+
             DateTime firstDay = new DateTime(month.Year, month.Month, 1);
             int daysInMonth = DateTime.DaysInMonth(month.Year, month.Month);
             int startCol = ((int)firstDay.DayOfWeek + 6) % 7;
 
-            foreach (Label lbl in dayLabels)
+            // Reset toàn bộ lịch
+            for (int r = 0; r < 6; r++)
             {
-                lbl.Text = "";
-                //lbl.BackColor = Color.White;
-                //lbl.ForeColor = Color.Black;
-                lbl.Tag = null;
+                for (int c = 0; c < 7; c++)
+                {
+                    Label lbl = dayLabels[r, c];
+                    lbl.Text = "";
+                    lbl.Tag = null;
+                    lbl.BackColor = Color.White;
+                    lbl.ForeColor = Color.Black;
+                    lbl.Font = new Font("Segoe UI", 10, FontStyle.Regular);
+                }
             }
 
+            // Điền ngày
             int day = 1;
             for (int i = 0; i < daysInMonth; i++)
             {
@@ -128,25 +136,47 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 lbl.Text = day.ToString();
                 lbl.Tag = date;
 
+                // Ngày hôm nay
                 if (date.Date == DateTime.Today)
                 {
                     lbl.BackColor = Color.Aquamarine;
                     lbl.ForeColor = Color.DarkBlue;
-                    lbl.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+                    lbl.Font = new Font("Segoe UI", 11, FontStyle.Bold);
                 }
 
-                unchecked
+                // Tô đỏ nếu có sự kiện
+                if (HasEventOnDate(date))
                 {
-                    //if (allEvents.Any(ev => ev.Start.Date == date.Date))
-                    // lbl.ForeColor = Color.Red; 
+                    lbl.BackColor = Color.LightPink;
+                    lbl.ForeColor = Color.DarkRed;
+                    lbl.Font = new Font("Segoe UI", 11, FontStyle.Bold);
                 }
 
                 day++;
             }
 
             tblCalendar.ResumeLayout();
-
         }
+
+        //Hàm phụ
+        private bool HasEventOnDate(DateTime date)
+        {
+            if (currentUser_Sched == null || currentUser_Sched.Events == null)
+                return false;
+
+            foreach (EventBase ev in currentUser_Sched.Events)
+            {
+                DateTime startDate = ev.Start.Date;
+                DateTime endDate = ev.End.Date;
+
+                if (date >= startDate && date <= endDate)
+                    return true;
+            }
+
+            return false;
+        }
+
+
 
 
         /// <summary>
@@ -155,20 +185,44 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
         private void Day_Click(object sender, EventArgs e)
         {
             Label lbl = sender as Label;
-            if (lbl == null || lbl.Tag == null) return;
+            if (lbl == null || lbl.Tag == null)
+                return;
 
-            DateTime date = (DateTime)lbl.Tag;
+            DateTime selectedDate = (DateTime)lbl.Tag;
 
-            unchecked
+            // Nếu chưa có dữ liệu lịch, thoát
+            if (currentUser_Sched == null || currentUser_Sched.Events == null)
+                return;
+
+            // Tạo danh sách sự kiện cho ngày được chọn
+            List<EventBase> eventsInDay = new List<EventBase>();
+
+            foreach (EventBase ev in currentUser_Sched.Events)
             {
-                // List<MyEvent> eventsForDay = allEvents
-                //.Where(ev => ev.Start.Date == date.Date)
-                //.ToList();
+                DateTime startDate = ev.Start.Date;
+                DateTime endDate = ev.End.Date;
 
-                //FormEvents frm = new FormEvents(date, eventsForDay);
-                // frm.ShowDialog(); 
+                if (selectedDate >= startDate && selectedDate <= endDate)
+                {
+                    eventsInDay.Add(ev);
+                }
+            }
+
+            // Nếu có sự kiện → mở form hiển thị
+            if (eventsInDay.Count > 0)
+            {
+                FormEvents frm = new FormEvents(eventsInDay, selectedDate);
+                frm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Không có sự kiện nào trong ngày này.",
+                                "Thông báo",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
             }
         }
+      
 
         /// <summary>
         /// Tăng tháng
@@ -259,6 +313,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 );
 
                 allEvents.Add(recurringEvt);
+                DisplayCalendar(currentMonth);
+
                 if (recurringEvt.Reminder != null)
                 {
                     recurringEvt.Reminder.OnReminderTriggered += Reminder_OnTriggered;
@@ -290,6 +346,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 };
 
                 allEvents.Add(oneTimeEvent);
+                DisplayCalendar(currentMonth);
+
                 if (oneTimeEvent.Reminder != null)
                 {
                     oneTimeEvent.Reminder.OnReminderTriggered += Reminder_OnTriggered;
@@ -443,13 +501,11 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             MessageBox.Show("Đã xuất file CSV!");
         }
 
-        
 
 
-        private void dgvEvents_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
-        }
+      
+
 
         private void tblCalendar_Paint(object sender, PaintEventArgs e)
         {

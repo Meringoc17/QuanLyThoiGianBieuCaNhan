@@ -13,25 +13,19 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 {
     public partial class FormEvents : Form
     {
-        public FormEvents(DateTime date, List<EventBase> events)
+        public FormEvents(List<EventBase> events, DateTime date)
         {
             InitializeComponent();
-            lblDate.Text = "Sự kiện ngày " + date.ToString("dd/MM/yyyy");
 
-            if (events.Count > 0)
+            lblDate.Text = date.ToString("dd/MM/yyyy");
+
+            foreach (EventBase ev in events)
             {
-                foreach (EventBase ev in events)
-                {
-                    lstEvents.Items.Add(
-                        ev.Start.ToString("HH:mm") + " - " +
-                        ev.End.ToString("HH:mm") + " " +
-                        ev.Title
-                    );
-                }
-            }
-            else
-            {
-                lstEvents.Items.Add("Không có sự kiện.");
+                lstEvents.Items.Add(
+                    ev.Title + " (" +
+                    ev.Start.ToShortTimeString() + " - " +
+                    ev.End.ToShortTimeString() + ")"
+                );
             }
         }
 

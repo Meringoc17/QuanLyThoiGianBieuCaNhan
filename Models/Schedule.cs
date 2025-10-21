@@ -15,33 +15,32 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             Events = new List<EventBase>();
         }
 
-        public Schedule(User u): this()
+        public Schedule(User u) : this()
         {
             Owner = u.Phone;
         }
 
-        //=================================================================================
-        /// <summary>
-        /// Serialization nằm ở phân khúc này.
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-  
-        // Constructor dùng khi Deserialize
-        protected Schedule(SerializationInfo info, StreamingContext context)
-        {
-            Owner = info.GetString("Owner");
-            Events = (List<EventBase>)info.GetValue("Events", typeof(List<EventBase>));
-        }
-
-        // Hàm Serialize dữ liệu vào file
+        // ✅ Serialize – Ghi dữ liệu vào file
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("Owner", Owner);
             info.AddValue("Events", Events);
         }
 
-        //==================================================================================
+        // ✅ Deserialize – Đọc dữ liệu từ file
+        protected Schedule(SerializationInfo info, StreamingContext context)
+        {
+            try
+            {
+                Owner = info.GetString("Owner");
+                Events = (List<EventBase>)info.GetValue("Events", typeof(List<EventBase>));
+            }
+            catch
+            {
+                Owner = "Unknown";
+                Events = new List<EventBase>();
+            }
+        }
 
         public void AddEventSched(EventBase e)
         {
@@ -52,14 +51,5 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         {
             return $"📅 Lịch của: {Owner}, Tổng sự kiện: {Events.Count}";
         }
-    }
-    
-    public class ScheduleFactory
-    {
-        public static Schedule Create()
-        {
-            return new Schedule();
-        }
-
     }
 }
