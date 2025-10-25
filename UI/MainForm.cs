@@ -19,7 +19,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
         private DateTime currentMonth = DateTime.Today;
 
         private Label[,] dayLabels = new Label[6, 7]; // 42 ô ngày
-        
+
         private Timer timerReminder;
 
         private User currentUser;
@@ -29,7 +29,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
         private BindingList<EventBase> allEvents;
 
         //=========================================================================
-
 
         public MainForm(User user)
         {
@@ -57,14 +56,78 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 }
             };
             dgvEvents.DataSource = allEvents;
-            
+
             // Khởi tạo Timer
             timerReminder = new Timer();
-            timerReminder.Interval = 10000; // 1 phút
+            timerReminder.Interval = 1000; // 1 min
             timerReminder.Tick += timerReminder_Tick;
             timerReminder.Start();
+            timer_Time.Interval = 1000;
+            timer_Time.Start();
+            string dateTime = DateTime.Now.ToString("HH:mm:ss");
+            tS_Time.Text = "Time: " + dateTime.ToString();
             lbl_SignInName.Text = $"Đang đăng nhập dưới tên {currentUser.Name}";
         }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            // tránh flicker + tăng tốc cho bảng
+            tblCalendar.DoubleBuffered(true);
+
+            // Ngăn form tự scale theo DPI/font
+            this.AutoScaleMode = AutoScaleMode.None;
+            this.Scale(new SizeF(1f, 1f));
+
+            // (tuỳ chọn) ép kích thước gốc, chỉ dùng nếu nó vẫn bị to bất thường
+            // this.Size = new Size(1200, 764);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            statusStrip_Update();
+
+            // Cho phép chọn ngày + giờ
+            dtpStart.Format = DateTimePickerFormat.Custom;
+            dtpStart.CustomFormat = "dd/MM/yyyy HH:mm";
+            dtpStart.ShowUpDown = false;
+
+            dtpEnd.Format = DateTimePickerFormat.Custom;
+            dtpEnd.CustomFormat = "dd/MM/yyyy HH:mm";
+            dtpEnd.ShowUpDown = false;
+
+            dgvEvents.AutoGenerateColumns = true;
+            dgvEvents.DataSource = null;
+            dgvEvents.DataSource = allEvents;
+            dgvEvents.Columns["Start"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
+            dgvEvents.Columns["End"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
+            dgvEvents.Columns["Reminder"].Visible = false;
+            dgvEvents.Columns["DaNhacNho"].Visible = false;
+            dgvEvents.Columns["EnableReminder"].Visible = false;
+
+            // ⚙️ Tạo cột checkbox "Hoàn thành" nếu chưa có
+            if (!dgvEvents.Columns.Contains("Status"))
+            {
+                DataGridViewCheckBoxColumn chkCol = new DataGridViewCheckBoxColumn();
+                chkCol.HeaderText = "Hoàn thành";
+                chkCol.Name = "Status";
+                chkCol.DataPropertyName = "Status"; // phải trùng property trong EventBase
+                dgvEvents.Columns.Add(chkCol);
+            }
+
+            // ⚙️ Gắn sự kiện thủ công (không dùng lambda)
+            dgvEvents.CurrentCellDirtyStateChanged += dgvEvents_CurrentCellDirtyStateChanged;
+            dgvEvents.CellValueChanged += dgvEvents_CellValueChanged;
+            DisplayCalendar(currentMonth);
+            foreach (EventBase ev in allEvents)
+            {
+                if (ev.Reminder != null && ev.EnableReminder)
+                    ev.Reminder.OnReminderTriggered += Reminder_OnTriggered;
+            }
+
+        }
+
 
 
         //------------------------------code cho sự kiện lịch ---------------------------------
@@ -222,7 +285,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                                 MessageBoxIcon.Information);
             }
         }
-      
+
 
         /// <summary>
         /// Tăng tháng
@@ -248,36 +311,49 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
         /// <summary>
         /// Load Form
         /// </summary>
-        private void Form1_Load(object sender, EventArgs e)
+        
+
+        private void dgvEvents_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
-            tS_totalEvent.Text = $"Tổng số việc hiện tại: {currentUser_Sched.Events.Count}";
-
-
-            // Cho phép chọn ngày + giờ
-            dtpStart.Format = DateTimePickerFormat.Custom;
-            dtpStart.CustomFormat = "dd/MM/yyyy HH:mm";
-            dtpStart.ShowUpDown = false;
-
-            dtpEnd.Format = DateTimePickerFormat.Custom;
-            dtpEnd.CustomFormat = "dd/MM/yyyy HH:mm";
-            dtpEnd.ShowUpDown = false;
-
-            dgvEvents.AutoGenerateColumns = true;
-            dgvEvents.DataSource = null;
-            dgvEvents.DataSource = allEvents;
-            dgvEvents.Columns["Start"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
-            dgvEvents.Columns["End"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
-            dgvEvents.Columns["Reminder"].Visible = false;
-            dgvEvents.Columns["DaNhacNho"].Visible = false;
-            DisplayCalendar(currentMonth);
-            foreach (EventBase ev in allEvents)
+            if (dgvEvents.IsCurrentCellDirty)
             {
-                if (ev.Reminder != null)
-                    ev.Reminder.OnReminderTriggered += Reminder_OnTriggered;
+                dgvEvents.CommitEdit(DataGridViewDataErrorContexts.Commit);
             }
-
         }
 
+        private void dgvEvents_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            if (dgvEvents.Columns[e.ColumnIndex].Name == "Status")
+            {
+                DataGridViewRow row = dgvEvents.Rows[e.RowIndex];
+                bool isDone = false;
+
+                if (row.Cells["Status"].Value != null)
+                    isDone = Convert.ToBoolean(row.Cells["Status"].Value);
+
+                // ✅ Đổi màu nền và chữ
+                if (isDone)
+                {
+                    row.DefaultCellStyle.BackColor = Color.LightGreen;
+                    row.DefaultCellStyle.ForeColor = Color.Green;
+                }
+                else
+                {
+                    row.DefaultCellStyle.BackColor = Color.White;
+                    row.DefaultCellStyle.ForeColor = Color.Black;
+                }
+
+                // ✅ Cập nhật dữ liệu thật
+                if (e.RowIndex < allEvents.Count)
+                {
+                    allEvents[e.RowIndex].Status = isDone;
+                }
+
+                statusStrip_Update();
+            }
+        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -303,19 +379,38 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 return;
             }
 
+            if (dtpStart.Value < DateTime.Now)
+            {
+                MessageBox.Show("Vui lòng chọn lại thời gian bắt đầu, đúng hoặc sau thời gian hiện tại !",
+                    "Không hợp lệ",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }    
+
+            recurringEvt.EnableReminder = cB_ReminderOn.Checked;
+            
             // 🧠 Tạo sự kiện lặp lại hoặc 1 lần
+
             if (cbRepeat.Checked && recurringEvt != null)
             {
-                // Gán Reminder mặc định cho sự kiện lặp lại
-                recurringEvt.Reminder = new Reminder(
-                    TimeSpan.FromMinutes(1), TimeSpan.Zero,
-                    "Chuẩn bị cho sự kiện lặp lại sắp diễn ra!"
-                );
-
+                if (recurringEvt.EnableReminder)
+                {
+                    int result;
+                    if (int.TryParse(txtTimeb4Event.Text, out result))
+                    {
+                        recurringEvt.Reminder = ReminderService.CreateReminder(
+                            ReminderService.UnitConverter(result, cboBox_TimeUnit.SelectedItem.ToString())
+                        );
+                    }
+                    else
+                    {
+                        MessageBox.Show("Giá trị thời gian không hợp lệ!");
+                    }
+                }
                 allEvents.Add(recurringEvt);
                 DisplayCalendar(currentMonth);
 
-                if (recurringEvt.Reminder != null)
+                if (recurringEvt.Reminder != null && recurringEvt.EnableReminder)
                 {
                     recurringEvt.Reminder.OnReminderTriggered += Reminder_OnTriggered;
                     DateTime remindTime = recurringEvt.Start - recurringEvt.Reminder.BeforeStart;
@@ -329,6 +424,22 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             }
             else
             {
+                bool enbReminder = cB_ReminderOn.Checked;
+                Reminder reminder = new Reminder();
+                if (enbReminder)
+                {
+                    int result;
+                    if (int.TryParse(txtTimeb4Event.Text, out result))
+                    {
+                        reminder = ReminderService.CreateReminder(
+                            ReminderService.UnitConverter(result, cboBox_TimeUnit.SelectedItem.ToString())
+                        );
+                    }
+                    else
+                    {
+                        MessageBox.Show("Giá trị thời gian không hợp lệ!");
+                    }
+                }
                 // Sự kiện 1 lần
                 OneTimeEvent oneTimeEvent = new OneTimeEvent
                 {
@@ -337,11 +448,9 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                     End = dtpEnd.Value,
                     Priority = cbPriority.SelectedItem.ToString(),
                     Type = cbType.SelectedItem != null ? cbType.SelectedItem.ToString() : "Công việc",
-                    Reminder = new Reminder(
-                        TimeSpan.FromMinutes(10), TimeSpan.Zero,
-                        "Chuẩn bị cho sự kiện sắp diễn ra!"
-                    
-                    )
+                    EnableReminder = enbReminder,
+                    //if (cB_ReminderOn.Checked)
+                    Reminder = reminder
 
                 };
 
@@ -363,39 +472,48 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
             // 🔄 Làm mới hiển thị lịch
             DisplayCalendar(currentMonth);
+            statusStrip_Update();
 
             // 🪶 Thông báo xác nhận
             MessageBox.Show("Đã thêm sự kiện thành công!", "Thông báo",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void statusStrip_Update()
+        {
+            tS_totalEvent.Text = $" Tổng số việc hiện tại: {currentUser_Sched.Events.Count} ";
+            int done = 0;
+            int undone = 0;
+
+            foreach (EventBase ev in currentUser_Sched.Events)
+            {
+                if (ev.Status)
+                {
+                    done++;
+                }
+                else
+                {
+                    undone++;
+                }
+            }
+            tS_Finished.Text = $" Đã làm xong: {done} ";
+            tS_Undone.Text = $" Chưa làm xong: {undone} ";
+
+        }
+
         private void Reminder_OnTriggered(Reminder sender, EventBase ev)
         {
-            ev.DaNhacNho = true;
+            if (ev.EnableReminder)
+            {
+                ev.DaNhacNho = true;
                 MessageBox.Show(
                     $"⏰ {sender.Message}\nSự kiện: {ev.Title}\nBắt đầu lúc: {ev.Start:g}",
                     "Nhắc nhở",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information
-                ); 
+                );
+            }
         }
-
-
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
-
-            // tránh flicker + tăng tốc cho bảng
-            tblCalendar.DoubleBuffered(true);
-
-            // Ngăn form tự scale theo DPI/font
-            this.AutoScaleMode = AutoScaleMode.None;
-            this.Scale(new SizeF(1f, 1f));
-
-            // (tuỳ chọn) ép kích thước gốc, chỉ dùng nếu nó vẫn bị to bất thường
-            // this.Size = new Size(1200, 764);
-        }
-
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -501,72 +619,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             MessageBox.Show("Đã xuất file CSV!");
         }
 
-
-
-
-      
-
-
-        private void tblCalendar_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void lblUuTien_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dtpStart_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtTitle_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void lblMonthYear_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Calendar_statusStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void cbType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void cbRepeat_CheckedChanged(object sender, EventArgs e)
         {
             if (cbRepeat.Checked)
@@ -603,7 +655,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                     Start = dtpStart.Value,
                     End = dtpEnd.Value,
                     Priority = cbPriority.SelectedItem.ToString()
-                    
+
                 };
 
                 RecurringEvtSettingForm repeatForm = new RecurringEvtSettingForm(recurringEvt);
@@ -616,28 +668,80 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             }
         }
 
-
-        private void comboBoxText_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
         private void timerReminder_Tick(object sender, EventArgs e)
         {
+            DateTime now = DateTime.Now;
+            //now = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, 0);
+
+            // 🔔 1. Kiểm tra các sự kiện có Reminder
             foreach (EventBase ev in currentUser_Sched.Events)
             {
-                if (ev.Reminder == null || ev.DaNhacNho) continue;
+                if (ev == null || !ev.EnableReminder || ev.DaNhacNho)
+                    continue;
 
                 DateTime remindTime = ev.Start - ev.Reminder.BeforeStart;
-                if (DateTime.Now >= remindTime && !ev.DaNhacNho)
+
+                // Nếu đã đến thời gian nhắc nhở
+                if (now >= remindTime && !ev.DaNhacNho)
                 {
-                    // 👉 Kích hoạt sự kiện Reminder
                     ev.Reminder.Trigger(ev);
-                    
+                    ev.DaNhacNho = true;
+                }
+            }
+
+            // 🎨 2. Cập nhật màu trong DataGridView
+            foreach (DataGridViewRow row in dgvEvents.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                bool isDone = false;
+                if (row.Cells["Status"].Value != null)
+                    isDone = Convert.ToBoolean(row.Cells["Status"].Value);
+
+                // Mặc định
+                row.DefaultCellStyle.ForeColor = Color.Black;
+                row.DefaultCellStyle.BackColor = Color.White;
+
+                // Đã hoàn thành ✅
+                if (isDone)
+                {
+                    row.DefaultCellStyle.ForeColor = Color.DarkGreen;
+                    row.DefaultCellStyle.BackColor = Color.LightGreen;
+                    continue;
+                }
+
+                // Chưa hoàn thành → kiểm tra thời gian
+                if (DateTime.TryParse(row.Cells["Start"].Value?.ToString(), out DateTime startTime) &&
+                    DateTime.TryParse(row.Cells["End"].Value?.ToString(), out DateTime endTime))
+                {
+
+                    if (now > endTime)
+                    {
+                        // ⛔ Quá hạn
+                        row.DefaultCellStyle.ForeColor = Color.Red;
+                        row.DefaultCellStyle.BackColor = Color.MistyRose;
+                    }
+                    else if (now >= startTime && now <= endTime)
+                    {
+                        // 🔵 Đang diễn ra
+                        row.DefaultCellStyle.ForeColor = Color.RoyalBlue;
+                        row.DefaultCellStyle.BackColor = Color.LightCyan;
+                    }
+                    else
+                    {
+                        // 🟡 Chưa tới (sắp diễn ra)
+                        TimeSpan timeLeft = startTime - now;
+                        if (timeLeft.TotalMinutes <= 15) // ví dụ: nhắc màu vàng nếu còn ≤15 phút
+                        {
+                            row.DefaultCellStyle.ForeColor = Color.DarkOrange;
+                            row.DefaultCellStyle.BackColor = Color.LemonChiffon;
+                        }
+                    }
                 }
             }
         }
+
+
 
         private void SubscribeToRecurrEvtForm(RecurringEvtSettingForm r)
         {
@@ -655,15 +759,52 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        private void lblSignOut_Click(object sender, EventArgs e)
         {
+            DialogResult result = MessageBox.Show(
+                "Bạn muốn đăng xuất ?",
+                "Đăng Xuất",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+             );
+
+            if (result == DialogResult.Yes)
+            {
+                MessageBox.Show("Đã đăng xuất!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.Hide();
+                UserLogin login = new UserLogin();
+                login.ShowDialog();
+                this.Close();
+            }    
+
+            if (result == DialogResult.No)
+            {
+                result = DialogResult.OK;
+            }    
 
         }
-    }
 
-    /// <summary>
-    /// Lớp sự kiện
-    /// </summary>
+        private void timer_Time_Tick(object sender, EventArgs e)
+        {
+            string dateTime = DateTime.Now.ToString("HH:mm:ss");
+            tS_Time.Text = "Time: " + dateTime.ToString();
+        }
+
+        private void cB_ReminderOn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cB_ReminderOn.Checked)
+            {
+                txtTimeb4Event.Enabled = true;
+                cboBox_TimeUnit.Enabled = true;
+            }
+            else 
+            {
+                txtTimeb4Event.Enabled = false;
+                cboBox_TimeUnit.Enabled = false;
+            }
+        }
+    }
 
 
     public static class ControlExtensions

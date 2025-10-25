@@ -70,5 +70,11 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
         {
 
         }
+
+        private void btnSignUp_Click(object sender, EventArgs e)
+        {
+            UserRegisterForm userRegisterForm = new UserRegisterForm();
+            userRegisterForm.ShowDialog(); 
+        }
     }
 }

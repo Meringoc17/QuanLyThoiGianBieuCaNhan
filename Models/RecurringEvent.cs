@@ -51,6 +51,16 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             this.Status = e.Status;
         }
 
+        public RecurringEvent(string tt, DateTime start, DateTime end, string type, string prio, bool status)
+        {
+            this.Title = tt;
+            this.Start = start;
+            this.End = end;
+            this.Type = type;
+            this.Priority = prio;
+            this.Status = status;
+        }
+
         public override string ToString()
         {
             if (RepeatUnit != "Tuần")
@@ -151,6 +161,12 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             string type, string prio, bool status)
         {
             return new RecurringEvent(interval, unit, days, endInForm, occ, notified, tt, start, end, type, prio, status);
+        }
+
+        public static RecurringEvent Create(string tt, DateTime start, DateTime end,
+            string type, string prio, bool status)
+        {
+            return new RecurringEvent(tt, start, end, type, prio, status);
         }
     }
 

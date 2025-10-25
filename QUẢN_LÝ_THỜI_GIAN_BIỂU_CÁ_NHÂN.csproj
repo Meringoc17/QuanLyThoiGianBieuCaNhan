@@ -88,11 +88,11 @@
     <Compile Include="UI\UserLogin.Designer.cs">
       <DependentUpon>UserLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserSignUp.cs">
+    <Compile Include="UI\UserRegisterForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UserSignUp.Designer.cs">
-      <DependentUpon>UserSignUp.cs</DependentUpon>
+    <Compile Include="UI\UserRegisterForm.Designer.cs">
+      <DependentUpon>UserRegisterForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="UI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -117,8 +117,8 @@
     <EmbeddedResource Include="UI\UserLogin.resx">
       <DependentUpon>UserLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UserSignUp.resx">
-      <DependentUpon>UserSignUp.cs</DependentUpon>
+    <EmbeddedResource Include="UI\UserRegisterForm.resx">
+      <DependentUpon>UserRegisterForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">

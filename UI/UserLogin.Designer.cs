@@ -38,7 +38,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             this.btn_Input = new System.Windows.Forms.Button();
             this.usnTxtBox = new System.Windows.Forms.TextBox();
             this.pwdTxtbox = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnSignUp = new System.Windows.Forms.Button();
             this.panelLogin = new System.Windows.Forms.Panel();
             this.ckBox_KeepLogIn = new System.Windows.Forms.CheckBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
@@ -120,14 +120,15 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             this.pwdTxtbox.Size = new System.Drawing.Size(277, 28);
             this.pwdTxtbox.TabIndex = 6;
             // 
-            // button2
+            // btnSignUp
             // 
-            this.button2.Location = new System.Drawing.Point(517, 245);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(107, 47);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Sign Up";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnSignUp.Location = new System.Drawing.Point(517, 245);
+            this.btnSignUp.Name = "btnSignUp";
+            this.btnSignUp.Size = new System.Drawing.Size(107, 47);
+            this.btnSignUp.TabIndex = 8;
+            this.btnSignUp.Text = "Sign Up";
+            this.btnSignUp.UseVisualStyleBackColor = true;
+            this.btnSignUp.Click += new System.EventHandler(this.btnSignUp_Click);
             // 
             // panelLogin
             // 
@@ -196,7 +197,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             this.Controls.Add(this.lbl_LoginError);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnSignUp);
             this.Controls.Add(this.SignIn_lbl);
             this.Controls.Add(this.btn_Input);
             this.Controls.Add(this.pictureBox1);
@@ -223,7 +224,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
         private System.Windows.Forms.Button btn_Input;
         private System.Windows.Forms.TextBox usnTxtBox;
         private System.Windows.Forms.TextBox pwdTxtbox;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnSignUp;
         private System.Windows.Forms.Panel panelLogin;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.CheckBox ckBox_KeepLogIn;

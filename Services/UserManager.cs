@@ -15,12 +15,12 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
                 users.Add(new User("admin", "1234"));
         }
 
-        public static bool Register(string usernameOrPhone, string password)
+        public static bool Register(string username, string phonenum, string password)
         {
-            if (IsUsernameExisted(usernameOrPhone) || IsPhoneNumExisted(usernameOrPhone))
+            if (IsUsernameExisted(username) || IsPhoneNumExisted(phonenum))
                 return false; // Đã tồn tại
 
-            users.Add(new User(usernameOrPhone, password));
+            users.Add(new User(username, password, phonenum));
             return true;
         }
 

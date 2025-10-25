@@ -18,7 +18,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         private TimeSpan atTime;
         private string mess;
 
-        public TimeSpan BeforeStart { get { return b4_start; } private set {; } }
+        public TimeSpan BeforeStart { get { return b4_start; } private set { b4_start = value; } }
         public TimeSpan AtTime { get { return atTime; } private set {; } }
 
         public string Message { get { return mess; } private set {; } }
@@ -67,5 +67,12 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         {
             OnReminderTriggered?.Invoke(this, ev);
         }
+
+        public void SetTimeb4Start(TimeSpan t)
+        {
+            b4_start = t;
+        }
+
+
     }
 }

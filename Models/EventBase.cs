@@ -7,6 +7,16 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
     [Serializable]
     public abstract class EventBase : ISerializable
     {
+        private string title;
+        private DateTime start;
+        private DateTime end;
+        private string type;
+        private bool status;
+        private bool daNhac;
+        private List<string> categories;
+        private Reminder reminder;
+        private bool enableReminder = false;
+        
         public string Title { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
@@ -16,6 +26,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         public bool DaNhacNho { get; set; }
         public List<string> Categories { get; set; }
         public Reminder Reminder { get; set; }
+        public bool EnableReminder { get; set; }
 
         public EventBase()
         {

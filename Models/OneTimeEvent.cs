@@ -35,6 +35,12 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         {
             return ($"[One-Time Event] {Title} - {Start} to {End}");
         }
+
+        public static OneTimeEvent Create (string tt, DateTime start, DateTime end,
+            string type, string prio, bool status)
+        {
+            return new OneTimeEvent(tt, start, end, type, prio, status);
+        }
     }
 
 }
