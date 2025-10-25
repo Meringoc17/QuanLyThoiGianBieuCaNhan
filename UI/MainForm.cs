@@ -787,8 +787,27 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
         private void timer_Time_Tick(object sender, EventArgs e)
         {
+            // Tạo danh sách chứa toàn bộ sự kiện
+            List<EventBase> allEvents = new List<EventBase>();
+
+            // Duyệt qua từng Schedule trong danh sách Schedules
+            foreach (Schedule sched in ScheduleService.Schedules)
+            {
+                // Nếu Schedule có danh sách Events, thêm từng event vào danh sách chung
+                if (sched.Events != null)
+                {
+                    foreach (EventBase ev in sched.Events)
+                    {
+                        allEvents.Add(ev);
+                    }
+                }
+            }
+
+            // Gọi hàm kiểm tra nhắc nhở
+            ReminderService.CheckReminders(allEvents);
             string dateTime = DateTime.Now.ToString("HH:mm:ss");
             tS_Time.Text = "Time: " + dateTime.ToString();
+
         }
 
         private void cB_ReminderOn_CheckedChanged(object sender, EventArgs e)

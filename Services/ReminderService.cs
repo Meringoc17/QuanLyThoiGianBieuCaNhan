@@ -17,15 +17,24 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
 
         public static TimeSpan UnitConverter(int span, string unit)
         {
-            switch (unit.ToLower())
+            unit = unit.Trim().ToLower();
+
+            switch (unit)
             {
-                case "Phút":
+                case "phút":
+                case "minute":
+                case "minutes":
                     return TimeSpan.FromMinutes(span);
 
-                case "Tiếng":
+                case "tiếng":
+                case "giờ":
+                case "hour":
+                case "hours":
                     return TimeSpan.FromHours(span);
 
-                case "Ngày":
+                case "ngày":
+                case "day":
+                case "days":
                     return TimeSpan.FromDays(span);
 
                 default:
@@ -34,25 +43,31 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
         }
 
 
+
         public static void CheckReminders(List<EventBase> events)
         {
+            // Lấy thời gian hiện tại, bỏ phần giây và mili-giây
             DateTime now = DateTime.Now;
+            now = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, 0);
 
             foreach (EventBase ev in events)
             {
                 if (ev.Reminder != null && !ev.DaNhacNho)
                 {
+                    // Tính thời gian nhắc = thời gian bắt đầu - BeforeStart
                     DateTime remindTime = ev.Start - ev.Reminder.BeforeStart;
+                    remindTime = new DateTime(remindTime.Year, remindTime.Month, remindTime.Day, remindTime.Hour, remindTime.Minute, 0);
 
-                    if (now >= remindTime && !ev.DaNhacNho)
+                    // So sánh theo phút thay vì giây
+                    if (now == remindTime)
                     {
-                        // Gọi event thay vì MessageBox
                         ev.Reminder.Trigger(ev);
                         ev.DaNhacNho = true;
                     }
                 }
             }
         }
+
 
         public static Reminder ReminderToggle(EventBase ev, bool enable, TimeSpan t)
         {
