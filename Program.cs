@@ -27,7 +27,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             {
                 SetProcessDPIAware();
             }
-            UserManager.Add_Admin();
             Application.Run(new UserLogin());
         }
 

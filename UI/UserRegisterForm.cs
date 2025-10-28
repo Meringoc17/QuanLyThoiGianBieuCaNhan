@@ -19,6 +19,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
         public UserRegisterForm()
         {
             InitializeComponent();
+            pnSignUp.Region = CreateRoundedRegion(pnSignUp.ClientRectangle, 20);
         }
 
         private Region CreateRoundedRegion(Rectangle bounds, int radius) // tạo góc bolder tròn

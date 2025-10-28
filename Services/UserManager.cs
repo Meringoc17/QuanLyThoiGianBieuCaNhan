@@ -71,7 +71,9 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
         public static void Add_Admin()
         {
             if (!IsUsernameExisted("admin"))
+            {
                 users.Add(new User("admin", "1234"));
+            }
         }
 
         // ✅ Đăng ký người dùng mới
@@ -81,9 +83,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
                 return false; // Đã tồn tại
 
             users.Add(new User(username, password, phonenum));
-
-            // Lưu ngay xuống file để giữ lại dữ liệu sau khi tắt chương trình
-            SaveUsersToFile();
+            //SaveUsersToFile();
             return true;
         }
 

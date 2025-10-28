@@ -251,11 +251,12 @@
             // 
             // lbl_SignInName
             // 
+            this.lbl_SignInName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_SignInName.AutoSize = true;
             this.lbl_SignInName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.lbl_SignInName.Font = new System.Drawing.Font("Segoe UI Variable Display", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_SignInName.ForeColor = System.Drawing.Color.SteelBlue;
-            this.lbl_SignInName.Location = new System.Drawing.Point(917, 48);
+            this.lbl_SignInName.Location = new System.Drawing.Point(938, 48);
             this.lbl_SignInName.Name = "lbl_SignInName";
             this.lbl_SignInName.Size = new System.Drawing.Size(277, 27);
             this.lbl_SignInName.TabIndex = 3;
@@ -453,7 +454,7 @@
             // 
             // label7
             // 
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label7.Font = new System.Drawing.Font("Segoe UI Variable Display", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(69)))), ((int)(((byte)(163)))));
             this.label7.Location = new System.Drawing.Point(287, 3);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -465,7 +466,7 @@
             // 
             // label6
             // 
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label6.Font = new System.Drawing.Font("Segoe UI Variable Display", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(69)))), ((int)(((byte)(163)))));
             this.label6.Location = new System.Drawing.Point(231, 3);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -477,7 +478,7 @@
             // 
             // label5
             // 
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label5.Font = new System.Drawing.Font("Segoe UI Variable Display", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(69)))), ((int)(((byte)(163)))));
             this.label5.Location = new System.Drawing.Point(174, 3);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -489,7 +490,7 @@
             // 
             // label4
             // 
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label4.Font = new System.Drawing.Font("Segoe UI Variable Display", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(69)))), ((int)(((byte)(163)))));
             this.label4.Location = new System.Drawing.Point(116, 3);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -501,7 +502,7 @@
             // 
             // label3
             // 
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label3.Font = new System.Drawing.Font("Segoe UI Variable Display", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(69)))), ((int)(((byte)(163)))));
             this.label3.Location = new System.Drawing.Point(60, 3);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -513,7 +514,7 @@
             // 
             // label8
             // 
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label8.Font = new System.Drawing.Font("Segoe UI Variable Display", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(69)))), ((int)(((byte)(163)))));
             this.label8.Location = new System.Drawing.Point(347, 3);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -526,7 +527,7 @@
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label2.Font = new System.Drawing.Font("Segoe UI Variable Display", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(69)))), ((int)(((byte)(163)))));
             this.label2.Location = new System.Drawing.Point(5, 3);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
