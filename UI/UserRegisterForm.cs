@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,6 +17,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
         public UserRegisterForm()
         {
             InitializeComponent();
+            pnSignUp.Region = CreateRoundedRegion(pnSignUp.ClientRectangle, 20);
         }
 
         private Region CreateRoundedRegion(Rectangle bounds, int radius) // tạo góc bolder tròn
@@ -39,6 +39,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
 
         private void btn_Done_Click(object sender, EventArgs e)
         {
+          
+
             try
             {
                 lblError.Visible = false; // Ẩn lỗi trước
