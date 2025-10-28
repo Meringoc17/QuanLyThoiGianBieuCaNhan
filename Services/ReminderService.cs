@@ -1,6 +1,8 @@
 ﻿using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -9,6 +11,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
 {
     internal class ReminderService
     {
+        
         public static Reminder CreateReminder (TimeSpan t)
         {
             return new Reminder (t, TimeSpan.Zero,

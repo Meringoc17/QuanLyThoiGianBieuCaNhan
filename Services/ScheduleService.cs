@@ -13,7 +13,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
     {
         public static List<Schedule> Schedules { get; set; } = new List<Schedule>();
 
-
         public static Schedule ScheduleLoad(User user)
         {
             // Duyệt toàn bộ danh sách hiện có để tìm Schedule trùng Owner

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
 {
+    [Serializable]
     public class User
     {
         private string id;
@@ -17,6 +19,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         public string Name { get { return username; } private set { } }
         public string Password { get { return password; } private set { } }
         public string Phone { get { return phone; } private set { } }
+        public User() { }
 
         public User(string n, string p)
         {
@@ -45,6 +48,22 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         public void ResetPhoneNum(string p)
         {
             phone = p;
+        }
+
+        protected User(SerializationInfo info, StreamingContext context)
+        {
+            id = info.GetString("Id");
+            username = info.GetString("Username");
+            password = info.GetString("Password");
+            phone = info.GetString("Phone");
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Id", id);
+            info.AddValue("Username", username);
+            info.AddValue("Password", password); // hoặc có thể mã hóa ở đây
+            info.AddValue("Phone", phone);
         }
 
     }
