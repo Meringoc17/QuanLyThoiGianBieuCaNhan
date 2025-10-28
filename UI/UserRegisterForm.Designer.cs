@@ -38,12 +38,12 @@
             this.lbl_Title = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_Done = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnSignUp = new System.Windows.Forms.Panel();
             this.txtBoxPhoneNum = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lblError = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.pnSignUp.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_Name
@@ -141,22 +141,22 @@
             this.btn_Done.UseVisualStyleBackColor = true;
             this.btn_Done.Click += new System.EventHandler(this.btn_Done_Click);
             // 
-            // panel1
+            // pnSignUp
             // 
-            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(220)))), ((int)(((byte)(254)))));
-            this.panel1.Controls.Add(this.txtBoxPhoneNum);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.txtBoxConfirmPass);
-            this.panel1.Controls.Add(this.txtBoxPass);
-            this.panel1.Controls.Add(this.txtBoxName);
-            this.panel1.Controls.Add(this.lbl_Name);
-            this.panel1.Controls.Add(this.lbl_CreatePass);
-            this.panel1.Controls.Add(this.lbl_ConfirmPass);
-            this.panel1.Location = new System.Drawing.Point(222, 67);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(658, 247);
-            this.panel1.TabIndex = 9;
+            this.pnSignUp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnSignUp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(220)))), ((int)(((byte)(254)))));
+            this.pnSignUp.Controls.Add(this.txtBoxPhoneNum);
+            this.pnSignUp.Controls.Add(this.label2);
+            this.pnSignUp.Controls.Add(this.txtBoxConfirmPass);
+            this.pnSignUp.Controls.Add(this.txtBoxPass);
+            this.pnSignUp.Controls.Add(this.txtBoxName);
+            this.pnSignUp.Controls.Add(this.lbl_Name);
+            this.pnSignUp.Controls.Add(this.lbl_CreatePass);
+            this.pnSignUp.Controls.Add(this.lbl_ConfirmPass);
+            this.pnSignUp.Location = new System.Drawing.Point(222, 67);
+            this.pnSignUp.Name = "pnSignUp";
+            this.pnSignUp.Size = new System.Drawing.Size(658, 247);
+            this.pnSignUp.TabIndex = 9;
             // 
             // txtBoxPhoneNum
             // 
@@ -200,15 +200,15 @@
             this.Controls.Add(this.btn_Done);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lbl_Title);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnSignUp);
             this.Name = "UserRegisterForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Quản Lý Thời Gian Biểu Cá Nhân";
             this.Load += new System.EventHandler(this.UserSignUp_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnSignUp.ResumeLayout(false);
+            this.pnSignUp.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -225,7 +225,7 @@
         private System.Windows.Forms.Label lbl_Title;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btn_Done;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnSignUp;
         private System.Windows.Forms.Label lblError;
         private System.Windows.Forms.TextBox txtBoxPhoneNum;
         private System.Windows.Forms.Label label2;

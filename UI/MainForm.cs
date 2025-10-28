@@ -67,6 +67,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             string dateTime = DateTime.Now.ToString("HH:mm:ss");
             tS_Time.Text = "Time: " + dateTime.ToString();
             lbl_SignInName.Text = $"Đang đăng nhập dưới tên {currentUser.Name}";
+            //lbl_SignInName.Dock = DockStyle.Fill;
         }
 
         protected override void OnLoad(EventArgs e)
@@ -787,24 +788,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
         private void timer_Time_Tick(object sender, EventArgs e)
         {
-            // Tạo danh sách chứa toàn bộ sự kiện
-            List<EventBase> allEvents = new List<EventBase>();
-
-            // Duyệt qua từng Schedule trong danh sách Schedules
-            foreach (Schedule sched in ScheduleService.Schedules)
-            {
-                // Nếu Schedule có danh sách Events, thêm từng event vào danh sách chung
-                if (sched.Events != null)
-                {
-                    foreach (EventBase ev in sched.Events)
-                    {
-                        allEvents.Add(ev);
-                    }
-                }
-            }
-
             // Gọi hàm kiểm tra nhắc nhở
-            ReminderService.CheckReminders(allEvents);
+            ReminderService.CheckReminders(currentUser_Sched.Events);
             string dateTime = DateTime.Now.ToString("HH:mm:ss");
             tS_Time.Text = "Time: " + dateTime.ToString();
 

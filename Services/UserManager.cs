@@ -108,6 +108,19 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             return user;
         }
 
+        // ✅ Kiểm tra mật khẩu (dùng nội bộ)
+        public static bool PasswordCheck(string input, string pass)
+        {
+            if (IsUsernameExisted(input))
+                return GetSpecificUser_ByUsername(input).Password == pass;
+
+            if (IsPhoneNumExisted(input))
+                return GetSpecificUser_ByPhoneNum(input).Password == pass;
+
+            return false;
+        }
+
+        // ✅ Kiểm tra tồn tại username
         public static bool IsUsernameExisted(string username)
         {
             foreach (User user in users)
@@ -118,6 +131,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             return false;
         }
 
+        // ✅ Kiểm tra tồn tại số điện thoại
         public static bool IsPhoneNumExisted(string phonenum)
         {
             foreach (User user in users)
@@ -128,6 +142,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             return false;
         }
 
+        // ✅ Lấy user theo username
         public static User GetSpecificUser_ByUsername(string username)
         {
             foreach (User user in users)
@@ -138,6 +153,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             throw new Exception("Không tìm thấy người dùng!");
         }
 
+        // ✅ Lấy user theo số điện thoại
         public static User GetSpecificUser_ByPhoneNum(string phonenum)
         {
             foreach (User user in users)
@@ -148,6 +164,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             throw new Exception("Không tìm thấy người dùng!");
         }
 
+        // ✅ Lấy toàn bộ user (dùng cho quản trị)
         public static List<User> GetAllUsers()
         {
             return users;

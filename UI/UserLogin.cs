@@ -18,6 +18,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
         public UserLogin()
         {
             InitializeComponent();
+            UserManager.LoadUsersFromFile();
             panelLogin.Region = CreateRoundedRegion(panelLogin.ClientRectangle, 20);
             pwdTxtbox.UseSystemPasswordChar = true;
         }

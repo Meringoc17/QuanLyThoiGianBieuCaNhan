@@ -16,6 +16,9 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
         [STAThread]
         static void Main()
         {
+            UserManager.LoadUsersFromFile();
+            UserManager.Add_Admin(); // thêm admin mặc định nếu cần
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -24,7 +27,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             {
                 SetProcessDPIAware();
             }
-            UserManager.Add_Admin();
             Application.Run(new UserLogin());
         }
 
