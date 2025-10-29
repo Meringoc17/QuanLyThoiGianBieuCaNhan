@@ -1,15 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
 {
     [Serializable]
-    internal class OneTimeEvent : EventBase
+    public class OneTimeEvent : EventBase, ISerializable
     {
+      
+        public OneTimeEvent() { }
+
+     
         public OneTimeEvent(string tt, DateTime start, DateTime end,
-            string type, string prio, bool status) 
+            string type, string prio, bool status)
         {
             this.Title = tt;
             this.Start = start;
@@ -19,28 +21,43 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             this.Status = status;
         }
 
-        public OneTimeEvent() { }
-        public OneTimeEvent(EventBase e) 
+
+        public OneTimeEvent(EventBase e)
         {
-            e.Title = this.Title;
-            e.Start = this.Start;   
-            e.End = this.End;
-            e.Type = this.Type;
-            e.Priority = this.Priority;
-            e.Status = this.Status;
+            this.Title = e.Title;
+            this.Start = e.Start;
+            this.End = e.End;
+            this.Type = e.Type;
+            this.Priority = e.Priority;
+            this.Status = e.Status;
+            this.DaNhacNho = e.DaNhacNho;
+            this.EnableReminder = e.EnableReminder;
+            this.Reminder = e.Reminder;
         }
 
+        // BẮT BUỘC: Constructor dành cho BinaryFormatter khi deserialization
+        protected OneTimeEvent(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            // Nếu có thêm field riêng của OneTimeEvent thì đọc ở đây bằng info.GetValue(...)
+        }
+
+        //  BẮT BUỘC: Override hàm serialization
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            // Nếu có thêm field riêng của OneTimeEvent, thêm vào đây
+        }
 
         public override string ToString()
         {
-            return ($"[One-Time Event] {Title} - {Start} to {End}");
+            return $"[One-Time Event] {Title} - {Start:g} to {End:g}";
         }
 
-        public static OneTimeEvent Create (string tt, DateTime start, DateTime end,
+        public static OneTimeEvent Create(string tt, DateTime start, DateTime end,
             string type, string prio, bool status)
         {
             return new OneTimeEvent(tt, start, end, type, prio, status);
         }
     }
-
 }

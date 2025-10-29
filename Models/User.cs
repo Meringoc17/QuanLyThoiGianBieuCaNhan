@@ -20,8 +20,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         public string Password { get { return password; } private set { } }
         public string Phone { get { return phone; } private set { } }
         public User() { }
-
-        public User() { }
         public User(string n, string p)
         {
             username = n;

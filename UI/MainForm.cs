@@ -10,6 +10,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 {
@@ -24,6 +25,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
         private User currentUser;
         private Schedule currentUser_Sched;
+        private string scheduleFilePath;
+
         private Form dropDownForm;
         private RecurringEvent recurringEvt = new RecurringEvent();
         private BindingList<EventBase> allEvents;
@@ -36,7 +39,31 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             this.Font = SystemFonts.DefaultFont;     // Reset font về chuẩn
             InitializeComponent();
             currentUser = user;
+            scheduleFilePath = Path.Combine(
+    Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName,
+    $"schedule_{currentUser.Name}.dat"
+);
+
             currentUser_Sched = ScheduleService.ScheduleLoad(currentUser);
+            // 🔹 Tự động load dữ liệu sự kiện của user từ file .dat
+            if (File.Exists(scheduleFilePath))
+            {
+                try
+                {
+                    using (FileStream fs = new FileStream(scheduleFilePath, FileMode.Open))
+                    {
+                        BinaryFormatter bf = new BinaryFormatter();
+                        currentUser_Sched = (Schedule)bf.Deserialize(fs);
+                    }
+                    allEvents = new BindingList<EventBase>(currentUser_Sched.Events);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Lỗi khi đọc file lịch: {ex.Message}");
+                    allEvents = new BindingList<EventBase>(new List<EventBase>());
+                }
+            }
+
             allEvents = new BindingList<EventBase>(currentUser_Sched.Events);
             InitCalendarGrid();
             // Gán BindingList vào DataGridView
@@ -354,6 +381,20 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
                 statusStrip_Update();
             }
+            // Lưu file khi có thay đổi trạng thái
+            try
+            {
+                using (FileStream fs = new FileStream(scheduleFilePath, FileMode.Create))
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    bf.Serialize(fs, currentUser_Sched);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi auto-save sự kiện: " + ex.Message);
+            }
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -478,6 +519,20 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             // 🪶 Thông báo xác nhận
             MessageBox.Show("Đã thêm sự kiện thành công!", "Thông báo",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // 💾 Lưu lại dữ liệu sự kiện vào file binary
+            try
+            {
+                using (FileStream fs = new FileStream(scheduleFilePath, FileMode.Create))
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    bf.Serialize(fs, currentUser_Sched);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lưu file sự kiện: " + ex.Message);
+            }
+
         }
 
         private void statusStrip_Update()

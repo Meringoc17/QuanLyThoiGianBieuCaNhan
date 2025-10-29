@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         public List<DayOfWeek> Days { get; set; }  // Những ngày chọn
         public DateTime? EndDate { get; set; }
         public int? Occurrences { get; set; }
-
+      
         public RecurringEvent()
         {
             Days = new List<DayOfWeek>();
@@ -60,6 +61,28 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             this.Priority = prio;
             this.Status = status;
         }
+        // 🔴 BẮT BUỘC: Constructor dùng khi deserialize
+        protected RecurringEvent(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            RepeatIntervalDays = info.GetInt32(nameof(RepeatIntervalDays));
+            RepeatUnit = info.GetString(nameof(RepeatUnit));
+            EndDate = (DateTime?)info.GetValue(nameof(EndDate), typeof(DateTime?));
+            Occurrences = (int?)info.GetValue(nameof(Occurrences), typeof(int?));
+            Days = (List<DayOfWeek>)info.GetValue(nameof(Days), typeof(List<DayOfWeek>));
+        }
+
+        // 🔴 BẮT BUỘC: Hàm ghi dữ liệu khi serialize
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue(nameof(RepeatIntervalDays), RepeatIntervalDays);
+            info.AddValue(nameof(RepeatUnit), RepeatUnit);
+            info.AddValue(nameof(EndDate), EndDate, typeof(DateTime?));
+            info.AddValue(nameof(Occurrences), Occurrences, typeof(int?));
+            info.AddValue(nameof(Days), Days, typeof(List<DayOfWeek>));
+        }
+
 
         public override string ToString()
         {
@@ -92,35 +115,35 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             {
                 case "Thứ 2":
                     return DayOfWeek.Monday;
-                    break;
+                    
 
                 case "Thứ 3":
                     return DayOfWeek.Tuesday;
-                    break;
+                    
 
                 case "Thứ 4":
                     return DayOfWeek.Wednesday;
-                    break;
+                   
 
                 case "Thứ 5":
                     return DayOfWeek.Thursday;
-                    break;
+                    
 
                 case "Thứ 6":
                     return DayOfWeek.Friday;
-                    break;
+                    
 
                 case "Thứ 7":
                     return DayOfWeek.Saturday;
-                    break;
+                   
 
                 case "Chủ Nhật":
                     return DayOfWeek.Sunday;
-                    break;
+                    
 
                 default:
                     throw new ArgumentException("Invalid DayOfWeek !");
-                    break;
+                    
             }
         }
 
@@ -130,31 +153,31 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             {
                 case DayOfWeek.Monday:
                     return "Thứ 2";
-                    break;
+                   
                 case DayOfWeek.Tuesday:
                     return "Thứ 3";
-                    break;
+                    
                 case DayOfWeek.Wednesday:
                     return "Thứ 4";
-                    break;
+                   
                 case DayOfWeek.Thursday:
                     return "Thứ 5";
-                    break;
+                    
                 case DayOfWeek.Friday:
                     return "Thứ 6";
-                    break;
+                    
                 case DayOfWeek.Saturday:
                     return "Thứ 7";
                 case DayOfWeek.Sunday:
                     return "Chủ Nhật";
-                    break;
+                    
                 default: throw new ArgumentException("Invalid day of week !");
             }
 
         }
     }
 
-    internal class RecurringEvtFactory
+    public class RecurringEvtFactory
     {
         public static RecurringEvent Create(int interval, string unit, List<DayOfWeek> days,
             DateTime endInForm, int occ, bool notified, string tt, DateTime start, DateTime end,
