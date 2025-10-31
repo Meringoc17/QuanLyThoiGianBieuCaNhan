@@ -2,14 +2,44 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
 {
+    
+    [Serializable]
+    public class UserList : ISerializable
+    {
+        public List<User> Users { get; set; } = new List<User>();
+
+        public UserList() { }
+
+        public void Add(User user)
+        {
+            Users.Add(user);
+        }
+
+        public List<User> GetAll()
+        {
+            return Users;
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Users", Users);
+        }
+
+        protected UserList(SerializationInfo info, StreamingContext context)
+        {
+            Users = (List<User>)info.GetValue("Users", typeof(List<User>));
+        }
+    }
+
     [Serializable]
     internal class UserManager
     {
-        private static List<User> users = new List<User>();
+        private static UserList users = new UserList();
 
         // ✅ Lưu file ngay trong thư mục gốc project (an toàn khi rebuild)
         private static readonly string userFilePath = Path.Combine(
@@ -52,18 +82,18 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
                     using (FileStream fs = new FileStream(userFilePath, FileMode.Open))
                     {
                         BinaryFormatter bf = new BinaryFormatter();
-                        users = (List<User>)bf.Deserialize(fs);
+                        users = (UserList)bf.Deserialize(fs);
                     }
                 }
                 else
                 {
-                    users = new List<User>();
+                    users.Users = new List<User>();
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("⚠️ Lỗi khi load dữ liệu người dùng: " + ex.Message);
-                users = new List<User>();
+                users.Users = new List<User>();
             }
         }
 
@@ -123,7 +153,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
         // ✅ Kiểm tra tồn tại username
         public static bool IsUsernameExisted(string username)
         {
-            foreach (User user in users)
+            foreach (User user in users.Users)
             {
                 if (user.Name.Equals(username, StringComparison.OrdinalIgnoreCase))
                     return true;
@@ -134,7 +164,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
         // ✅ Kiểm tra tồn tại số điện thoại
         public static bool IsPhoneNumExisted(string phonenum)
         {
-            foreach (User user in users)
+            foreach (User user in users.Users)
             {
                 if (user.Phone == phonenum)
                     return true;
@@ -145,7 +175,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
         // ✅ Lấy user theo username
         public static User GetSpecificUser_ByUsername(string username)
         {
-            foreach (User user in users)
+            foreach (User user in users.Users)
             {
                 if (user.Name.Equals(username, StringComparison.OrdinalIgnoreCase))
                     return user;
@@ -156,7 +186,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
         // ✅ Lấy user theo số điện thoại
         public static User GetSpecificUser_ByPhoneNum(string phonenum)
         {
-            foreach (User user in users)
+            foreach (User user in users.Users)
             {
                 if (user.Phone == phonenum)
                     return user;
@@ -167,7 +197,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
         // ✅ Lấy toàn bộ user (dùng cho quản trị)
         public static List<User> GetAllUsers()
         {
-            return users;
+            return users.Users;
         }
     }
 }

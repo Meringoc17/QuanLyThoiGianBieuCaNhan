@@ -42,6 +42,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             }
         }
 
+
         public void AddEventSched(EventBase e)
         {
             Events.Add(e);
@@ -51,5 +52,11 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         {
             return $"📅 Lịch của: {Owner}, Tổng sự kiện: {Events.Count}";
         }
+
+
+        public void Remove (EventBase e)
+        {
+            Events.Remove(e); 
+        }   
     }
 }

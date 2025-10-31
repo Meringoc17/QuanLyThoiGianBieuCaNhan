@@ -33,10 +33,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             return new Region(path);
         }
 
-        private void UserSignUp_Load(object sender, EventArgs e)
-        {
-
-        }
+        private void UserSignUp_Load(object sender, EventArgs e) { }
 
         private void btn_Done_Click(object sender, EventArgs e)
         {
@@ -106,7 +103,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             lblError.Visible = true;
             lblError.Text = message;
         }
-
 
     }
 }

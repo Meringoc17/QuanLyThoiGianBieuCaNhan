@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
@@ -13,7 +14,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
     {
         public int RepeatIntervalDays { get; set; } // Lặp lại mỗi X đơn vị
         public string RepeatUnit { get; set; }     // "Ngày", "Tuần", ...
-        public List<DayOfWeek> Days { get; set; }  // Những ngày chọn
+        public List<DayOfWeek> Days { get; set; }  // Những ngày chọn trg tuần
         public DateTime? EndDate { get; set; }
         public int? Occurrences { get; set; }
       
@@ -52,6 +53,23 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             this.Status = e.Status;
         }
 
+        public RecurringEvent(RecurringEvent e)
+        {
+            this.DaNhacNho = e.DaNhacNho;
+            this.Title = e.Title;
+            this.Start = e.Start;
+            this.End = e.End;
+            this.Type = e.Type;
+            this.Priority = e.Priority;
+            this.Status = e.Status;
+            this.RepeatIntervalDays = e.RepeatIntervalDays;
+            this.RepeatUnit = e.RepeatUnit;
+            this.Days = e.Days;
+            this.EndDate = e.EndDate;
+            this.Occurrences = e.Occurrences;
+            this.DaNhacNho = e.DaNhacNho;
+        }
+
         public RecurringEvent(string tt, DateTime start, DateTime end, string type, string prio, bool status)
         {
             this.Title = tt;
@@ -61,6 +79,26 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             this.Priority = prio;
             this.Status = status;
         }
+
+        // Tiện cho việc tự Generate sk lặp lại
+        public RecurringEvent(RecurringEvent template, DateTime newStart, DateTime newEnd): base()
+        {
+            this.Title = template.Title;
+            this.Type = template.Type;
+            this.Priority = template.Priority;
+            this.Status = false;
+            this.RepeatIntervalDays = template.RepeatIntervalDays;
+            this.RepeatUnit = template.RepeatUnit;
+            this.Days = template.Days != null ? new List<DayOfWeek>(template.Days) : new List<DayOfWeek>();
+            this.EndDate = template.EndDate;
+            this.Occurrences = template.Occurrences;
+            this.Start = newStart;
+            this.End = newEnd;
+            this.EnableReminder = template.EnableReminder;
+            this.Reminder = template.Reminder != null ? 
+                new Reminder(template.Reminder.BeforeStart, TimeSpan.Zero, template.Reminder.Message) : null;
+        }
+
         // 🔴 BẮT BUỘC: Constructor dùng khi deserialize
         protected RecurringEvent(SerializationInfo info, StreamingContext context)
             : base(info, context)
@@ -83,6 +121,28 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             info.AddValue(nameof(Days), Days, typeof(List<DayOfWeek>));
         }
 
+        private int ThuVN(DayOfWeek dow)
+        {
+            int v = (int)dow; // Sunday = 0
+            if (v == 0) v = 7; // Chủ Nhật = 7
+            return v;
+        }
+
+        private void SortDaysByWeek(List<DayOfWeek> list)
+        {
+            for (int i = 0; i < list.Count - 1; i++)
+            {
+                for (int j = i + 1; j < list.Count; j++)
+                {
+                    if (ThuVN(list[i]) > ThuVN(list[j]))
+                    {
+                        DayOfWeek temp = list[i];
+                        list[i] = list[j];
+                        list[j] = temp;
+                    }
+                }
+            }
+        }
 
         public override string ToString()
         {
@@ -91,20 +151,27 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
                 return $"Lặp lại mỗi {RepeatIntervalDays} {RepeatUnit}";
             }
 
-            // Trường hợp lặp theo tuần
             if (Days != null && Days.Count > 0)
             {
+                SortDaysByWeek(Days);
+
                 List<string> daysInVN = new List<string>();
                 foreach (DayOfWeek d in Days)
                 {
                     daysInVN.Add(FromDOWtoDaysInVN(d));
                 }
 
-                string daysChosen = string.Join(", ", daysInVN);
+                string daysChosen = "";
+                for (int i = 0; i < daysInVN.Count; i++)
+                {
+                    daysChosen += daysInVN[i];
+                    if (i < daysInVN.Count - 1)
+                        daysChosen += ", ";
+                }
+
                 return $"Lặp lại mỗi {RepeatIntervalDays} {RepeatUnit}\nVào các ngày: {daysChosen}";
             }
 
-            // Nếu chẳng có gì thì trả về cơ bản
             return $"Lặp lại mỗi {RepeatIntervalDays} {RepeatUnit}";
         }
 

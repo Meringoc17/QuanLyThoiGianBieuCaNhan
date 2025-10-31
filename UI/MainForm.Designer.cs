@@ -129,7 +129,7 @@
             this.toolStripButtonThem,
             this.toolStripButtonSua,
             this.toolStripButtonXoa});
-            this.toolStrip.Location = new System.Drawing.Point(0, 36);
+            this.toolStrip.Location = new System.Drawing.Point(0, 33);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip.Size = new System.Drawing.Size(1238, 54);
@@ -225,7 +225,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1238, 36);
+            this.menuStrip1.Size = new System.Drawing.Size(1238, 33);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip";
             // 
@@ -326,7 +326,7 @@
             // 
             this.lblOverdueIdcColor.AutoSize = true;
             this.lblOverdueIdcColor.Font = new System.Drawing.Font("Segoe UI Variable Display", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOverdueIdcColor.Location = new System.Drawing.Point(694, 410);
+            this.lblOverdueIdcColor.Location = new System.Drawing.Point(699, 410);
             this.lblOverdueIdcColor.Name = "lblOverdueIdcColor";
             this.lblOverdueIdcColor.Size = new System.Drawing.Size(75, 24);
             this.lblOverdueIdcColor.TabIndex = 6;
@@ -336,7 +336,7 @@
             // 
             this.pnRed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.pnRed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnRed.Location = new System.Drawing.Point(667, 414);
+            this.pnRed.Location = new System.Drawing.Point(672, 414);
             this.pnRed.Name = "pnRed";
             this.pnRed.Size = new System.Drawing.Size(21, 20);
             this.pnRed.TabIndex = 5;
@@ -539,6 +539,7 @@
             // 
             // dgvEvents
             // 
+            this.dgvEvents.AllowUserToAddRows = false;
             this.dgvEvents.AllowUserToResizeColumns = false;
             this.dgvEvents.AllowUserToResizeRows = false;
             this.dgvEvents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;

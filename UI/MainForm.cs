@@ -7,10 +7,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 {
@@ -40,11 +41,12 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             InitializeComponent();
             currentUser = user;
             scheduleFilePath = Path.Combine(
-    Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName,
-    $"schedule_{currentUser.Name}.dat"
+             Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName,
+              $"schedule_{currentUser.Name}.dat"
 );
 
-            currentUser_Sched = ScheduleService.ScheduleLoad(currentUser);
+            //currentUser_Sched = ScheduleService.ScheduleLoad(currentUser);
+
             // 🔹 Tự động load dữ liệu sự kiện của user từ file .dat
             if (File.Exists(scheduleFilePath))
             {
@@ -55,17 +57,23 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                         BinaryFormatter bf = new BinaryFormatter();
                         currentUser_Sched = (Schedule)bf.Deserialize(fs);
                     }
-                    allEvents = new BindingList<EventBase>(currentUser_Sched.Events);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Lỗi khi đọc file lịch: {ex.Message}");
-                    allEvents = new BindingList<EventBase>(new List<EventBase>());
+                    currentUser_Sched = new Schedule(currentUser);
                 }
             }
+            else
+            {
+                // 🔹 Nếu chưa có file => tạo mới Schedule trống
+                currentUser_Sched = new Schedule(currentUser);
+            }
 
+            // ✅ Luôn đảm bảo allEvents không null
             allEvents = new BindingList<EventBase>(currentUser_Sched.Events);
             InitCalendarGrid();
+
             // Gán BindingList vào DataGridView
             allEvents.ListChanged += (s, e) =>
             {
@@ -73,16 +81,43 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 {
                     EventBase added = allEvents[e.NewIndex];
                     if (!currentUser_Sched.Events.Contains(added))
+                    {
                         currentUser_Sched.Events.Add(added);
+                    }
                 }
                 else if (e.ListChangedType == ListChangedType.ItemDeleted)
                 {
                     // Cập nhật theo index
                     if (e.NewIndex >= 0 && e.NewIndex < currentUser_Sched.Events.Count)
-                        currentUser_Sched.Events.RemoveAt(e.NewIndex);
+                        currentUser_Sched.Events = allEvents.ToList();
+                    statusStrip_Update();
+                    if (File.Exists(scheduleFilePath))
+                    {
+                        try
+                        {
+                            using (FileStream fs = new FileStream(scheduleFilePath, FileMode.Create))
+                            {
+                                BinaryFormatter bf = new BinaryFormatter();
+                                bf.Serialize(fs, currentUser_Sched); // ✅ Serialize nguyên Schedule
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Lỗi khi đọc file lịch: {ex.Message}");
+                            allEvents = new BindingList<EventBase>(new List<EventBase>());
+                        }
+                    }
+
                 }
             };
+
             dgvEvents.DataSource = allEvents;
+            dgvEvents.ClearSelection();
+            if (dgvEvents.Rows.Count > 0)
+            {
+                dgvEvents.CurrentCell = dgvEvents.Rows[0].Cells[0];
+                dgvEvents.Rows[0].Selected = true;
+            }
 
             // Khởi tạo Timer
             timerReminder = new Timer();
@@ -94,7 +129,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             string dateTime = DateTime.Now.ToString("HH:mm:ss");
             tS_Time.Text = "Time: " + dateTime.ToString();
             lbl_SignInName.Text = $"Đang đăng nhập dưới tên {currentUser.Name}";
-            //lbl_SignInName.Dock = DockStyle.Fill;
+
         }
 
         protected override void OnLoad(EventArgs e)
@@ -154,6 +189,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                     ev.Reminder.OnReminderTriggered += Reminder_OnTriggered;
             }
 
+            GenerateRecurringEventsOnLoad();
+
         }
 
 
@@ -162,6 +199,35 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
         /// <summary>
         /// Khởi tạo 42 ô label trong bảng lịch
         /// </summary>
+        /// 
+        private void GenerateRecurringEventsOnLoad()
+        {
+            List<RecurringEvent> newEvents = new List<RecurringEvent>();
+
+            foreach (EventBase ev in currentUser_Sched.Events)
+            {
+                if (ev is RecurringEvent r)
+                {
+                    while (r.End < DateTime.Now &&
+                          (r.EndDate == DateTime.MinValue || r.End < r.EndDate || r.Occurrences > 0))
+                    {
+                        RecurringEvent newEvt = EventManager.RCEvt_AutoGenerate(currentUser_Sched, r);
+                        if (newEvt == null) break;
+
+                        currentUser_Sched.Events.Add(newEvt);
+                        newEvents.Add(newEvt);
+
+                        // Cập nhật r để tiếp tục sinh event tiếp theo
+                        r = newEvt;
+                    }
+                }
+            }
+
+            foreach (RecurringEvent ev in newEvents)
+                allEvents.Add(ev);
+
+            DisplayCalendar(currentMonth);
+        }
         private void InitCalendarGrid()
         {
             tblCalendar.Controls.Clear();
@@ -339,7 +405,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
         /// <summary>
         /// Load Form
         /// </summary>
-        
+
 
         private void dgvEvents_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
@@ -427,10 +493,10 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                     "Không hợp lệ",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            }    
+            }
 
             recurringEvt.EnableReminder = cB_ReminderOn.Checked;
-            
+
             // 🧠 Tạo sự kiện lặp lại hoặc 1 lần
 
             if (cbRepeat.Checked && recurringEvt != null)
@@ -449,7 +515,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                         MessageBox.Show("Giá trị thời gian không hợp lệ!");
                     }
                 }
-                allEvents.Add(recurringEvt);
+                allEvents.Add(new RecurringEvent(recurringEvt));
                 DisplayCalendar(currentMonth);
 
                 if (recurringEvt.Reminder != null && recurringEvt.EnableReminder)
@@ -632,12 +698,29 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
         private void toolStripButtonXoa_Click(object sender, EventArgs e)
         {
-            if (dgvEvents.CurrentRow != null)
+            if (dgvEvents.CurrentRow != null && dgvEvents.SelectedRows.Count == 1)
             {
-                dgvEvents.Rows.Remove(dgvEvents.CurrentRow);
-                MessageBox.Show("Đã xóa sự kiện!");
+                int index = dgvEvents.CurrentRow.Index;
+
+                if (index >= 0 && index < allEvents.Count)
+                {
+                    EventBase ev = (EventBase)dgvEvents.CurrentRow.DataBoundItem;
+                    allEvents.Remove(ev);
+                }
             }
+            else if (dgvEvents.CurrentRow != null && dgvEvents.SelectedRows.Count > 1)
+            {
+                for (int i = 0; i < dgvEvents.SelectedRows.Count; i++)
+                {
+                    EventBase ev = (EventBase)dgvEvents.SelectedRows[i].DataBoundItem;
+                    allEvents.Remove(ev);
+                }
+                EventBase ev2 = (EventBase)dgvEvents.SelectedRows[0].DataBoundItem;
+                allEvents.Remove(ev2);
+            } 
+            
         }
+
 
         private void toolStripButtonTai_Click(object sender, EventArgs e)
         {
@@ -776,6 +859,39 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                         // ⛔ Quá hạn
                         row.DefaultCellStyle.ForeColor = Color.Red;
                         row.DefaultCellStyle.BackColor = Color.MistyRose;
+
+                        List<RecurringEvent> newEvents = new List<RecurringEvent>();
+                        List<RecurringEvent> removeOldEvts = new List<RecurringEvent>();
+
+                        foreach (EventBase re in currentUser_Sched.Events)
+                        {
+                            if (re is RecurringEvent r)
+                            {
+                                RecurringEvent newEvt = EventManager.rcEvt_EndGenLoop(currentUser_Sched, r);
+                                if (newEvt != null)
+                                    newEvents.Add(newEvt);
+                                removeOldEvts.Add(r);
+                            }
+
+                        }
+
+                        // ✅ Add vào cả Schedule lẫn UI BindingList
+                        foreach (RecurringEvent ev in newEvents)
+                        {
+                            allEvents.Add(ev);
+                        }
+
+                        foreach(RecurringEvent ev in removeOldEvts)
+                        {
+                            allEvents.Remove(ev);
+                        }   
+                        
+                        if (newEvents.Count > 0)
+                        {
+                            DisplayCalendar(currentMonth); // cập nhật lịch
+                            allEvents.ResetBindings();     // cập nhật bảng
+                        }
+
                     }
                     else if (now >= startTime && now <= endTime)
                     {
@@ -796,8 +912,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 }
             }
         }
-
-
 
         private void SubscribeToRecurrEvtForm(RecurringEvtSettingForm r)
         {
@@ -832,12 +946,12 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 UserLogin login = new UserLogin();
                 login.ShowDialog();
                 this.Close();
-            }    
+            }
 
             if (result == DialogResult.No)
             {
                 result = DialogResult.OK;
-            }    
+            }
 
         }
 
@@ -846,7 +960,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             // Gọi hàm kiểm tra nhắc nhở
             ReminderService.CheckReminders(currentUser_Sched.Events);
             string dateTime = DateTime.Now.ToString("HH:mm:ss");
-            tS_Time.Text = "Time: " + dateTime.ToString();
+            tS_Time.Text = "Time:  " + dateTime.ToString();
 
         }
 
@@ -857,7 +971,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 txtTimeb4Event.Enabled = true;
                 cboBox_TimeUnit.Enabled = true;
             }
-            else 
+            else
             {
                 txtTimeb4Event.Enabled = false;
                 cboBox_TimeUnit.Enabled = false;
