@@ -15,8 +15,10 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         public int RepeatIntervalDays { get; set; } = -1;// Lặp lại mỗi X đơn vị
         public string RepeatUnit { get; set; }     // "Ngày", "Tuần", ...
         public List<DayOfWeek> Days { get; set; }  // Những ngày chọn trg tuần
-        public DateTime? EndDate { get; set; }
-        public int? Occurrences { get; set; }
+        public DateTime? EndDate { get; set; } = DateTime.MinValue;
+        public int? Occurrences { get; set; } = 0;
+
+        public string DaysInVN { get; set; }
       
         public RecurringEvent()
         {
@@ -161,15 +163,15 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
                     daysInVN.Add(FromDOWtoDaysInVN(d));
                 }
 
-                string daysChosen = "";
+                DaysInVN = "";
                 for (int i = 0; i < daysInVN.Count; i++)
                 {
-                    daysChosen += daysInVN[i];
+                    DaysInVN += daysInVN[i];
                     if (i < daysInVN.Count - 1)
-                        daysChosen += ", ";
+                        DaysInVN += ", ";
                 }
 
-                return $"Lặp lại mỗi {RepeatIntervalDays} {RepeatUnit}\nVào các ngày: {daysChosen}";
+                return $"Lặp lại mỗi {RepeatIntervalDays} {RepeatUnit}\nVào các ngày: {DaysInVN}";
             }
 
             return $"Lặp lại mỗi {RepeatIntervalDays} {RepeatUnit}";

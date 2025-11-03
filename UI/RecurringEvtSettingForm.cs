@@ -85,6 +85,10 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
                     throw new Exception("Chưa điền số lần nhắc !");
                 }
             }
+            else 
+            { 
+
+            }
 
             if (cB_Never.Checked == true)
             {
@@ -278,6 +282,11 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
                 }
             }
             
+        }
+
+        private void RecurringEvtSettingForm_Load(object sender, EventArgs e)
+        {
+             dtPicker_DaySelect.CustomFormat = "dd/MM/yyyy HH:mm";
         }
     }
 }

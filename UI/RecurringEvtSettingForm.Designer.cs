@@ -344,6 +344,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "RecurringEvtSettingForm";
+            this.Load += new System.EventHandler(this.RecurringEvtSettingForm_Load);
             this.pnRepeatAfterTimeUnit.ResumeLayout(false);
             this.pnRepeatAfterTimeUnit.PerformLayout();
             this.pnRepeatDays.ResumeLayout(false);

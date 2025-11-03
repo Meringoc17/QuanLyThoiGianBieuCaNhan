@@ -222,12 +222,11 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 if (ev is RecurringEvent r)
                 {
                     while (r.End < DateTime.Now &&
-                          (r.EndDate == DateTime.MinValue || r.End < r.EndDate || r.Occurrences > 0))
+                          (r.EndDate == DateTime.MinValue || r.EndDate > DateTime.Now) &&
+                          (r.Occurrences == null || r.Occurrences > 0))
                     {
                         RecurringEvent newEvt = EventManager.RCEvt_AutoGenerate(currentUser_Sched, r);
                         if (newEvt == null) break;
-
-                        currentUser_Sched.Events.Add(newEvt);
                         newEvents.Add(newEvt);
 
                         // Cập nhật r để tiếp tục sinh event tiếp theo
@@ -1010,9 +1009,16 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
         private void toolStripBtnEvtDetail_Click(object sender, EventArgs e)
         {
-            if (dgvEvents.SelectedRows.Count > 0)
+            if (dgvEvents.SelectedRows.Count > 1)
             {
+                MessageBox.Show("Vui lòng chọn 1 dòng sự kiện để xem!");
+                return;
 
+            }
+            else if (dgvEvents.SelectedRows.Count == 1)
+            {
+                EventDetailForm f = new EventDetailForm((EventBase)dgvEvents.SelectedRows[0].DataBoundItem);
+                f.ShowDialog();
             }    
         }
     }
