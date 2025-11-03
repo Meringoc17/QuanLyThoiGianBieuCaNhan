@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lstEvents = new System.Windows.Forms.ListBox();
+            this.listEvents = new System.Windows.Forms.ListBox();
             this.lblDate = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // lstEvents
+            // listEvents
             // 
-            this.lstEvents.ForeColor = System.Drawing.Color.Black;
-            this.lstEvents.FormattingEnabled = true;
-            this.lstEvents.ItemHeight = 20;
-            this.lstEvents.Location = new System.Drawing.Point(56, 101);
-            this.lstEvents.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.lstEvents.Name = "lstEvents";
-            this.lstEvents.Size = new System.Drawing.Size(416, 124);
-            this.lstEvents.TabIndex = 0;
+            this.listEvents.ForeColor = System.Drawing.Color.Black;
+            this.listEvents.FormattingEnabled = true;
+            this.listEvents.ItemHeight = 20;
+            this.listEvents.Location = new System.Drawing.Point(56, 101);
+            this.listEvents.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.listEvents.Name = "listEvents";
+            this.listEvents.Size = new System.Drawing.Size(416, 124);
+            this.listEvents.TabIndex = 0;
             // 
             // lblDate
             // 
@@ -60,7 +60,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnClose.Location = new System.Drawing.Point(202, 248);
             this.btnClose.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnClose.Name = "btnClose";
@@ -79,7 +79,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lblDate);
-            this.Controls.Add(this.lstEvents);
+            this.Controls.Add(this.listEvents);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -92,7 +92,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox lstEvents;
+        private System.Windows.Forms.ListBox listEvents;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Button btnClose;
     }

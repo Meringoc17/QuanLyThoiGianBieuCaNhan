@@ -24,13 +24,13 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         public string Priority { get; set; }
         public bool Status { get; set; }
         public bool DaNhacNho { get; set; }
-        public List<string> Categories { get; set; }
+        //public List<string> Categories { get; set; }
         public Reminder Reminder { get; set; }
         public bool EnableReminder { get; set; }
 
         public EventBase()
         {
-            Categories = new List<string>();
+            //Categories = new List<string>();
         }
 
         // Constructor dùng khi Deserialize
@@ -46,12 +46,12 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             {
                 Status = info.GetBoolean("Status");
                 DaNhacNho = info.GetBoolean("DaNhacNho");
-                Categories = (List<string>)info.GetValue("Categories", typeof(List<string>));
+                //Categories = (List<string>)info.GetValue("Categories", typeof(List<string>));
                 Reminder = (Reminder)info.GetValue("Reminder", typeof(Reminder));
             }
             catch
             {
-                Categories = new List<string>();
+                //Categories = new List<string>();
             }
         }
 
@@ -65,7 +65,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             info.AddValue("Priority", Priority);
             info.AddValue("Status", Status);
             info.AddValue("DaNhacNho", DaNhacNho);
-            info.AddValue("Categories", Categories);
+            //info.AddValue("Categories", Categories);
             info.AddValue("Reminder", Reminder);
         }
 

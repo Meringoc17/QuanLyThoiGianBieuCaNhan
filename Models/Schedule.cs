@@ -1,3 +1,4 @@
+using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -54,9 +55,30 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         }
 
 
-        public void Remove (EventBase e)
+        public void RemoveEvent(EventBase e)
         {
-            Events.Remove(e); 
-        }   
+            try
+            {
+                Events.Remove(e);
+            }
+            catch (EventException ex)
+            {
+                throw new EventException("Lỗi không xóa được sự kiện!");
+            }
+        }
+
+        public void AddEvent(EventBase e)
+        {
+            try
+            {
+                Events.Add(e);
+            }
+            catch (Exception ex)
+            {
+                throw new EventException("Lỗi không thêm được sự kiện!", ex);
+            }
+        }
+
+
     }
 }

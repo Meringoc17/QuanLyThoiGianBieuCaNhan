@@ -24,8 +24,32 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             string[] timeUnits = { "Ngày", "Tuần", "Tháng", "Năm" };
             cLB_UnitTimeSelect.Items.AddRange(timeUnits);
             cLB_UnitTimeSelect.SetItemChecked(0, true);
+
+            if (recurrringEvt.RepeatIntervalDays == -1)
+            {
+                txtBox_NumTimeUnit.Text = "";
+            }
+            else
+            {
+                txtBox_NumTimeUnit.Text = recurrringEvt.RepeatIntervalDays.ToString();
+            }
+
+            if (string.IsNullOrEmpty(recurrringEvt.RepeatUnit))
+            {
+                for (int i = 0; i < cLB_UnitTimeSelect.Items.Count; i++)
+                {
+                    if (cLB_UnitTimeSelect.Items[i].ToString() == recurrringEvt.RepeatUnit)
+                    {
+                        cLB_UnitTimeSelect.SetItemChecked(i, true);
+                    }
+                }
+            }
             
-            //if (cLB_UnitTimeSelect)
+            if (pnRepeatDays.Enabled)
+            {
+
+            }    
+            
         }
 
         private void btn_Done_Click(object sender, EventArgs e)

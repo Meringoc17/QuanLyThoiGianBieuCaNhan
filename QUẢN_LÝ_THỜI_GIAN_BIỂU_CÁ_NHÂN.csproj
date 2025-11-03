@@ -49,9 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\DataFileException.cs" />
+    <Compile Include="Exceptions\EventException.cs" />
+    <Compile Include="Exceptions\OTEvtException.cs" />
+    <Compile Include="Exceptions\RcEvtException.cs" />
+    <Compile Include="Exceptions\UserException.cs" />
     <Compile Include="Interfaces\ISerializer.cs" />
     <Compile Include="Models\Schedule.cs" />
-    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\EventBase.cs" />
     <Compile Include="Models\OneTimeEvent.cs" />
     <Compile Include="Models\RecurringEvent.cs" />
@@ -61,6 +65,12 @@
     <Compile Include="Services\ReminderService.cs" />
     <Compile Include="Services\ScheduleService.cs" />
     <Compile Include="Services\UserManager.cs" />
+    <Compile Include="UI\EventDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\EventDetailForm.Designer.cs">
+      <DependentUpon>EventDetailForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +104,9 @@
     <Compile Include="UI\UserRegisterForm.Designer.cs">
       <DependentUpon>UserRegisterForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\EventDetailForm.resx">
+      <DependentUpon>EventDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>

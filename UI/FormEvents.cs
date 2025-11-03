@@ -21,7 +21,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
             foreach (EventBase ev in events)
             {
-                lstEvents.Items.Add(
+                listEvents.Items.Add(
                     ev.Title + " (" +
                     ev.Start.ToShortTimeString() + " - " +
                     ev.End.ToShortTimeString() + ")"

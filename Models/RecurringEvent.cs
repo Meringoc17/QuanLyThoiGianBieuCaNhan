@@ -12,7 +12,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
     [Serializable]
     public class RecurringEvent : EventBase
     {
-        public int RepeatIntervalDays { get; set; } // Lặp lại mỗi X đơn vị
+        public int RepeatIntervalDays { get; set; } = -1;// Lặp lại mỗi X đơn vị
         public string RepeatUnit { get; set; }     // "Ngày", "Tuần", ...
         public List<DayOfWeek> Days { get; set; }  // Những ngày chọn trg tuần
         public DateTime? EndDate { get; set; }

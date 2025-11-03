@@ -106,6 +106,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblSignOut = new System.Windows.Forms.Label();
             this.timer_Time = new System.Windows.Forms.Timer(this.components);
+            this.thêmLoạiSựKiệnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripBtnEvtDetail = new System.Windows.Forms.ToolStripButton();
             this.toolStrip.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -128,8 +130,9 @@
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonThem,
             this.toolStripButtonSua,
-            this.toolStripButtonXoa});
-            this.toolStrip.Location = new System.Drawing.Point(0, 33);
+            this.toolStripButtonXoa,
+            this.toolStripBtnEvtDetail});
+            this.toolStrip.Location = new System.Drawing.Point(0, 36);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip.Size = new System.Drawing.Size(1238, 54);
@@ -140,6 +143,7 @@
             // 
             this.toolStripButtonThem.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonThem.Image")));
             this.toolStripButtonThem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonThem.Margin = new System.Windows.Forms.Padding(0, 2, 5, 3);
             this.toolStripButtonThem.Name = "toolStripButtonThem";
             this.toolStripButtonThem.Size = new System.Drawing.Size(92, 49);
             this.toolStripButtonThem.Text = "Thêm";
@@ -149,6 +153,7 @@
             // 
             this.toolStripButtonSua.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonSua.Image")));
             this.toolStripButtonSua.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonSua.Margin = new System.Windows.Forms.Padding(5, 2, 5, 3);
             this.toolStripButtonSua.Name = "toolStripButtonSua";
             this.toolStripButtonSua.Size = new System.Drawing.Size(78, 49);
             this.toolStripButtonSua.Text = "Sửa";
@@ -158,6 +163,7 @@
             // 
             this.toolStripButtonXoa.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonXoa.Image")));
             this.toolStripButtonXoa.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonXoa.Margin = new System.Windows.Forms.Padding(5, 2, 5, 3);
             this.toolStripButtonXoa.Name = "toolStripButtonXoa";
             this.toolStripButtonXoa.Size = new System.Drawing.Size(79, 49);
             this.toolStripButtonXoa.Text = "Xóa";
@@ -225,14 +231,15 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1238, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(1238, 36);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip";
             // 
             // côngCụToolStripMenuItem
             // 
             this.côngCụToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.xóaToànBộSựKiênToolStripMenuItem});
+            this.xóaToànBộSựKiênToolStripMenuItem,
+            this.thêmLoạiSựKiệnToolStripMenuItem});
             this.côngCụToolStripMenuItem.Name = "côngCụToolStripMenuItem";
             this.côngCụToolStripMenuItem.Size = new System.Drawing.Size(165, 29);
             this.côngCụToolStripMenuItem.Text = "Công cụ bổ sung";
@@ -376,9 +383,8 @@
             this.statusStrip.Location = new System.Drawing.Point(468, 365);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
-            this.statusStrip.Size = new System.Drawing.Size(571, 32);
+            this.statusStrip.Size = new System.Drawing.Size(577, 32);
             this.statusStrip.TabIndex = 2;
-            this.statusStrip.Text = "statusStrip1";
             // 
             // tS_totalEvent
             // 
@@ -389,6 +395,7 @@
             // 
             // toolStripStatusLabel5
             // 
+            this.toolStripStatusLabel5.Margin = new System.Windows.Forms.Padding(1, 4, 1, 3);
             this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
             this.toolStripStatusLabel5.Size = new System.Drawing.Size(16, 25);
             this.toolStripStatusLabel5.Text = "|";
@@ -402,6 +409,7 @@
             // 
             // toolStripStatusLabel6
             // 
+            this.toolStripStatusLabel6.Margin = new System.Windows.Forms.Padding(1, 4, 1, 3);
             this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
             this.toolStripStatusLabel6.Size = new System.Drawing.Size(16, 25);
             this.toolStripStatusLabel6.Text = "|";
@@ -415,6 +423,7 @@
             // 
             // toolStripStatusLabel4
             // 
+            this.toolStripStatusLabel4.Margin = new System.Windows.Forms.Padding(1, 4, 1, 3);
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
             this.toolStripStatusLabel4.Size = new System.Drawing.Size(16, 25);
             this.toolStripStatusLabel4.Text = "|";
@@ -434,8 +443,8 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.93035F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.42786F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.1791F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.93035F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.92537F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.1791F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.67662F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.42786F));
             this.tableLayoutPanel2.Controls.Add(this.label7, 5, 0);
             this.tableLayoutPanel2.Controls.Add(this.label6, 4, 0);
@@ -456,10 +465,10 @@
             // 
             this.label7.Font = new System.Drawing.Font("Segoe UI Variable Display", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(69)))), ((int)(((byte)(163)))));
-            this.label7.Location = new System.Drawing.Point(287, 3);
+            this.label7.Location = new System.Drawing.Point(288, 3);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 52);
+            this.label7.Size = new System.Drawing.Size(52, 52);
             this.label7.TabIndex = 5;
             this.label7.Text = "T7";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -751,7 +760,7 @@
             "Phút",
             "Tiếng",
             "Ngày"});
-            this.cboBox_TimeUnit.Location = new System.Drawing.Point(279, 135);
+            this.cboBox_TimeUnit.Location = new System.Drawing.Point(279, 144);
             this.cboBox_TimeUnit.Name = "cboBox_TimeUnit";
             this.cboBox_TimeUnit.Size = new System.Drawing.Size(92, 28);
             this.cboBox_TimeUnit.TabIndex = 18;
@@ -760,7 +769,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(109, 139);
+            this.label1.Location = new System.Drawing.Point(109, 147);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(112, 21);
             this.label1.TabIndex = 17;
@@ -781,23 +790,25 @@
             // txtRepeatDetail
             // 
             this.txtRepeatDetail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtRepeatDetail.Enabled = false;
             this.txtRepeatDetail.Font = new System.Drawing.Font("Segoe UI Variable Display", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRepeatDetail.Location = new System.Drawing.Point(113, 17);
             this.txtRepeatDetail.Multiline = true;
             this.txtRepeatDetail.Name = "txtRepeatDetail";
+            this.txtRepeatDetail.ReadOnly = true;
             this.txtRepeatDetail.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtRepeatDetail.Size = new System.Drawing.Size(258, 64);
+            this.txtRepeatDetail.Size = new System.Drawing.Size(258, 77);
             this.txtRepeatDetail.TabIndex = 14;
             // 
             // txtTimeb4Event
             // 
             this.txtTimeb4Event.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTimeb4Event.Enabled = false;
-            this.txtTimeb4Event.Location = new System.Drawing.Point(224, 136);
+            this.txtTimeb4Event.Location = new System.Drawing.Point(224, 145);
             this.txtTimeb4Event.Name = "txtTimeb4Event";
             this.txtTimeb4Event.Size = new System.Drawing.Size(49, 26);
             this.txtTimeb4Event.TabIndex = 16;
+            this.txtTimeb4Event.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtTimeb4Event.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumber_KeyPress);
             // 
             // lblAdditional
             // 
@@ -814,7 +825,7 @@
             // 
             this.cB_ReminderOn.AutoSize = true;
             this.cB_ReminderOn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cB_ReminderOn.Location = new System.Drawing.Point(50, 100);
+            this.cB_ReminderOn.Location = new System.Drawing.Point(48, 107);
             this.cB_ReminderOn.Name = "cB_ReminderOn";
             this.cB_ReminderOn.Size = new System.Drawing.Size(154, 29);
             this.cB_ReminderOn.TabIndex = 15;
@@ -966,6 +977,22 @@
             // 
             this.timer_Time.Tick += new System.EventHandler(this.timer_Time_Tick);
             // 
+            // thêmLoạiSựKiệnToolStripMenuItem
+            // 
+            this.thêmLoạiSựKiệnToolStripMenuItem.Name = "thêmLoạiSựKiệnToolStripMenuItem";
+            this.thêmLoạiSựKiệnToolStripMenuItem.Size = new System.Drawing.Size(274, 34);
+            this.thêmLoạiSựKiệnToolStripMenuItem.Text = "Thêm Loại sự kiện";
+            // 
+            // toolStripBtnEvtDetail
+            // 
+            this.toolStripBtnEvtDetail.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnEvtDetail.Image")));
+            this.toolStripBtnEvtDetail.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBtnEvtDetail.Margin = new System.Windows.Forms.Padding(5, 2, 5, 3);
+            this.toolStripBtnEvtDetail.Name = "toolStripBtnEvtDetail";
+            this.toolStripBtnEvtDetail.Size = new System.Drawing.Size(202, 49);
+            this.toolStripBtnEvtDetail.Text = "Xem chi tiết sự kiện";
+            this.toolStripBtnEvtDetail.Click += new System.EventHandler(this.toolStripBtnEvtDetail_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
@@ -979,6 +1006,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "MainForm";
@@ -1086,5 +1114,7 @@
         private System.Windows.Forms.Panel pnWhite;
         private System.Windows.Forms.Label lblOccuringIdcColor;
         private System.Windows.Forms.Panel pnBlue;
+        private System.Windows.Forms.ToolStripButton toolStripBtnEvtDetail;
+        private System.Windows.Forms.ToolStripMenuItem thêmLoạiSựKiệnToolStripMenuItem;
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
 {
+
     internal class EventManager
     {
         public static EventBase Create(string tt, DateTime start, DateTime end,
@@ -22,19 +23,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             {
                 return o = OneTimeEvent.Create(tt, start, end, type, prio, status);
             }
-        }
-
-
-        public static OneTimeEvent CreateOneTimeEvt(string title, DateTime start,
-            DateTime end, string prior, string type, Reminder r)
-        {
-            return new OneTimeEvent();
-        }
-
-        public static OneTimeEvent CreateOneTimeEvt(string title, DateTime start,
-            DateTime end, string prior, string type)
-        {
-            return new OneTimeEvent();
         }
 
         public static RecurringEvent RepeatwUnitCalculation(

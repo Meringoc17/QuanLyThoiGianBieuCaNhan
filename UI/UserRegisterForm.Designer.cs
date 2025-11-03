@@ -81,7 +81,6 @@
             // 
             // txtBoxName
             // 
-            this.txtBoxName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBoxName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxName.Location = new System.Drawing.Point(239, 32);
             this.txtBoxName.Name = "txtBoxName";
@@ -90,7 +89,6 @@
             // 
             // txtBoxPass
             // 
-            this.txtBoxPass.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBoxPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxPass.Location = new System.Drawing.Point(239, 138);
             this.txtBoxPass.Name = "txtBoxPass";
@@ -100,7 +98,6 @@
             // 
             // txtBoxConfirmPass
             // 
-            this.txtBoxConfirmPass.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBoxConfirmPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxConfirmPass.Location = new System.Drawing.Point(239, 188);
             this.txtBoxConfirmPass.Name = "txtBoxConfirmPass";
@@ -160,12 +157,12 @@
             // 
             // txtBoxPhoneNum
             // 
-            this.txtBoxPhoneNum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBoxPhoneNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxPhoneNum.Location = new System.Drawing.Point(239, 85);
             this.txtBoxPhoneNum.Name = "txtBoxPhoneNum";
             this.txtBoxPhoneNum.Size = new System.Drawing.Size(381, 28);
             this.txtBoxPhoneNum.TabIndex = 8;
+            this.txtBoxPhoneNum.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumber_KeyPress);
             // 
             // label2
             // 
@@ -181,11 +178,11 @@
             // lblError
             // 
             this.lblError.AutoSize = true;
-            this.lblError.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblError.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblError.ForeColor = System.Drawing.Color.DeepSkyBlue;
             this.lblError.Location = new System.Drawing.Point(217, 317);
             this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(134, 25);
+            this.lblError.Size = new System.Drawing.Size(118, 21);
             this.lblError.TabIndex = 0;
             this.lblError.Text = "Báo lỗi ở đây !";
             this.lblError.Visible = false;
@@ -201,6 +198,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lbl_Title);
             this.Controls.Add(this.pnSignUp);
+            this.MaximizeBox = false;
             this.Name = "UserRegisterForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

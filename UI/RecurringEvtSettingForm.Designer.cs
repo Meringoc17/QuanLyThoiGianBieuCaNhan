@@ -339,6 +339,7 @@
             this.Controls.Add(this.pnOverSetting);
             this.Controls.Add(this.pnRepeatDays);
             this.Controls.Add(this.pnRepeatAfterTimeUnit);
+            this.MaximizeBox = false;
             this.Name = "RecurringEvtSettingForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

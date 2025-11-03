@@ -1,13 +1,16 @@
-﻿using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models;
+﻿using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Exceptions;
+using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models;
 using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services;
 using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,42 +77,52 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             allEvents = new BindingList<EventBase>(currentUser_Sched.Events);
             InitCalendarGrid();
 
-            // Gán BindingList vào DataGridView
-            allEvents.ListChanged += (s, e) =>
+            try
             {
-                if (e.ListChangedType == ListChangedType.ItemAdded)
+                // Gán BindingList vào DataGridView
+                allEvents.ListChanged += (s, e) =>
                 {
-                    EventBase added = allEvents[e.NewIndex];
-                    if (!currentUser_Sched.Events.Contains(added))
+                    if (e.ListChangedType == ListChangedType.ItemAdded)
                     {
-                        currentUser_Sched.Events.Add(added);
-                    }
-                }
-                else if (e.ListChangedType == ListChangedType.ItemDeleted)
-                {
-                    // Cập nhật theo index
-                    if (e.NewIndex >= 0 && e.NewIndex < currentUser_Sched.Events.Count)
-                        currentUser_Sched.Events = allEvents.ToList();
-                    statusStrip_Update();
-                    if (File.Exists(scheduleFilePath))
-                    {
-                        try
+                        EventBase added = allEvents[e.NewIndex];
+                        if (!currentUser_Sched.Events.Contains(added))
                         {
-                            using (FileStream fs = new FileStream(scheduleFilePath, FileMode.Create))
+                            currentUser_Sched.AddEvent(added);
+                        }
+
+                    }
+                    else if (e.ListChangedType == ListChangedType.ItemDeleted)
+                    {
+                        // Cập nhật theo index
+                        if (e.NewIndex >= 0 && e.NewIndex < currentUser_Sched.Events.Count)
+                            currentUser_Sched.Events = allEvents.ToList();
+                        statusStrip_Update();
+                        if (File.Exists(scheduleFilePath))
+                        {
+                            try
                             {
-                                BinaryFormatter bf = new BinaryFormatter();
-                                bf.Serialize(fs, currentUser_Sched); // ✅ Serialize nguyên Schedule
+                                using (FileStream fs = new FileStream(scheduleFilePath, FileMode.Create))
+                                {
+                                    BinaryFormatter bf = new BinaryFormatter();
+                                    bf.Serialize(fs, currentUser_Sched); // ✅ Serialize nguyên Schedule
+                                }
+                            }
+                            catch (DataFileException ex)
+                            {
+                                MessageBox.Show($"Lỗi khi đọc file lịch: {ex.Message}");
+                                allEvents = new BindingList<EventBase>(new List<EventBase>());
+                                throw new DataFileException("Lỗi khi đọc file lịch.", ex);
                             }
                         }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show($"Lỗi khi đọc file lịch: {ex.Message}");
-                            allEvents = new BindingList<EventBase>(new List<EventBase>());
-                        }
-                    }
 
-                }
-            };
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Có lỗi trong BindingList handler: " + ex.Message);
+                throw; // vẫn giữ nguyên lỗi gốc
+            }
 
             dgvEvents.DataSource = allEvents;
             dgvEvents.ClearSelection();
@@ -333,8 +346,14 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             return false;
         }
 
-
-
+        private void txtNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Chỉ cho phép chữ số và phím điều khiển (Backspace, Delete, v.v.)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // chặn ký tự không hợp lệ
+            }
+        }
 
         /// <summary>
         /// Xử lý click vào ngày
@@ -456,11 +475,10 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                     bf.Serialize(fs, currentUser_Sched);
                 }
             }
-            catch (Exception ex)
+            catch (DataFileException ex)
             {
-                Console.WriteLine("Lỗi khi auto-save sự kiện: " + ex.Message);
+                throw new DataFileException("Lỗi khi auto-save sự kiện", ex);
             }
-
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -495,87 +513,110 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 return;
             }
 
-            recurringEvt.EnableReminder = cB_ReminderOn.Checked;
-
-            // 🧠 Tạo sự kiện lặp lại hoặc 1 lần
-
-            if (cbRepeat.Checked && recurringEvt != null)
+            try
             {
-                if (recurringEvt.EnableReminder)
+                recurringEvt.EnableReminder = cB_ReminderOn.Checked;
+
+                // 🧠 Tạo sự kiện lặp lại hoặc 1 lần
+
+                if (cbRepeat.Checked && recurringEvt != null)
                 {
-                    int result;
-                    if (int.TryParse(txtTimeb4Event.Text, out result))
+                    try
                     {
-                        recurringEvt.Reminder = ReminderService.CreateReminder(
-                            ReminderService.UnitConverter(result, cboBox_TimeUnit.SelectedItem.ToString())
-                        );
+                        if (recurringEvt.EnableReminder)
+                        {
+                            int result;
+                            if (int.TryParse(txtTimeb4Event.Text, out result))
+                            {
+                                recurringEvt.Reminder = ReminderService.CreateReminder(
+                                    ReminderService.UnitConverter(result, cboBox_TimeUnit.SelectedItem.ToString())
+                                );
+                            }
+                            else
+                            {
+                                MessageBox.Show("Giá trị thời gian không hợp lệ!");
+                            }
+                        }
+                        allEvents.Add(new RecurringEvent(recurringEvt));
+                        DisplayCalendar(currentMonth);
+
+                        if (recurringEvt.Reminder != null && recurringEvt.EnableReminder)
+                        {
+                            recurringEvt.Reminder.OnReminderTriggered += Reminder_OnTriggered;
+                            DateTime remindTime = recurringEvt.Start - recurringEvt.Reminder.BeforeStart;
+                            if (DateTime.Now >= remindTime && DateTime.Now < recurringEvt.Start)
+                            {
+                                // 👉 Nhắc ngay
+                                recurringEvt.Reminder.Trigger(recurringEvt);
+                                recurringEvt.DaNhacNho = true;
+                            }
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Giá trị thời gian không hợp lệ!");
+                        throw new RcEvtException("Lỗi không lưu được sự kiện lặp lại", ex);
                     }
                 }
-                allEvents.Add(new RecurringEvent(recurringEvt));
-                DisplayCalendar(currentMonth);
-
-                if (recurringEvt.Reminder != null && recurringEvt.EnableReminder)
+                else
                 {
-                    recurringEvt.Reminder.OnReminderTriggered += Reminder_OnTriggered;
-                    DateTime remindTime = recurringEvt.Start - recurringEvt.Reminder.BeforeStart;
-                    if (DateTime.Now >= remindTime && DateTime.Now < recurringEvt.Start)
+                    try
                     {
-                        // 👉 Nhắc ngay
-                        recurringEvt.Reminder.Trigger(recurringEvt);
-                        recurringEvt.DaNhacNho = true;
+                        bool enbReminder = cB_ReminderOn.Checked;
+                        Reminder reminder = new Reminder();
+                        if (enbReminder)
+                        {
+                            int result;
+                            if (int.TryParse(txtTimeb4Event.Text, out result))
+                            {
+                                reminder = ReminderService.CreateReminder(
+                                    ReminderService.UnitConverter(result, cboBox_TimeUnit.SelectedItem.ToString())
+                                );
+                            }
+                            else
+                            {
+                                MessageBox.Show("Giá trị thời gian không hợp lệ!");
+                            }
+                        }
+                        // Sự kiện 1 lần
+                        OneTimeEvent oneTimeEvent = new OneTimeEvent
+                        {
+                            Title = txtTitle.Text,
+                            Start = dtpStart.Value,
+                            End = dtpEnd.Value,
+                            Priority = cbPriority.SelectedItem.ToString(),
+                            Type = cbType.SelectedItem != null ? cbType.SelectedItem.ToString() : "Công việc",
+                            EnableReminder = enbReminder,
+                            //if (cB_ReminderOn.Checked)
+                            Reminder = reminder
+
+                        };
+
+                        allEvents.Add(oneTimeEvent);
+                        DisplayCalendar(currentMonth);
+
+                        if (oneTimeEvent.Reminder != null)
+                        {
+                            oneTimeEvent.Reminder.OnReminderTriggered += Reminder_OnTriggered;
+                            DateTime remindTime = oneTimeEvent.Start - oneTimeEvent.Reminder.BeforeStart;
+                            if (DateTime.Now >= remindTime && DateTime.Now < oneTimeEvent.Start)
+                            {
+                                // 👉 Nhắc ngay
+                                oneTimeEvent.Reminder.Trigger(oneTimeEvent);
+                                oneTimeEvent.DaNhacNho = true;
+                            }
+                        }
                     }
+                    catch (Exception ex)
+                    {
+                        throw new OTEvtException("Lỗi không lưu được sự kiện", ex);
+                    }
+
                 }
             }
-            else
+            catch (Exception ex)
             {
-                bool enbReminder = cB_ReminderOn.Checked;
-                Reminder reminder = new Reminder();
-                if (enbReminder)
-                {
-                    int result;
-                    if (int.TryParse(txtTimeb4Event.Text, out result))
-                    {
-                        reminder = ReminderService.CreateReminder(
-                            ReminderService.UnitConverter(result, cboBox_TimeUnit.SelectedItem.ToString())
-                        );
-                    }
-                    else
-                    {
-                        MessageBox.Show("Giá trị thời gian không hợp lệ!");
-                    }
-                }
-                // Sự kiện 1 lần
-                OneTimeEvent oneTimeEvent = new OneTimeEvent
-                {
-                    Title = txtTitle.Text,
-                    Start = dtpStart.Value,
-                    End = dtpEnd.Value,
-                    Priority = cbPriority.SelectedItem.ToString(),
-                    Type = cbType.SelectedItem != null ? cbType.SelectedItem.ToString() : "Công việc",
-                    EnableReminder = enbReminder,
-                    //if (cB_ReminderOn.Checked)
-                    Reminder = reminder
-
-                };
-
-                allEvents.Add(oneTimeEvent);
-                DisplayCalendar(currentMonth);
-
-                if (oneTimeEvent.Reminder != null)
-                {
-                    oneTimeEvent.Reminder.OnReminderTriggered += Reminder_OnTriggered;
-                    DateTime remindTime = oneTimeEvent.Start - oneTimeEvent.Reminder.BeforeStart;
-                    if (DateTime.Now >= remindTime && DateTime.Now < oneTimeEvent.Start)
-                    {
-                        // 👉 Nhắc ngay
-                        oneTimeEvent.Reminder.Trigger(oneTimeEvent);
-                        oneTimeEvent.DaNhacNho = true;
-                    }
-                }
+                MessageBox.Show("Lỗi thêm vào sự kiện: " + ex.Message);
+                throw;
             }
 
             // 🔄 Làm mới hiển thị lịch
@@ -717,45 +758,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 }
                 EventBase ev2 = (EventBase)dgvEvents.SelectedRows[0].DataBoundItem;
                 allEvents.Remove(ev2);
-            } 
-            
-        }
-
-
-        private void toolStripButtonTai_Click(object sender, EventArgs e)
-        {
-            string[] lines = File.ReadAllLines("sukien.csv");
-            dgvEvents.Rows.Clear();
-
-            foreach (string line in lines)
-            {
-                string[] parts = line.Split(',');
-                dgvEvents.Rows.Add(parts);
             }
 
-            MessageBox.Show("Đã tải dữ liệu!");
-        }
-
-        private void toolStripButtonXuatCSV_Click(object sender, EventArgs e)
-        {
-            using (StreamWriter sw = new StreamWriter("sukien.csv"))
-            {
-                foreach (DataGridViewRow row in dgvEvents.Rows)
-                {
-                    if (!row.IsNewRow)
-                    {
-                        string line = string.Join(",",
-                            row.Cells[0].Value,
-                            row.Cells[1].Value,
-                            row.Cells[2].Value,
-                            row.Cells[3].Value,
-                            row.Cells[4].Value);
-                        sw.WriteLine(line);
-                    }
-                }
-            }
-
-            MessageBox.Show("Đã xuất file CSV!");
         }
 
         private void cbRepeat_CheckedChanged(object sender, EventArgs e)
@@ -787,23 +791,49 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                     return;
                 }
 
-                // ✅ Nếu hợp lệ thì tạo recurring event và mở form cấu hình
-                this.recurringEvt = new RecurringEvent
+                if (dtpStart.Value <= DateTime.Now)
                 {
-                    Title = txtTitle.Text,
-                    Start = dtpStart.Value,
-                    End = dtpEnd.Value,
-                    Priority = cbPriority.SelectedItem.ToString()
+                    MessageBox.Show("Thời gian bắt đầu phải sau thời gian hiện tại!",
+                        "Lỗi thời gian", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cbRepeat.Checked = false;
+                    return;
+                }
 
-                };
+                if (dtpEnd.Value <= DateTime.Now)
+                {
+                    MessageBox.Show("Thời gian kết thúc thời gian hiện tại!",
+                        "Lỗi thời gian", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cbRepeat.Checked = false;
+                    return;
+                }
 
-                RecurringEvtSettingForm repeatForm = new RecurringEvtSettingForm(recurringEvt);
-                this.SubscribeToRecurrEvtForm(repeatForm);
-                repeatForm.ShowDialog();
+                if (string.IsNullOrEmpty(txtRepeatDetail.Text))
+                {
+                    // ✅ Nếu hợp lệ thì tạo recurring event và mở form cấu hình
+                    this.recurringEvt = new RecurringEvent
+                    {
+                        Title = txtTitle.Text,
+                        Start = dtpStart.Value,
+                        End = dtpEnd.Value,
+                        Priority = cbPriority.SelectedItem.ToString(),
+                        Type = cbType.SelectedItem != null ? cbType.SelectedItem.ToString() : ""
+                    };
+
+                    RecurringEvtSettingForm repeatForm = new RecurringEvtSettingForm(recurringEvt);
+                    this.SubscribeToRecurrEvtForm(repeatForm);
+                    repeatForm.ShowDialog();
+                }
+                else
+                {
+                    RecurringEvtSettingForm repeatForm = new RecurringEvtSettingForm(recurringEvt);
+                    this.SubscribeToRecurrEvtForm(repeatForm);
+                    repeatForm.ShowDialog();
+                } 
+                    
             }
             else
             {
-                this.recurringEvt = null;
+                //this.recurringEvt = null;
             }
         }
 
@@ -881,11 +911,11 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                             allEvents.Add(ev);
                         }
 
-                        foreach(RecurringEvent ev in removeOldEvts)
+                        foreach (RecurringEvent ev in removeOldEvts)
                         {
                             allEvents.Remove(ev);
-                        }   
-                        
+                        }
+
                         if (newEvents.Count > 0)
                         {
                             DisplayCalendar(currentMonth); // cập nhật lịch
@@ -976,6 +1006,14 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 txtTimeb4Event.Enabled = false;
                 cboBox_TimeUnit.Enabled = false;
             }
+        }
+
+        private void toolStripBtnEvtDetail_Click(object sender, EventArgs e)
+        {
+            if (dgvEvents.SelectedRows.Count > 0)
+            {
+
+            }    
         }
     }
 

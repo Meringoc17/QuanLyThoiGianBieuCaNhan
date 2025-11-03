@@ -33,6 +33,15 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             return new Region(path);
         }
 
+        private void txtNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Chỉ cho phép chữ số và phím điều khiển (Backspace, Delete, v.v.)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // chặn ký tự không hợp lệ
+            }
+        }
+
         private void UserSignUp_Load(object sender, EventArgs e) { }
 
         private void btn_Done_Click(object sender, EventArgs e)
