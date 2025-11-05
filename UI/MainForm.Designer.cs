@@ -55,7 +55,6 @@
             this.lblFilter = new System.Windows.Forms.Label();
             this.picboxSort = new System.Windows.Forms.PictureBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.cbFilterPrior = new System.Windows.Forms.CheckBox();
             this.lblNonOccuringIdcColor = new System.Windows.Forms.Label();
             this.pnWhite = new System.Windows.Forms.Panel();
             this.lblOccuringIdcColor = new System.Windows.Forms.Label();
@@ -114,6 +113,11 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblSignOut = new System.Windows.Forms.Label();
             this.timer_Time = new System.Windows.Forms.Timer(this.components);
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.btnResetDGV = new System.Windows.Forms.Button();
             this.toolStrip.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -129,6 +133,8 @@
             this.pn_MainAdd.SuspendLayout();
             this.panelRight.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -141,10 +147,10 @@
             this.toolStripButtonSua,
             this.toolStripButtonXoa,
             this.toolStripBtnEvtDetail});
-            this.toolStrip.Location = new System.Drawing.Point(0, 33);
+            this.toolStrip.Location = new System.Drawing.Point(0, 36);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStrip.Size = new System.Drawing.Size(1238, 54);
+            this.toolStrip.Size = new System.Drawing.Size(1262, 54);
             this.toolStrip.TabIndex = 2;
             this.toolStrip.Text = "ToolBar";
             // 
@@ -194,7 +200,7 @@
             this.xuấtToolStripMenuItem,
             this.lưuToolStripMenuItem});
             this.tệpToolStripMenuItem.Name = "tệpToolStripMenuItem";
-            this.tệpToolStripMenuItem.Size = new System.Drawing.Size(62, 29);
+            this.tệpToolStripMenuItem.Size = new System.Drawing.Size(62, 32);
             this.tệpToolStripMenuItem.Text = "Tệp ";
             // 
             // xuấtToolStripMenuItem
@@ -212,7 +218,7 @@
             // xemToolStripMenuItem
             // 
             this.xemToolStripMenuItem.Name = "xemToolStripMenuItem";
-            this.xemToolStripMenuItem.Size = new System.Drawing.Size(64, 29);
+            this.xemToolStripMenuItem.Size = new System.Drawing.Size(64, 32);
             this.xemToolStripMenuItem.Text = "Xem";
             // 
             // trợGiúpToolStripMenuItem1
@@ -221,7 +227,7 @@
             this.câuHỏiThườngGặpToolStripMenuItem,
             this.hướngDẫnSửDụngToolStripMenuItem});
             this.trợGiúpToolStripMenuItem1.Name = "trợGiúpToolStripMenuItem1";
-            this.trợGiúpToolStripMenuItem1.Size = new System.Drawing.Size(94, 29);
+            this.trợGiúpToolStripMenuItem1.Size = new System.Drawing.Size(94, 32);
             this.trợGiúpToolStripMenuItem1.Text = "Trợ Giúp";
             // 
             // câuHỏiThườngGặpToolStripMenuItem
@@ -250,7 +256,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1238, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(1262, 36);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip";
             // 
@@ -260,7 +266,7 @@
             this.xóaToànBộSựKiênToolStripMenuItem,
             this.thêmLoạiSựKiệnToolStripMenuItem});
             this.côngCụToolStripMenuItem.Name = "côngCụToolStripMenuItem";
-            this.côngCụToolStripMenuItem.Size = new System.Drawing.Size(165, 29);
+            this.côngCụToolStripMenuItem.Size = new System.Drawing.Size(165, 32);
             this.côngCụToolStripMenuItem.Text = "Công cụ bổ sung";
             // 
             // xóaToànBộSựKiênToolStripMenuItem
@@ -288,7 +294,7 @@
             this.lbl_SignInName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.lbl_SignInName.Font = new System.Drawing.Font("Segoe UI Variable Display", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_SignInName.ForeColor = System.Drawing.Color.SteelBlue;
-            this.lbl_SignInName.Location = new System.Drawing.Point(938, 48);
+            this.lbl_SignInName.Location = new System.Drawing.Point(975, 47);
             this.lbl_SignInName.Name = "lbl_SignInName";
             this.lbl_SignInName.Size = new System.Drawing.Size(277, 27);
             this.lbl_SignInName.TabIndex = 3;
@@ -314,19 +320,21 @@
             this.panel1.Location = new System.Drawing.Point(7, 8);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1196, 447);
+            this.panel1.Size = new System.Drawing.Size(1223, 447);
             this.panel1.TabIndex = 0;
             // 
             // pnSortMain
             // 
             this.pnSortMain.BackColor = System.Drawing.Color.LightYellow;
             this.pnSortMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnSortMain.Controls.Add(this.btnResetDGV);
+            this.pnSortMain.Controls.Add(this.comboBox2);
+            this.pnSortMain.Controls.Add(this.panel2);
             this.pnSortMain.Controls.Add(this.pnSortLbl);
             this.pnSortMain.Controls.Add(this.comboBox1);
-            this.pnSortMain.Controls.Add(this.cbFilterPrior);
             this.pnSortMain.Location = new System.Drawing.Point(468, 24);
             this.pnSortMain.Name = "pnSortMain";
-            this.pnSortMain.Size = new System.Drawing.Size(707, 50);
+            this.pnSortMain.Size = new System.Drawing.Size(728, 50);
             this.pnSortMain.TabIndex = 11;
             // 
             // pnSortLbl
@@ -337,7 +345,7 @@
             this.pnSortLbl.Controls.Add(this.picboxSort);
             this.pnSortLbl.Location = new System.Drawing.Point(-1, -1);
             this.pnSortLbl.Name = "pnSortLbl";
-            this.pnSortLbl.Size = new System.Drawing.Size(187, 50);
+            this.pnSortLbl.Size = new System.Drawing.Size(186, 50);
             this.pnSortLbl.TabIndex = 5;
             // 
             // lblFilter
@@ -364,28 +372,19 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.Font = new System.Drawing.Font("Segoe UI Variable Display", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(325, 11);
+            this.comboBox1.Location = new System.Drawing.Point(207, 10);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(145, 28);
+            this.comboBox1.Size = new System.Drawing.Size(123, 29);
             this.comboBox1.TabIndex = 3;
-            // 
-            // cbFilterPrior
-            // 
-            this.cbFilterPrior.AutoSize = true;
-            this.cbFilterPrior.Font = new System.Drawing.Font("Segoe UI Variable Display", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbFilterPrior.Location = new System.Drawing.Point(210, 12);
-            this.cbFilterPrior.Name = "cbFilterPrior";
-            this.cbFilterPrior.Size = new System.Drawing.Size(92, 28);
-            this.cbFilterPrior.TabIndex = 0;
-            this.cbFilterPrior.Text = "Ưu tiên";
-            this.cbFilterPrior.UseVisualStyleBackColor = true;
+            this.comboBox1.Text = "Ưu tiên";
             // 
             // lblNonOccuringIdcColor
             // 
             this.lblNonOccuringIdcColor.AutoSize = true;
             this.lblNonOccuringIdcColor.Font = new System.Drawing.Font("Segoe UI Variable Display", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNonOccuringIdcColor.Location = new System.Drawing.Point(1044, 410);
+            this.lblNonOccuringIdcColor.Location = new System.Drawing.Point(1067, 410);
             this.lblNonOccuringIdcColor.Name = "lblNonOccuringIdcColor";
             this.lblNonOccuringIdcColor.Size = new System.Drawing.Size(110, 24);
             this.lblNonOccuringIdcColor.TabIndex = 10;
@@ -395,7 +394,7 @@
             // 
             this.pnWhite.BackColor = System.Drawing.Color.White;
             this.pnWhite.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnWhite.Location = new System.Drawing.Point(1018, 414);
+            this.pnWhite.Location = new System.Drawing.Point(1038, 414);
             this.pnWhite.Name = "pnWhite";
             this.pnWhite.Size = new System.Drawing.Size(21, 20);
             this.pnWhite.TabIndex = 9;
@@ -404,7 +403,7 @@
             // 
             this.lblOccuringIdcColor.AutoSize = true;
             this.lblOccuringIdcColor.Font = new System.Drawing.Font("Segoe UI Variable Display", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOccuringIdcColor.Location = new System.Drawing.Point(851, 410);
+            this.lblOccuringIdcColor.Location = new System.Drawing.Point(870, 410);
             this.lblOccuringIdcColor.Name = "lblOccuringIdcColor";
             this.lblOccuringIdcColor.Size = new System.Drawing.Size(110, 24);
             this.lblOccuringIdcColor.TabIndex = 8;
@@ -414,7 +413,7 @@
             // 
             this.pnBlue.BackColor = System.Drawing.Color.LightCyan;
             this.pnBlue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnBlue.Location = new System.Drawing.Point(824, 414);
+            this.pnBlue.Location = new System.Drawing.Point(843, 414);
             this.pnBlue.Name = "pnBlue";
             this.pnBlue.Size = new System.Drawing.Size(21, 20);
             this.pnBlue.TabIndex = 7;
@@ -423,7 +422,7 @@
             // 
             this.lblOverdueIdcColor.AutoSize = true;
             this.lblOverdueIdcColor.Font = new System.Drawing.Font("Segoe UI Variable Display", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOverdueIdcColor.Location = new System.Drawing.Point(699, 410);
+            this.lblOverdueIdcColor.Location = new System.Drawing.Point(714, 410);
             this.lblOverdueIdcColor.Name = "lblOverdueIdcColor";
             this.lblOverdueIdcColor.Size = new System.Drawing.Size(75, 24);
             this.lblOverdueIdcColor.TabIndex = 6;
@@ -433,7 +432,7 @@
             // 
             this.pnRed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.pnRed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnRed.Location = new System.Drawing.Point(672, 414);
+            this.pnRed.Location = new System.Drawing.Point(687, 414);
             this.pnRed.Name = "pnRed";
             this.pnRed.Size = new System.Drawing.Size(21, 20);
             this.pnRed.TabIndex = 5;
@@ -442,7 +441,7 @@
             // 
             this.lblDoneIdcColor.AutoSize = true;
             this.lblDoneIdcColor.Font = new System.Drawing.Font("Segoe UI Variable Display", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDoneIdcColor.Location = new System.Drawing.Point(517, 410);
+            this.lblDoneIdcColor.Location = new System.Drawing.Point(526, 410);
             this.lblDoneIdcColor.Name = "lblDoneIdcColor";
             this.lblDoneIdcColor.Size = new System.Drawing.Size(107, 24);
             this.lblDoneIdcColor.TabIndex = 4;
@@ -452,7 +451,7 @@
             // 
             this.pnGreen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.pnGreen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnGreen.Location = new System.Drawing.Point(490, 414);
+            this.pnGreen.Location = new System.Drawing.Point(499, 414);
             this.pnGreen.Name = "pnGreen";
             this.pnGreen.Size = new System.Drawing.Size(21, 20);
             this.pnGreen.TabIndex = 3;
@@ -473,19 +472,20 @@
             this.statusStrip.Location = new System.Drawing.Point(468, 365);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
-            this.statusStrip.Size = new System.Drawing.Size(577, 32);
+            this.statusStrip.Size = new System.Drawing.Size(596, 32);
             this.statusStrip.TabIndex = 2;
             // 
             // tS_totalEvent
             // 
             this.tS_totalEvent.BackColor = System.Drawing.Color.White;
+            this.tS_totalEvent.Margin = new System.Windows.Forms.Padding(7, 4, 0, 3);
             this.tS_totalEvent.Name = "tS_totalEvent";
             this.tS_totalEvent.Size = new System.Drawing.Size(195, 25);
             this.tS_totalEvent.Text = "Tổng công việc hiện có";
             // 
             // toolStripStatusLabel5
             // 
-            this.toolStripStatusLabel5.Margin = new System.Windows.Forms.Padding(1, 4, 1, 3);
+            this.toolStripStatusLabel5.Margin = new System.Windows.Forms.Padding(2, 4, 2, 3);
             this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
             this.toolStripStatusLabel5.Size = new System.Drawing.Size(16, 25);
             this.toolStripStatusLabel5.Text = "|";
@@ -499,7 +499,7 @@
             // 
             // toolStripStatusLabel6
             // 
-            this.toolStripStatusLabel6.Margin = new System.Windows.Forms.Padding(1, 4, 1, 3);
+            this.toolStripStatusLabel6.Margin = new System.Windows.Forms.Padding(2, 4, 2, 3);
             this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
             this.toolStripStatusLabel6.Size = new System.Drawing.Size(16, 25);
             this.toolStripStatusLabel6.Text = "|";
@@ -513,13 +513,14 @@
             // 
             // toolStripStatusLabel4
             // 
-            this.toolStripStatusLabel4.Margin = new System.Windows.Forms.Padding(1, 4, 1, 3);
+            this.toolStripStatusLabel4.Margin = new System.Windows.Forms.Padding(2, 4, 2, 3);
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
             this.toolStripStatusLabel4.Size = new System.Drawing.Size(16, 25);
             this.toolStripStatusLabel4.Text = "|";
             // 
             // tS_Time
             // 
+            this.tS_Time.Margin = new System.Windows.Forms.Padding(0, 4, 6, 3);
             this.tS_Time.Name = "tS_Time";
             this.tS_Time.Size = new System.Drawing.Size(50, 25);
             this.tS_Time.Text = "Time";
@@ -648,7 +649,7 @@
             this.dgvEvents.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvEvents.Name = "dgvEvents";
             this.dgvEvents.RowHeadersWidth = 82;
-            this.dgvEvents.Size = new System.Drawing.Size(707, 303);
+            this.dgvEvents.Size = new System.Drawing.Size(728, 303);
             this.dgvEvents.TabIndex = 1;
             // 
             // tblCalendar
@@ -730,17 +731,13 @@
             this.panelunder.BackColor = System.Drawing.Color.AliceBlue;
             this.panelunder.Controls.Add(this.btnCancel);
             this.panelunder.Controls.Add(this.btnSave);
-            this.panelunder.Controls.Add(this.dtpStart);
-            this.panelunder.Controls.Add(this.txtTitle);
-            this.panelunder.Controls.Add(this.lblBatDau);
-            this.panelunder.Controls.Add(this.lblTieuDe);
             this.panelunder.Controls.Add(this.lblAddEvt);
             this.panelunder.Controls.Add(this.pn_);
             this.panelunder.Controls.Add(this.pn_MainAdd);
             this.panelunder.Location = new System.Drawing.Point(4, 5);
             this.panelunder.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panelunder.Name = "panelunder";
-            this.panelunder.Size = new System.Drawing.Size(1192, 354);
+            this.panelunder.Size = new System.Drawing.Size(1226, 354);
             this.panelunder.TabIndex = 0;
             // 
             // btnCancel
@@ -773,7 +770,7 @@
             // 
             this.dtpStart.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpStart.Location = new System.Drawing.Point(144, 126);
+            this.dtpStart.Location = new System.Drawing.Point(128, 75);
             this.dtpStart.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dtpStart.Name = "dtpStart";
             this.dtpStart.Size = new System.Drawing.Size(207, 29);
@@ -782,7 +779,7 @@
             // txtTitle
             // 
             this.txtTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTitle.Location = new System.Drawing.Point(142, 66);
+            this.txtTitle.Location = new System.Drawing.Point(128, 17);
             this.txtTitle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(559, 26);
@@ -793,7 +790,7 @@
             // 
             this.lblBatDau.BackColor = System.Drawing.SystemColors.Control;
             this.lblBatDau.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBatDau.Location = new System.Drawing.Point(27, 126);
+            this.lblBatDau.Location = new System.Drawing.Point(15, 75);
             this.lblBatDau.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblBatDau.Name = "lblBatDau";
             this.lblBatDau.Size = new System.Drawing.Size(93, 29);
@@ -805,7 +802,7 @@
             // 
             this.lblTieuDe.BackColor = System.Drawing.SystemColors.Control;
             this.lblTieuDe.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTieuDe.Location = new System.Drawing.Point(27, 65);
+            this.lblTieuDe.Location = new System.Drawing.Point(15, 16);
             this.lblTieuDe.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTieuDe.Name = "lblTieuDe";
             this.lblTieuDe.Size = new System.Drawing.Size(93, 27);
@@ -821,7 +818,7 @@
             this.lblAddEvt.Location = new System.Drawing.Point(0, 0);
             this.lblAddEvt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAddEvt.Name = "lblAddEvt";
-            this.lblAddEvt.Size = new System.Drawing.Size(1257, 37);
+            this.lblAddEvt.Size = new System.Drawing.Size(1293, 37);
             this.lblAddEvt.TabIndex = 0;
             this.lblAddEvt.Text = "Thêm Sự Kiện";
             this.lblAddEvt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -839,7 +836,7 @@
             this.pn_.Controls.Add(this.cB_ReminderOn);
             this.pn_.Location = new System.Drawing.Point(754, 50);
             this.pn_.Name = "pn_";
-            this.pn_.Size = new System.Drawing.Size(417, 211);
+            this.pn_.Size = new System.Drawing.Size(438, 211);
             this.pn_.TabIndex = 17;
             // 
             // cboBox_TimeUnit
@@ -869,7 +866,7 @@
             // 
             this.cbRepeat.AutoSize = true;
             this.cbRepeat.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbRepeat.Location = new System.Drawing.Point(19, 36);
+            this.cbRepeat.Location = new System.Drawing.Point(35, 36);
             this.cbRepeat.Name = "cbRepeat";
             this.cbRepeat.Size = new System.Drawing.Size(88, 29);
             this.cbRepeat.TabIndex = 13;
@@ -881,7 +878,7 @@
             // 
             this.txtRepeatDetail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtRepeatDetail.Font = new System.Drawing.Font("Segoe UI Variable Display", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRepeatDetail.Location = new System.Drawing.Point(113, 17);
+            this.txtRepeatDetail.Location = new System.Drawing.Point(137, 15);
             this.txtRepeatDetail.Multiline = true;
             this.txtRepeatDetail.Name = "txtRepeatDetail";
             this.txtRepeatDetail.ReadOnly = true;
@@ -893,9 +890,9 @@
             // 
             this.txtTimeb4Event.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTimeb4Event.Enabled = false;
-            this.txtTimeb4Event.Location = new System.Drawing.Point(224, 145);
+            this.txtTimeb4Event.Location = new System.Drawing.Point(229, 145);
             this.txtTimeb4Event.Name = "txtTimeb4Event";
-            this.txtTimeb4Event.Size = new System.Drawing.Size(49, 26);
+            this.txtTimeb4Event.Size = new System.Drawing.Size(37, 26);
             this.txtTimeb4Event.TabIndex = 16;
             this.txtTimeb4Event.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtTimeb4Event.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumber_KeyPress);
@@ -905,7 +902,7 @@
             this.lblAdditional.AutoSize = true;
             this.lblAdditional.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAdditional.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lblAdditional.Location = new System.Drawing.Point(294, 184);
+            this.lblAdditional.Location = new System.Drawing.Point(315, 184);
             this.lblAdditional.Name = "lblAdditional";
             this.lblAdditional.Size = new System.Drawing.Size(118, 21);
             this.lblAdditional.TabIndex = 0;
@@ -915,7 +912,7 @@
             // 
             this.cB_ReminderOn.AutoSize = true;
             this.cB_ReminderOn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cB_ReminderOn.Location = new System.Drawing.Point(48, 107);
+            this.cB_ReminderOn.Location = new System.Drawing.Point(48, 109);
             this.cB_ReminderOn.Name = "cB_ReminderOn";
             this.cB_ReminderOn.Size = new System.Drawing.Size(154, 29);
             this.cB_ReminderOn.TabIndex = 15;
@@ -929,14 +926,18 @@
             this.pn_MainAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pn_MainAdd.Controls.Add(this.lblAddEvtPnl);
             this.pn_MainAdd.Controls.Add(this.cbType);
+            this.pn_MainAdd.Controls.Add(this.lblTieuDe);
+            this.pn_MainAdd.Controls.Add(this.txtTitle);
+            this.pn_MainAdd.Controls.Add(this.dtpStart);
+            this.pn_MainAdd.Controls.Add(this.lblBatDau);
             this.pn_MainAdd.Controls.Add(this.dtpEnd);
             this.pn_MainAdd.Controls.Add(this.lblUuTien);
             this.pn_MainAdd.Controls.Add(this.cbPriority);
             this.pn_MainAdd.Controls.Add(this.lblKetThuc);
             this.pn_MainAdd.Controls.Add(this.lblLoai);
-            this.pn_MainAdd.Location = new System.Drawing.Point(13, 50);
+            this.pn_MainAdd.Location = new System.Drawing.Point(23, 50);
             this.pn_MainAdd.Name = "pn_MainAdd";
-            this.pn_MainAdd.Size = new System.Drawing.Size(725, 211);
+            this.pn_MainAdd.Size = new System.Drawing.Size(715, 211);
             this.pn_MainAdd.TabIndex = 18;
             // 
             // lblAddEvtPnl
@@ -944,7 +945,7 @@
             this.lblAddEvtPnl.AutoSize = true;
             this.lblAddEvtPnl.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAddEvtPnl.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.lblAddEvtPnl.Location = new System.Drawing.Point(576, 184);
+            this.lblAddEvtPnl.Location = new System.Drawing.Point(566, 184);
             this.lblAddEvtPnl.Name = "lblAddEvtPnl";
             this.lblAddEvtPnl.Size = new System.Drawing.Size(144, 21);
             this.lblAddEvtPnl.TabIndex = 0;
@@ -1005,7 +1006,7 @@
             // 
             this.lblKetThuc.BackColor = System.Drawing.SystemColors.Control;
             this.lblKetThuc.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblKetThuc.Location = new System.Drawing.Point(12, 136);
+            this.lblKetThuc.Location = new System.Drawing.Point(15, 136);
             this.lblKetThuc.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblKetThuc.Name = "lblKetThuc";
             this.lblKetThuc.Size = new System.Drawing.Size(94, 30);
@@ -1031,7 +1032,7 @@
             this.panelRight.Location = new System.Drawing.Point(7, 468);
             this.panelRight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panelRight.Name = "panelRight";
-            this.panelRight.Size = new System.Drawing.Size(1200, 359);
+            this.panelRight.Size = new System.Drawing.Size(1223, 359);
             this.panelRight.TabIndex = 1;
             // 
             // tableLayoutPanel1
@@ -1047,7 +1048,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55.3528F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 44.6472F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1214, 835);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1237, 835);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // lblSignOut
@@ -1056,7 +1057,7 @@
             this.lblSignOut.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.lblSignOut.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSignOut.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblSignOut.Location = new System.Drawing.Point(1145, 8);
+            this.lblSignOut.Location = new System.Drawing.Point(1162, 7);
             this.lblSignOut.Name = "lblSignOut";
             this.lblSignOut.Size = new System.Drawing.Size(87, 21);
             this.lblSignOut.TabIndex = 4;
@@ -1067,12 +1068,65 @@
             // 
             this.timer_Time.Tick += new System.EventHandler(this.timer_Time_Tick);
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.AliceBlue;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Location = new System.Drawing.Point(355, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(149, 50);
+            this.panel2.TabIndex = 6;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Variable Display", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(57, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(82, 24);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Lọc theo:";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(51, 50);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.Font = new System.Drawing.Font("Segoe UI Variable Display", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(528, 10);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(123, 29);
+            this.comboBox2.TabIndex = 7;
+            this.comboBox2.Text = "Loại";
+            // 
+            // btnResetDGV
+            // 
+            this.btnResetDGV.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnResetDGV.Location = new System.Drawing.Point(671, 7);
+            this.btnResetDGV.Name = "btnResetDGV";
+            this.btnResetDGV.Size = new System.Drawing.Size(37, 35);
+            this.btnResetDGV.TabIndex = 8;
+            this.btnResetDGV.Text = "🔄";
+            this.btnResetDGV.UseVisualStyleBackColor = true;
+            // 
             // pnSort
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(225)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(1238, 929);
+            this.ClientSize = new System.Drawing.Size(1262, 929);
             this.Controls.Add(this.lblSignOut);
             this.Controls.Add(this.lbl_SignInName);
             this.Controls.Add(this.toolStrip);
@@ -1094,7 +1148,6 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.pnSortMain.ResumeLayout(false);
-            this.pnSortMain.PerformLayout();
             this.pnSortLbl.ResumeLayout(false);
             this.pnSortLbl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picboxSort)).EndInit();
@@ -1104,13 +1157,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvEvents)).EndInit();
             this.pnCalnd.ResumeLayout(false);
             this.panelunder.ResumeLayout(false);
-            this.panelunder.PerformLayout();
             this.pn_.ResumeLayout(false);
             this.pn_.PerformLayout();
             this.pn_MainAdd.ResumeLayout(false);
             this.pn_MainAdd.PerformLayout();
             this.panelRight.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1197,9 +1252,13 @@
         private System.Windows.Forms.ToolStripMenuItem thêmLoạiSựKiệnToolStripMenuItem;
         private System.Windows.Forms.Panel pnSortMain;
         private System.Windows.Forms.Label lblFilter;
-        private System.Windows.Forms.CheckBox cbFilterPrior;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.PictureBox picboxSort;
         private System.Windows.Forms.Panel pnSortLbl;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button btnResetDGV;
     }
 }
