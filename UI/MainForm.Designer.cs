@@ -118,6 +118,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.btnResetDGV = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.toolStrip.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -135,6 +136,7 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -200,7 +202,7 @@
             this.xuấtToolStripMenuItem,
             this.lưuToolStripMenuItem});
             this.tệpToolStripMenuItem.Name = "tệpToolStripMenuItem";
-            this.tệpToolStripMenuItem.Size = new System.Drawing.Size(62, 32);
+            this.tệpToolStripMenuItem.Size = new System.Drawing.Size(62, 29);
             this.tệpToolStripMenuItem.Text = "Tệp ";
             // 
             // xuấtToolStripMenuItem
@@ -218,7 +220,7 @@
             // xemToolStripMenuItem
             // 
             this.xemToolStripMenuItem.Name = "xemToolStripMenuItem";
-            this.xemToolStripMenuItem.Size = new System.Drawing.Size(64, 32);
+            this.xemToolStripMenuItem.Size = new System.Drawing.Size(64, 29);
             this.xemToolStripMenuItem.Text = "Xem";
             // 
             // trợGiúpToolStripMenuItem1
@@ -227,7 +229,7 @@
             this.câuHỏiThườngGặpToolStripMenuItem,
             this.hướngDẫnSửDụngToolStripMenuItem});
             this.trợGiúpToolStripMenuItem1.Name = "trợGiúpToolStripMenuItem1";
-            this.trợGiúpToolStripMenuItem1.Size = new System.Drawing.Size(94, 32);
+            this.trợGiúpToolStripMenuItem1.Size = new System.Drawing.Size(94, 29);
             this.trợGiúpToolStripMenuItem1.Text = "Trợ Giúp";
             // 
             // câuHỏiThườngGặpToolStripMenuItem
@@ -266,7 +268,7 @@
             this.xóaToànBộSựKiênToolStripMenuItem,
             this.thêmLoạiSựKiệnToolStripMenuItem});
             this.côngCụToolStripMenuItem.Name = "côngCụToolStripMenuItem";
-            this.côngCụToolStripMenuItem.Size = new System.Drawing.Size(165, 32);
+            this.côngCụToolStripMenuItem.Size = new System.Drawing.Size(165, 29);
             this.côngCụToolStripMenuItem.Text = "Công cụ bổ sung";
             // 
             // xóaToànBộSựKiênToolStripMenuItem
@@ -289,12 +291,12 @@
             // 
             // lbl_SignInName
             // 
-            this.lbl_SignInName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_SignInName.AutoSize = true;
             this.lbl_SignInName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.lbl_SignInName.Dock = System.Windows.Forms.DockStyle.Right;
             this.lbl_SignInName.Font = new System.Drawing.Font("Segoe UI Variable Display", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_SignInName.ForeColor = System.Drawing.Color.SteelBlue;
-            this.lbl_SignInName.Location = new System.Drawing.Point(975, 47);
+            this.lbl_SignInName.Location = new System.Drawing.Point(318, 0);
             this.lbl_SignInName.Name = "lbl_SignInName";
             this.lbl_SignInName.Size = new System.Drawing.Size(277, 27);
             this.lbl_SignInName.TabIndex = 3;
@@ -1121,14 +1123,23 @@
             this.btnResetDGV.Text = "🔄";
             this.btnResetDGV.UseVisualStyleBackColor = true;
             // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.panel3.Controls.Add(this.lbl_SignInName);
+            this.panel3.Location = new System.Drawing.Point(655, 48);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(595, 32);
+            this.panel3.TabIndex = 5;
+            // 
             // pnSort
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(225)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1262, 929);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.lblSignOut);
-            this.Controls.Add(this.lbl_SignInName);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
@@ -1166,6 +1177,8 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1260,5 +1273,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Button btnResetDGV;
+        private System.Windows.Forms.Panel panel3;
     }
 }
