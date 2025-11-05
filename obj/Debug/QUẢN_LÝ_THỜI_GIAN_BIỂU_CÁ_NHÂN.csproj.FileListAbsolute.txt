@@ -3,7 +3,6 @@ C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\bin\Debug\QUẢN_LÝ_THỜI
 C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\bin\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.exe
 C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\bin\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.pdb
 C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.csproj.AssemblyReference.cache
-C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.MainForm.resources
 C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.FormEvents.resources
 C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Properties.Resources.resources
 C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI.RecurringEvtSettingForm.resources
@@ -28,3 +27,4 @@ C:\Users\Ngọc_Ánh\source\repos\project oop\QuanLyThoiGianBieuCaNhan\bin\Debug
 C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI.UserRegisterForm.resources
 C:\Users\Ngọc_Ánh\source\repos\project oop\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI.UserRegisterForm.resources
 C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI.EventDetailForm.resources
+C:\Users\Admin\source\repos\QuanLyThoiGianBieuCaNhan\obj\Debug\QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.pnSort.resources

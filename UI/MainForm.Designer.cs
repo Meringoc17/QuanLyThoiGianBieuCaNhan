@@ -1,6 +1,6 @@
 ﻿namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 {
-    partial class MainForm
+    partial class pnSort
     {
         /// <summary>
         /// Required designer variable.
@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(pnSort));
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonThem = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSua = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonXoa = new System.Windows.Forms.ToolStripButton();
+            this.toolStripBtnEvtDetail = new System.Windows.Forms.ToolStripButton();
             this.tệpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xuấtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lưuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,10 +45,18 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.côngCụToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xóaToànBộSựKiênToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.thêmLoạiSựKiệnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tm_Reminder = new System.Windows.Forms.Timer(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.lbl_SignInName = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pnSortMain = new System.Windows.Forms.Panel();
+            this.pnSortLbl = new System.Windows.Forms.Panel();
+            this.lblFilter = new System.Windows.Forms.Label();
+            this.picboxSort = new System.Windows.Forms.PictureBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbCategory = new System.Windows.Forms.CheckBox();
+            this.cbFilterPrior = new System.Windows.Forms.CheckBox();
             this.lblNonOccuringIdcColor = new System.Windows.Forms.Label();
             this.pnWhite = new System.Windows.Forms.Panel();
             this.lblOccuringIdcColor = new System.Windows.Forms.Label();
@@ -88,7 +97,7 @@
             this.lblAddEvt = new System.Windows.Forms.Label();
             this.pn_ = new System.Windows.Forms.Panel();
             this.cboBox_TimeUnit = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblRemindb4 = new System.Windows.Forms.Label();
             this.cbRepeat = new System.Windows.Forms.CheckBox();
             this.txtRepeatDetail = new System.Windows.Forms.TextBox();
             this.txtTimeb4Event = new System.Windows.Forms.TextBox();
@@ -106,11 +115,12 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblSignOut = new System.Windows.Forms.Label();
             this.timer_Time = new System.Windows.Forms.Timer(this.components);
-            this.thêmLoạiSựKiệnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripBtnEvtDetail = new System.Windows.Forms.ToolStripButton();
             this.toolStrip.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.pnSortMain.SuspendLayout();
+            this.pnSortLbl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picboxSort)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEvents)).BeginInit();
@@ -169,13 +179,23 @@
             this.toolStripButtonXoa.Text = "Xóa";
             this.toolStripButtonXoa.Click += new System.EventHandler(this.toolStripButtonXoa_Click);
             // 
+            // toolStripBtnEvtDetail
+            // 
+            this.toolStripBtnEvtDetail.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnEvtDetail.Image")));
+            this.toolStripBtnEvtDetail.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBtnEvtDetail.Margin = new System.Windows.Forms.Padding(5, 2, 5, 3);
+            this.toolStripBtnEvtDetail.Name = "toolStripBtnEvtDetail";
+            this.toolStripBtnEvtDetail.Size = new System.Drawing.Size(202, 49);
+            this.toolStripBtnEvtDetail.Text = "Xem chi tiết sự kiện";
+            this.toolStripBtnEvtDetail.Click += new System.EventHandler(this.toolStripBtnEvtDetail_Click);
+            // 
             // tệpToolStripMenuItem
             // 
             this.tệpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.xuấtToolStripMenuItem,
             this.lưuToolStripMenuItem});
             this.tệpToolStripMenuItem.Name = "tệpToolStripMenuItem";
-            this.tệpToolStripMenuItem.Size = new System.Drawing.Size(62, 29);
+            this.tệpToolStripMenuItem.Size = new System.Drawing.Size(62, 32);
             this.tệpToolStripMenuItem.Text = "Tệp ";
             // 
             // xuấtToolStripMenuItem
@@ -193,7 +213,7 @@
             // xemToolStripMenuItem
             // 
             this.xemToolStripMenuItem.Name = "xemToolStripMenuItem";
-            this.xemToolStripMenuItem.Size = new System.Drawing.Size(64, 29);
+            this.xemToolStripMenuItem.Size = new System.Drawing.Size(64, 32);
             this.xemToolStripMenuItem.Text = "Xem";
             // 
             // trợGiúpToolStripMenuItem1
@@ -202,7 +222,7 @@
             this.câuHỏiThườngGặpToolStripMenuItem,
             this.hướngDẫnSửDụngToolStripMenuItem});
             this.trợGiúpToolStripMenuItem1.Name = "trợGiúpToolStripMenuItem1";
-            this.trợGiúpToolStripMenuItem1.Size = new System.Drawing.Size(94, 29);
+            this.trợGiúpToolStripMenuItem1.Size = new System.Drawing.Size(94, 32);
             this.trợGiúpToolStripMenuItem1.Text = "Trợ Giúp";
             // 
             // câuHỏiThườngGặpToolStripMenuItem
@@ -241,7 +261,7 @@
             this.xóaToànBộSựKiênToolStripMenuItem,
             this.thêmLoạiSựKiệnToolStripMenuItem});
             this.côngCụToolStripMenuItem.Name = "côngCụToolStripMenuItem";
-            this.côngCụToolStripMenuItem.Size = new System.Drawing.Size(165, 29);
+            this.côngCụToolStripMenuItem.Size = new System.Drawing.Size(165, 32);
             this.côngCụToolStripMenuItem.Text = "Công cụ bổ sung";
             // 
             // xóaToànBộSựKiênToolStripMenuItem
@@ -249,6 +269,12 @@
             this.xóaToànBộSựKiênToolStripMenuItem.Name = "xóaToànBộSựKiênToolStripMenuItem";
             this.xóaToànBộSựKiênToolStripMenuItem.Size = new System.Drawing.Size(274, 34);
             this.xóaToànBộSựKiênToolStripMenuItem.Text = "Xóa toàn bộ sự kiện";
+            // 
+            // thêmLoạiSựKiệnToolStripMenuItem
+            // 
+            this.thêmLoạiSựKiệnToolStripMenuItem.Name = "thêmLoạiSựKiệnToolStripMenuItem";
+            this.thêmLoạiSựKiệnToolStripMenuItem.Size = new System.Drawing.Size(274, 34);
+            this.thêmLoạiSựKiệnToolStripMenuItem.Text = "Thêm Loại sự kiện";
             // 
             // tm_Reminder
             // 
@@ -272,6 +298,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LavenderBlush;
+            this.panel1.Controls.Add(this.pnSortMain);
             this.panel1.Controls.Add(this.lblNonOccuringIdcColor);
             this.panel1.Controls.Add(this.pnWhite);
             this.panel1.Controls.Add(this.lblOccuringIdcColor);
@@ -290,6 +317,83 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1196, 447);
             this.panel1.TabIndex = 0;
+            // 
+            // pnSortMain
+            // 
+            this.pnSortMain.BackColor = System.Drawing.Color.LightYellow;
+            this.pnSortMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnSortMain.Controls.Add(this.pnSortLbl);
+            this.pnSortMain.Controls.Add(this.comboBox1);
+            this.pnSortMain.Controls.Add(this.cbCategory);
+            this.pnSortMain.Controls.Add(this.cbFilterPrior);
+            this.pnSortMain.Location = new System.Drawing.Point(468, 24);
+            this.pnSortMain.Name = "pnSortMain";
+            this.pnSortMain.Size = new System.Drawing.Size(707, 50);
+            this.pnSortMain.TabIndex = 11;
+            // 
+            // pnSortLbl
+            // 
+            this.pnSortLbl.BackColor = System.Drawing.Color.AliceBlue;
+            this.pnSortLbl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnSortLbl.Controls.Add(this.lblFilter);
+            this.pnSortLbl.Controls.Add(this.picboxSort);
+            this.pnSortLbl.Location = new System.Drawing.Point(-1, -1);
+            this.pnSortLbl.Name = "pnSortLbl";
+            this.pnSortLbl.Size = new System.Drawing.Size(187, 50);
+            this.pnSortLbl.TabIndex = 5;
+            // 
+            // lblFilter
+            // 
+            this.lblFilter.AutoSize = true;
+            this.lblFilter.Font = new System.Drawing.Font("Segoe UI Variable Display", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFilter.Location = new System.Drawing.Point(57, 13);
+            this.lblFilter.Name = "lblFilter";
+            this.lblFilter.Size = new System.Drawing.Size(116, 24);
+            this.lblFilter.TabIndex = 2;
+            this.lblFilter.Text = "Sắp xếp theo:";
+            // 
+            // picboxSort
+            // 
+            this.picboxSort.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picboxSort.BackgroundImage")));
+            this.picboxSort.Image = ((System.Drawing.Image)(resources.GetObject("picboxSort.Image")));
+            this.picboxSort.InitialImage = ((System.Drawing.Image)(resources.GetObject("picboxSort.InitialImage")));
+            this.picboxSort.Location = new System.Drawing.Point(0, 0);
+            this.picboxSort.Name = "picboxSort";
+            this.picboxSort.Size = new System.Drawing.Size(51, 50);
+            this.picboxSort.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picboxSort.TabIndex = 4;
+            this.picboxSort.TabStop = false;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(514, 10);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(171, 28);
+            this.comboBox1.TabIndex = 3;
+            // 
+            // cbCategory
+            // 
+            this.cbCategory.AutoSize = true;
+            this.cbCategory.Font = new System.Drawing.Font("Segoe UI Variable Display", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbCategory.Location = new System.Drawing.Point(355, 12);
+            this.cbCategory.Name = "cbCategory";
+            this.cbCategory.Size = new System.Drawing.Size(111, 28);
+            this.cbCategory.TabIndex = 1;
+            this.cbCategory.Text = "Phân Loại";
+            this.cbCategory.UseVisualStyleBackColor = true;
+            this.cbCategory.CheckedChanged += new System.EventHandler(this.cbCategory_CheckedChanged);
+            // 
+            // cbFilterPrior
+            // 
+            this.cbFilterPrior.AutoSize = true;
+            this.cbFilterPrior.Font = new System.Drawing.Font("Segoe UI Variable Display", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbFilterPrior.Location = new System.Drawing.Point(228, 12);
+            this.cbFilterPrior.Name = "cbFilterPrior";
+            this.cbFilterPrior.Size = new System.Drawing.Size(92, 28);
+            this.cbFilterPrior.TabIndex = 0;
+            this.cbFilterPrior.Text = "Ưu tiên";
+            this.cbFilterPrior.UseVisualStyleBackColor = true;
             // 
             // lblNonOccuringIdcColor
             // 
@@ -554,11 +658,11 @@
             this.dgvEvents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvEvents.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
             this.dgvEvents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEvents.Location = new System.Drawing.Point(468, 24);
+            this.dgvEvents.Location = new System.Drawing.Point(468, 73);
             this.dgvEvents.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvEvents.Name = "dgvEvents";
             this.dgvEvents.RowHeadersWidth = 82;
-            this.dgvEvents.Size = new System.Drawing.Size(707, 352);
+            this.dgvEvents.Size = new System.Drawing.Size(707, 303);
             this.dgvEvents.TabIndex = 1;
             // 
             // tblCalendar
@@ -741,7 +845,7 @@
             this.pn_.BackColor = System.Drawing.Color.White;
             this.pn_.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pn_.Controls.Add(this.cboBox_TimeUnit);
-            this.pn_.Controls.Add(this.label1);
+            this.pn_.Controls.Add(this.lblRemindb4);
             this.pn_.Controls.Add(this.cbRepeat);
             this.pn_.Controls.Add(this.txtRepeatDetail);
             this.pn_.Controls.Add(this.txtTimeb4Event);
@@ -765,15 +869,15 @@
             this.cboBox_TimeUnit.Size = new System.Drawing.Size(92, 28);
             this.cboBox_TimeUnit.TabIndex = 18;
             // 
-            // label1
+            // lblRemindb4
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(109, 147);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(112, 21);
-            this.label1.TabIndex = 17;
-            this.label1.Text = "Nhắc tôi trước:";
+            this.lblRemindb4.AutoSize = true;
+            this.lblRemindb4.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRemindb4.Location = new System.Drawing.Point(109, 147);
+            this.lblRemindb4.Name = "lblRemindb4";
+            this.lblRemindb4.Size = new System.Drawing.Size(112, 21);
+            this.lblRemindb4.TabIndex = 17;
+            this.lblRemindb4.Text = "Nhắc tôi trước:";
             // 
             // cbRepeat
             // 
@@ -977,23 +1081,7 @@
             // 
             this.timer_Time.Tick += new System.EventHandler(this.timer_Time_Tick);
             // 
-            // thêmLoạiSựKiệnToolStripMenuItem
-            // 
-            this.thêmLoạiSựKiệnToolStripMenuItem.Name = "thêmLoạiSựKiệnToolStripMenuItem";
-            this.thêmLoạiSựKiệnToolStripMenuItem.Size = new System.Drawing.Size(274, 34);
-            this.thêmLoạiSựKiệnToolStripMenuItem.Text = "Thêm Loại sự kiện";
-            // 
-            // toolStripBtnEvtDetail
-            // 
-            this.toolStripBtnEvtDetail.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnEvtDetail.Image")));
-            this.toolStripBtnEvtDetail.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripBtnEvtDetail.Margin = new System.Windows.Forms.Padding(5, 2, 5, 3);
-            this.toolStripBtnEvtDetail.Name = "toolStripBtnEvtDetail";
-            this.toolStripBtnEvtDetail.Size = new System.Drawing.Size(202, 49);
-            this.toolStripBtnEvtDetail.Text = "Xem chi tiết sự kiện";
-            this.toolStripBtnEvtDetail.Click += new System.EventHandler(this.toolStripBtnEvtDetail_Click);
-            // 
-            // MainForm
+            // pnSort
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -1009,7 +1097,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
-            this.Name = "MainForm";
+            this.Name = "pnSort";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản Lý Thời Gian Biểu Cá Nhân";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -1019,6 +1107,11 @@
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.pnSortMain.ResumeLayout(false);
+            this.pnSortMain.PerformLayout();
+            this.pnSortLbl.ResumeLayout(false);
+            this.pnSortLbl.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picboxSort)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -1103,7 +1196,7 @@
         private System.Windows.Forms.Panel pn_MainAdd;
         private System.Windows.Forms.Label lblAddEvtPnl;
         private System.Windows.Forms.ComboBox cboBox_TimeUnit;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblRemindb4;
         private System.Windows.Forms.Label lblSignOut;
         private System.Windows.Forms.Timer timer_Time;
         private System.Windows.Forms.Label lblDoneIdcColor;
@@ -1116,5 +1209,12 @@
         private System.Windows.Forms.Panel pnBlue;
         private System.Windows.Forms.ToolStripButton toolStripBtnEvtDetail;
         private System.Windows.Forms.ToolStripMenuItem thêmLoạiSựKiệnToolStripMenuItem;
+        private System.Windows.Forms.Panel pnSortMain;
+        private System.Windows.Forms.Label lblFilter;
+        private System.Windows.Forms.CheckBox cbCategory;
+        private System.Windows.Forms.CheckBox cbFilterPrior;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.PictureBox picboxSort;
+        private System.Windows.Forms.Panel pnSortLbl;
     }
 }

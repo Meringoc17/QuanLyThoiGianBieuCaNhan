@@ -18,7 +18,7 @@ using System.Windows.Forms;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 {
-    public partial class MainForm : Form
+    public partial class pnSort : Form
     {
 
         private DateTime currentMonth = DateTime.Today;
@@ -37,7 +37,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
         //=========================================================================
 
-        public MainForm(User user)
+        public pnSort(User user)
         {
             this.AutoScaleMode = AutoScaleMode.None; // Ngắt autoscale
             this.Font = SystemFonts.DefaultFont;     // Reset font về chuẩn
@@ -1020,6 +1020,11 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 EventDetailForm f = new EventDetailForm((EventBase)dgvEvents.SelectedRows[0].DataBoundItem);
                 f.ShowDialog();
             }    
+        }
+
+        private void cbCategory_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

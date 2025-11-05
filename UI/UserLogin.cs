@@ -52,7 +52,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
                                 "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();
                 
-                MainForm mainForm = new MainForm(user);
+                pnSort mainForm = new pnSort(user);
                 mainForm.ShowDialog();
                 this.Close();
 
