@@ -18,7 +18,7 @@ using System.Windows.Forms;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 {
-    public partial class pnSort : Form
+    public partial class MainForm : Form
     {
 
         private DateTime currentMonth = DateTime.Today;
@@ -37,7 +37,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
         //=========================================================================
 
-        public pnSort(User user)
+        public MainForm(User user)
         {
             this.AutoScaleMode = AutoScaleMode.None; // Ngắt autoscale
             this.Font = SystemFonts.DefaultFont;     // Reset font về chuẩn
@@ -75,6 +75,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
             // ✅ Luôn đảm bảo allEvents không null
             allEvents = new BindingList<EventBase>(currentUser_Sched.Events);
+            dgvEvents.DataSource = allEvents;
             InitCalendarGrid();
 
             try
@@ -1022,11 +1023,60 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             }    
         }
 
-        private void cbCategory_CheckedChanged(object sender, EventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            UpdateEventDataSource();
+        }
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateEventDataSource();
+        }
+     
+        private void FilterAndSortEvents()
+        {
+            
+            string selectedType = comboBox2.SelectedItem?.ToString();
+            string selectedPriority = comboBox1.SelectedItem?.ToString();
 
+            List<EventBase> filteredSortedEvents = EventSortService.FilterAndSort(allEvents.ToList(), selectedType, selectedPriority);
+
+            dgvEvents.DataSource = new BindingList<EventBase>(filteredSortedEvents);
+        }
+
+        private void UpdateEventDataSource()
+        {   string selectedType = comboBox2.SelectedItem?.ToString();
+            string selectedPriority = comboBox1.SelectedItem?.ToString();
+
+       
+            if (string.IsNullOrEmpty(selectedType) && string.IsNullOrEmpty(selectedPriority))
+            {
+            
+                dgvEvents.DataSource = new BindingList<EventBase>(currentUser_Sched.Events); 
+                return;
+            }
+
+            
+            List<EventBase> filteredSortedEvents = EventSortService.FilterAndSort(currentUser_Sched.Events.ToList(), selectedType, selectedPriority);
+   dgvEvents.DataSource = new BindingList<EventBase>(filteredSortedEvents); 
+        }
+
+
+
+
+        private void btnResetDGV_Click(object sender, EventArgs e)
+        {
+            // Đặt lại giá trị ComboBox về mặc định (ví dụ, không chọn gì)
+            comboBox1.SelectedIndex = -1; // Không chọn gì
+            comboBox2.SelectedIndex = -1; // Không chọn gì
+
+            // Hiển thị lại tất cả sự kiện
+            UpdateEventDataSource();
         }
     }
+    }
+
+
+
 
 
     public static class ControlExtensions
@@ -1040,4 +1090,3 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             prop.SetValue(control, enable, null);
         }
     }
-}
