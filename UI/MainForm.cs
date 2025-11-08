@@ -1022,7 +1022,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 f.ShowDialog();
             }    
         }
-
+       // ---------------------- Phần lọc sự kiện-----------------------
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateEventDataSource();
