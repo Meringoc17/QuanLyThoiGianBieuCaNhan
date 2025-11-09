@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,7 +17,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             InitializeComponent();
             if (e is RecurringEvent rc)
             { 
-                lblDetail.Text = "Tiêu đề: " + e.Title + "\n(Có lặp lại)";
+                lblDetail.Text = "Tiêu đề: " + e.Title + "\nLặp lại: Có";
                 lBEvtDetail.Items.Add("Thời gian bắt đầu: " + rc.Start);
                 lBEvtDetail.Items.Add("Thời gian kết thúc: " + rc.End);
                 lBEvtDetail.Items.Add("Loại: " + rc.Type);
@@ -32,8 +31,9 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
                     lBEvtDetail.Items.Add("Trạng thái: Chưa xong");
                 }    
 
-                lBEvtDetail.Items.Add("    ======================");
+                lBEvtDetail.Items.Add("    =============================");
                 lBEvtDetail.Items.Add("Chi tiết lặp lại theo: " + rc.RepeatUnit.ToUpperInvariant());
+                lBEvtDetail.Items.Add("Lặp lại vào mỗi " + rc.RepeatIntervalDays + " " + rc.RepeatUnit);
 
                 if (rc.RepeatUnit == "Tuần")
                 {
@@ -51,7 +51,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             }
             else 
             {
-                lblDetail.Text = "Tiêu đề: " + e.Title + "\n(Ko lặp lại)";
+                lblDetail.Text = "Tiêu đề: " + e.Title + "\nLặp lại: Không";
                 lBEvtDetail.Items.Add("Thời gian bắt đầu: " + e.Start);
                 lBEvtDetail.Items.Add("Thời gian kết thúc: " + e.End);
                 lBEvtDetail.Items.Add("Loại: " + e.Type);

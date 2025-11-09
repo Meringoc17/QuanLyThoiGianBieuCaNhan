@@ -37,10 +37,16 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
 
         private void btn_Input_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(pwdTxtbox.Text) || string.IsNullOrEmpty(usnTxtBox.Text))
+            {
+                lbl_LoginError.ForeColor = Color.Red;
+                lbl_LoginError.Text = "Vui lòng điền đầy đủ thông tin !";
+                lbl_LoginError.Visible = true;
+                return;
+            }
             try
             {
                 User user = UserManager.Login(usnTxtBox.Text.Trim(), pwdTxtbox.Text.Trim());
-                
                 lbl_LoginError.ForeColor = Color.Green;
                 lbl_LoginError.Text = "Đăng nhập thành công !";
                 lbl_LoginError.Visible = true;
@@ -67,15 +73,45 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             }
         }
 
-        private void ckBox_KeepLogIn_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnSignUp_Click(object sender, EventArgs e)
         {
             UserRegisterForm userRegisterForm = new UserRegisterForm();
             userRegisterForm.ShowDialog(); 
+        }
+
+        private void pwdTxtbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                try
+                {
+                    User user = UserManager.Login(usnTxtBox.Text.Trim(), pwdTxtbox.Text.Trim());
+                    lbl_LoginError.ForeColor = Color.Green;
+                    lbl_LoginError.Text = "Đăng nhập thành công !";
+                    lbl_LoginError.Visible = true;
+                    Console.Beep(750, 150);
+                    Console.Beep(850, 150);
+                    Console.Beep(1000, 150);
+
+                    MessageBox.Show($"Đăng nhập thành công! Xin chào {user.Name}",
+                                    "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Hide();
+
+                    MainForm mainForm = new MainForm(user);
+                    mainForm.ShowDialog();
+                    this.Close();
+
+                    // new MainForm(user).Show();
+                    // this.Hide();
+                }
+                catch (Exception ex)
+                {
+                    lbl_LoginError.Text = "❌ " + ex.Message;
+                    lbl_LoginError.ForeColor = Color.Red;
+                    lbl_LoginError.Visible = true;
+                }
+            }
         }
     }
 }

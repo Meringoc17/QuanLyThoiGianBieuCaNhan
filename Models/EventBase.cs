@@ -24,6 +24,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         public string Priority { get; set; }
         public bool Status { get; set; }
         public bool DaNhacNho { get; set; }
+
         //public List<string> Categories { get; set; }
         public Reminder Reminder { get; set; }
         public bool EnableReminder { get; set; }
