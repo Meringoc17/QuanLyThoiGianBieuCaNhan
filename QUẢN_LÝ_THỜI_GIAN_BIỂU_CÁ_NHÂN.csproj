@@ -64,6 +64,7 @@
     <Compile Include="Models\OneTimeEvent.cs" />
     <Compile Include="Models\RecurringEvent.cs" />
     <Compile Include="Models\Reminder.cs" />
+    <Compile Include="Services\EventFactory.cs" />
     <Compile Include="Services\EventManager.cs" />
     <Compile Include="Services\EventSortService.cs" />
     <Compile Include="Services\FileServices.cs" />
