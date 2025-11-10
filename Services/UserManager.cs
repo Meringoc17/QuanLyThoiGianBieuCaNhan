@@ -41,13 +41,13 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
     {
         private static UserList users = new UserList();
 
-        // ✅ Lưu file ngay trong thư mục gốc project (an toàn khi rebuild)
+        //  Lưu file ngay trong thư mục gốc project (an toàn khi rebuild)
         private static readonly string userFilePath = Path.Combine(
             Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName,
             "users.dat"
         );
 
-        // ✅ Tự động chạy 1 lần khi chương trình load
+        // Tự động chạy 1 lần khi chương trình load
         static UserManager()
         {
             LoadUsersFromFile();
@@ -55,7 +55,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             SaveUsersToFile();
         }
 
-        // 🧩 Ghi danh sách user xuống file
+        // Ghi danh sách user xuống file
         public static void SaveUsersToFile()
         {
             try
@@ -72,7 +72,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             }
         }
 
-        // 🧩 Đọc lại danh sách user từ file
+        // Đọc lại danh sách user từ file
         public static void LoadUsersFromFile()
         {
             try
@@ -97,7 +97,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             }
         }
 
-        // 🧠 Ghi danh sách người dùng ra file
+        //  Ghi danh sách người dùng ra file
        
         // Thêm admin mặc định
         public static void Add_Admin()
@@ -138,7 +138,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             return user;
         }
 
-        // ✅ Kiểm tra mật khẩu (dùng nội bộ)
+        //  Kiểm tra mật khẩu (dùng nội bộ)
         public static bool PasswordCheck(string input, string pass)
         {
             if (IsUsernameExisted(input))
@@ -150,7 +150,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             return false;
         }
 
-        // ✅ Kiểm tra tồn tại username
+        //  Kiểm tra tồn tại username
         public static bool IsUsernameExisted(string username)
         {
             foreach (User user in users.Users)
@@ -161,7 +161,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             return false;
         }
 
-        // ✅ Kiểm tra tồn tại số điện thoại
+        //  Kiểm tra tồn tại số điện thoại
         public static bool IsPhoneNumExisted(string phonenum)
         {
             foreach (User user in users.Users)
@@ -172,7 +172,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             return false;
         }
 
-        // ✅ Lấy user theo username
+        //  Lấy user theo username
         public static User GetSpecificUser_ByUsername(string username)
         {
             foreach (User user in users.Users)
@@ -183,7 +183,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             throw new Exception("Không tìm thấy người dùng!");
         }
 
-        // ✅ Lấy user theo số điện thoại
+        //  Lấy user theo số điện thoại
         public static User GetSpecificUser_ByPhoneNum(string phonenum)
         {
             foreach (User user in users.Users)
@@ -194,7 +194,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             throw new Exception("Không tìm thấy người dùng!");
         }
 
-        // ✅ Lấy toàn bộ user (dùng cho quản trị)
+        //  Lấy toàn bộ user (dùng cho quản trị)
         public static List<User> GetAllUsers()
         {
             return users.Users;

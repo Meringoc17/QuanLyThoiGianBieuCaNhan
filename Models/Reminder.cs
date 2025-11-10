@@ -35,7 +35,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             this.mess = mess;
         }
 
-        // ✅ Constructor đặc biệt dùng khi Deserialization
+        //  Constructor đặc biệt dùng khi Deserialization
         protected Reminder(SerializationInfo info, StreamingContext context)
         {
             BeforeStart = (TimeSpan)info.GetValue("BeforeStart", typeof(TimeSpan));
@@ -43,7 +43,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             Message = info.GetString("Message");
         }
 
-        // ✅ Hàm Serialize (ghi dữ liệu vào file)
+        //  Hàm Serialize (ghi dữ liệu vào file)
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("BeforeStart", BeforeStart);
@@ -51,13 +51,13 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             info.AddValue("Message", Message);
         }
         
-        // ✅ Phương thức thông báo
+        // Phương thức thông báo
         public string Notify(EventBase ev)
         {
             return ($"⏰ Nhắc nhở: {AtTime} trước khi bắt đầu sự kiện '{ev.Title}' vào {ev.Start:g}");
         }
 
-        // ✅ Ghi đè ToString (phục vụ hiển thị trong Console hoặc báo cáo)
+        //  Ghi đè ToString (phục vụ hiển thị trong Console hoặc báo cáo)
         public override string ToString()
         {
             return $"[Reminder] Trước: {BeforeStart.TotalMinutes} phút";

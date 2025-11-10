@@ -21,14 +21,14 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             Owner = u.Phone;
         }
 
-        // ✅ Serialize – Ghi dữ liệu vào file
+        // Serialize – Ghi dữ liệu vào file
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("Owner", Owner);
             info.AddValue("Events", Events);
         }
 
-        // ✅ Deserialize – Đọc dữ liệu từ file
+        //  Deserialize – Đọc dữ liệu từ file
         protected Schedule(SerializationInfo info, StreamingContext context)
         {
             try

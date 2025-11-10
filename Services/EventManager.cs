@@ -126,7 +126,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
                 }
             }
 
-            return null; // ⚠️ Không tạo mới
+            return null; //  Không tạo mới
         }
 
         public static RecurringEvent RCEvt_AutoGenerate(Schedule s, RecurringEvent e)

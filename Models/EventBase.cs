@@ -16,7 +16,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         private List<string> categories;
         private Reminder reminder;
         private bool enableReminder = false;
-        
+  
         public string Title { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
@@ -73,5 +73,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         {
             return $"📅 {Title} | {Start:g} - {End:g} | Ưu tiên: {Priority}";
         }
+
+        // Phương thức DisplayDetails - có thể được mở rộng trong các lớp con
+        public abstract void DisplayDetails();
     }
 }

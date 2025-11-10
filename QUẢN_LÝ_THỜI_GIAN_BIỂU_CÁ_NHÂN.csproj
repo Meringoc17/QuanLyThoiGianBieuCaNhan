@@ -49,12 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Decorators\ReminderDecorator.cs" />
     <Compile Include="Exceptions\DataFileException.cs" />
     <Compile Include="Exceptions\EventException.cs" />
     <Compile Include="Exceptions\OTEvtException.cs" />
     <Compile Include="Exceptions\RcEvtException.cs" />
     <Compile Include="Exceptions\UserException.cs" />
     <Compile Include="Interfaces\ISerializer.cs" />
+    <Compile Include="Models\CompositeEvent.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\EventBase.cs" />
     <Compile Include="Models\OneTimeEvent.cs" />
