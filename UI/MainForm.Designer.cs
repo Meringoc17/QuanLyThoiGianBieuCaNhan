@@ -505,7 +505,7 @@
             this.tS_Undone,
             this.toolStripStatusLabel4,
             this.tS_Time});
-            this.statusStrip.Location = new System.Drawing.Point(468, 365);
+            this.statusStrip.Location = new System.Drawing.Point(472, 363);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
             this.statusStrip.Size = new System.Drawing.Size(596, 32);

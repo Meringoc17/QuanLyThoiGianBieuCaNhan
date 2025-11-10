@@ -174,6 +174,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
         }
 
         //------------------------------code cho sự kiện lịch ---------------------------------
+
         private void AllEvents_ListChangedSafe(object sender, ListChangedEventArgs e)
         {
             if (e.ListChangedType == ListChangedType.ItemAdded)
@@ -184,7 +185,10 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                     currentUser_Sched.AddEvent(added);
                 }
             }
+
+            SaveSchedule();
         }
+
         /// <summary>
         /// Khởi tạo 42 ô label trong bảng lịch
         /// </summary>
@@ -640,18 +644,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             MessageBox.Show("Đã thêm sự kiện thành công!", "Thông báo",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
             // 💾 Lưu lại dữ liệu sự kiện vào file binary
-            try
-            {
-                using (FileStream fs = new FileStream(scheduleFilePath, FileMode.Create))
-                {
-                    BinaryFormatter bf = new BinaryFormatter();
-                    bf.Serialize(fs, currentUser_Sched);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi lưu file sự kiện: " + ex.Message);
-            }
+            SaveSchedule();
 
         }
 
@@ -869,10 +862,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 }
 
             }
-            else
-            {
-                //this.recurringEvt = null;
-            }
+            
         }
 
         private void timerReminder_Tick(object sender, EventArgs e)
@@ -1112,7 +1102,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             List<EventBase> filteredSortedEvents = EventSortService.FilterAndSort(currentUser_Sched.Events, selectedType, selectedPriority);
             dgvEvents.DataSource = new BindingList<EventBase>(filteredSortedEvents);
         }
-
 
         private void btnResetDGV_Click(object sender, EventArgs e)
         {
