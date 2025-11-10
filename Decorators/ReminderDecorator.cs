@@ -16,10 +16,10 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Decorators
             _eventBase = eventBase;
         }
 
-        public override void DisplayDetails()
+        public override string DisplayDetails()
         {
             _eventBase.DisplayDetails();  // Gọi DisplayDetails của sự kiện gốc
-            Console.WriteLine($"Reminder: {Reminder.Notify(_eventBase)}");
+            return $"Reminder: {Reminder.Notify(_eventBase)}";
         }
     }
 

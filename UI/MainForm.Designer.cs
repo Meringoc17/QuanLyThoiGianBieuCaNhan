@@ -302,7 +302,7 @@
             this.pnSortMain.Controls.Add(this.pnSortLbl);
             this.pnSortMain.Location = new System.Drawing.Point(472, 24);
             this.pnSortMain.Name = "pnSortMain";
-            this.pnSortMain.Size = new System.Drawing.Size(728, 50);
+            this.pnSortMain.Size = new System.Drawing.Size(724, 50);
             this.pnSortMain.TabIndex = 11;
             // 
             // btnResetDGV
@@ -325,7 +325,7 @@
             this.panel2.Controls.Add(this.cbCategoryFilter);
             this.panel2.Location = new System.Drawing.Point(415, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(312, 50);
+            this.panel2.Size = new System.Drawing.Size(308, 50);
             this.panel2.TabIndex = 6;
             // 
             // label1
@@ -496,6 +496,7 @@
             // 
             this.statusStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.statusStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.statusStrip.GripMargin = new System.Windows.Forms.Padding(4, 3, 3, 4);
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tS_totalEvent,
@@ -505,16 +506,16 @@
             this.tS_Undone,
             this.toolStripStatusLabel4,
             this.tS_Time});
-            this.statusStrip.Location = new System.Drawing.Point(472, 363);
+            this.statusStrip.Location = new System.Drawing.Point(472, 356);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
-            this.statusStrip.Size = new System.Drawing.Size(596, 32);
+            this.statusStrip.Size = new System.Drawing.Size(593, 33);
             this.statusStrip.TabIndex = 2;
             // 
             // tS_totalEvent
             // 
             this.tS_totalEvent.BackColor = System.Drawing.Color.White;
-            this.tS_totalEvent.Margin = new System.Windows.Forms.Padding(7, 4, 0, 3);
+            this.tS_totalEvent.Margin = new System.Windows.Forms.Padding(4, 4, 0, 4);
             this.tS_totalEvent.Name = "tS_totalEvent";
             this.tS_totalEvent.Size = new System.Drawing.Size(195, 25);
             this.tS_totalEvent.Text = "Tổng công việc hiện có";
@@ -523,40 +524,40 @@
             // 
             this.toolStripStatusLabel5.Margin = new System.Windows.Forms.Padding(2, 4, 2, 3);
             this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            this.toolStripStatusLabel5.Size = new System.Drawing.Size(16, 25);
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(16, 26);
             this.toolStripStatusLabel5.Text = "|";
             // 
             // tS_Finished
             // 
             this.tS_Finished.BackColor = System.Drawing.Color.White;
             this.tS_Finished.Name = "tS_Finished";
-            this.tS_Finished.Size = new System.Drawing.Size(113, 25);
+            this.tS_Finished.Size = new System.Drawing.Size(113, 26);
             this.tS_Finished.Text = "Đã làm xong";
             // 
             // toolStripStatusLabel6
             // 
             this.toolStripStatusLabel6.Margin = new System.Windows.Forms.Padding(2, 4, 2, 3);
             this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
-            this.toolStripStatusLabel6.Size = new System.Drawing.Size(16, 25);
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(16, 26);
             this.toolStripStatusLabel6.Text = "|";
             // 
             // tS_Undone
             // 
             this.tS_Undone.BackColor = System.Drawing.Color.White;
             this.tS_Undone.Name = "tS_Undone";
-            this.tS_Undone.Size = new System.Drawing.Size(148, 25);
+            this.tS_Undone.Size = new System.Drawing.Size(148, 26);
             this.tS_Undone.Text = "Chưa hoàn thành";
             // 
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Margin = new System.Windows.Forms.Padding(2, 4, 2, 3);
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(16, 25);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(16, 26);
             this.toolStripStatusLabel4.Text = "|";
             // 
             // tS_Time
             // 
-            this.tS_Time.Margin = new System.Windows.Forms.Padding(0, 4, 6, 3);
+            this.tS_Time.Margin = new System.Windows.Forms.Padding(0, 4, 6, 4);
             this.tS_Time.Name = "tS_Time";
             this.tS_Time.Size = new System.Drawing.Size(50, 25);
             this.tS_Time.Text = "Time";
@@ -685,7 +686,8 @@
             this.dgvEvents.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvEvents.Name = "dgvEvents";
             this.dgvEvents.RowHeadersWidth = 82;
-            this.dgvEvents.Size = new System.Drawing.Size(728, 312);
+            this.dgvEvents.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgvEvents.Size = new System.Drawing.Size(724, 288);
             this.dgvEvents.TabIndex = 1;
             // 
             // tblCalendar

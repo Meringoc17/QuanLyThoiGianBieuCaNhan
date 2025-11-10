@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,7 +22,9 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             UserManager.LoadUsersFromFile();
             panelLogin.Region = CreateRoundedRegion(panelLogin.ClientRectangle, 20);
             pwdTxtbox.UseSystemPasswordChar = true;
+            
         }
+
 
         private Region CreateRoundedRegion(Rectangle bounds, int radius) // tạo góc bolder tròn
         {

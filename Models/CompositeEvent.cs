@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 using System;
 
 [Serializable]
-public class CompositeEvent : EventBase
+public class CompositeEvent : EventBase, ISerializable
 {
     private List<EventBase> _events = new List<EventBase>();
 
@@ -28,13 +28,15 @@ public class CompositeEvent : EventBase
     }
 
     // Triển khai phương thức DisplayDetails
-    public override void DisplayDetails()
+    public override string DisplayDetails()
     {
-        Console.WriteLine($"Composite Event: {Title} | {Start:g} - {End:g}");
-        foreach (var ev in _events)
+        string ev_List = string.Empty;
+        foreach (EventBase ev in _events)
         {
-            ev.DisplayDetails();  // Gọi phương thức của sự kiện con
+            ev_List += ev.DisplayDetails();
+            ev_List += "\n";// Gọi phương thức của sự kiện con
         }
+        return ev_List;
     }
 
     // Serialize để lưu trữ các sự kiện con

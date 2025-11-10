@@ -61,9 +61,9 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             {
                 Events.Remove(e);
             }
-            catch (EventException ex)
+            catch (Exception ex)
             {
-                throw new EventException("Lỗi không xóa được sự kiện!");
+                throw new EventException("Lỗi không xóa được sự kiện!", ex);
             }
         }
 

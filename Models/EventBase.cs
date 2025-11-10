@@ -11,9 +11,9 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         private DateTime start;
         private DateTime end;
         private string type;
-        private bool status;
+        private bool status = false;
         private bool daNhac;
-        private List<string> categories;
+        //private List<string> categories;
         private Reminder reminder;
         private bool enableReminder = false;
   
@@ -76,6 +76,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         }
 
         // Phương thức DisplayDetails - có thể được mở rộng trong các lớp con
-        public abstract void DisplayDetails();
+        public abstract string DisplayDetails();
     }
 }

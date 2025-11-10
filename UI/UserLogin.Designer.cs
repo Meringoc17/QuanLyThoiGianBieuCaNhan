@@ -40,7 +40,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             this.pwdTxtbox = new System.Windows.Forms.TextBox();
             this.btnSignUp = new System.Windows.Forms.Button();
             this.panelLogin = new System.Windows.Forms.Panel();
-            this.ckBox_KeepLogIn = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lbl_LoginError = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picboxSchedIcon)).BeginInit();
@@ -95,7 +94,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             // 
             // btn_Input
             // 
-            this.btn_Input.Location = new System.Drawing.Point(658, 245);
+            this.btn_Input.Location = new System.Drawing.Point(658, 240);
             this.btn_Input.Name = "btn_Input";
             this.btn_Input.Size = new System.Drawing.Size(107, 47);
             this.btn_Input.TabIndex = 4;
@@ -122,7 +121,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             // 
             // btnSignUp
             // 
-            this.btnSignUp.Location = new System.Drawing.Point(517, 245);
+            this.btnSignUp.Location = new System.Drawing.Point(517, 240);
             this.btnSignUp.Name = "btnSignUp";
             this.btnSignUp.Size = new System.Drawing.Size(107, 47);
             this.btnSignUp.TabIndex = 8;
@@ -133,33 +132,21 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             // panelLogin
             // 
             this.panelLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(234)))), ((int)(((byte)(254)))));
-            this.panelLogin.Controls.Add(this.ckBox_KeepLogIn);
             this.panelLogin.Controls.Add(this.UsernameLbl);
             this.panelLogin.Controls.Add(this.label2);
             this.panelLogin.Controls.Add(this.usnTxtBox);
             this.panelLogin.Controls.Add(this.pwdTxtbox);
-            this.panelLogin.Location = new System.Drawing.Point(182, 77);
+            this.panelLogin.Location = new System.Drawing.Point(182, 88);
             this.panelLogin.Name = "panelLogin";
-            this.panelLogin.Size = new System.Drawing.Size(595, 148);
+            this.panelLogin.Size = new System.Drawing.Size(595, 129);
             this.panelLogin.TabIndex = 9;
-            // 
-            // ckBox_KeepLogIn
-            // 
-            this.ckBox_KeepLogIn.AutoSize = true;
-            this.ckBox_KeepLogIn.ForeColor = System.Drawing.Color.DarkBlue;
-            this.ckBox_KeepLogIn.Location = new System.Drawing.Point(428, 114);
-            this.ckBox_KeepLogIn.Name = "ckBox_KeepLogIn";
-            this.ckBox_KeepLogIn.Size = new System.Drawing.Size(140, 24);
-            this.ckBox_KeepLogIn.TabIndex = 11;
-            this.ckBox_KeepLogIn.Text = "Remember Me";
-            this.ckBox_KeepLogIn.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label1.Location = new System.Drawing.Point(589, 53);
+            this.label1.Location = new System.Drawing.Point(586, 64);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(188, 21);
             this.label1.TabIndex = 11;
@@ -170,7 +157,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             this.lbl_LoginError.AutoSize = true;
             this.lbl_LoginError.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_LoginError.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lbl_LoginError.Location = new System.Drawing.Point(187, 228);
+            this.lbl_LoginError.Location = new System.Drawing.Point(178, 220);
             this.lbl_LoginError.Name = "lbl_LoginError";
             this.lbl_LoginError.Size = new System.Drawing.Size(112, 21);
             this.lbl_LoginError.TabIndex = 12;
@@ -215,7 +202,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
         private System.Windows.Forms.TextBox pwdTxtbox;
         private System.Windows.Forms.Button btnSignUp;
         private System.Windows.Forms.Panel panelLogin;
-        private System.Windows.Forms.CheckBox ckBox_KeepLogIn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbl_LoginError;
     }

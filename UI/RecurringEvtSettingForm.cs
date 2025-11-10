@@ -23,11 +23,15 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
         List<DayOfWeek> RcSelectedDaysForWeek = new List<DayOfWeek>();
         DateTime RcFinalEnd;
         int RcOccurence = 0;
+        DateTime StartDate;
+        DateTime EndDate;
 
-        public RecurringEvtSettingForm(RecurringEvent r)
+        public RecurringEvtSettingForm(RecurringEvent r, DateTime start, DateTime end)
         {
             InitializeComponent();
             this.recurrringEvt = r;
+            StartDate = start;
+            EndDate = end;
             string[] timeUnits = { "Ngày", "Tuần", "Tháng", "Năm" };
             cLB_UnitTimeSelect.Items.AddRange(timeUnits);
             cLB_UnitTimeSelect.SetItemChecked(0, true);
@@ -53,11 +57,16 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
                 }
             }
 
-            if (pnRepeatDays.Enabled)
-            {
+        }
 
-            }    
-            
+        public RecurringEvtSettingForm(DateTime start, DateTime end)
+        {
+            InitializeComponent();
+            string[] timeUnits = { "Ngày", "Tuần", "Tháng", "Năm" };
+            cLB_UnitTimeSelect.Items.AddRange(timeUnits);
+            cLB_UnitTimeSelect.SetItemChecked(0, true);
+            StartDate = start;
+            EndDate = end;
         }
 
         private void btn_Done_Click(object sender, EventArgs e)
@@ -130,8 +139,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             }
         }
 
-
-
         private void btn_Reset_Click(object sender, EventArgs e)
         {
             cLB_UnitTimeSelect.SetItemChecked(0, true);
@@ -197,37 +204,37 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
                     case "Tháng": 
                         pnRepeatDays.Enabled = false;
                         
-                        if (recurrringEvt.Start.Date != recurrringEvt.End.Date)
+                        if (StartDate.Date != EndDate.Date)
                         {
                             lblEveryMonth.Location = new System.Drawing.Point(160, 81);
                             lblEveryMonth.Text = $"Lặp lại vào ngày " +
-                                $"{recurrringEvt.Start.Date.Day} - {recurrringEvt.End.Date.Day} hằng tháng";
+                                $"{StartDate.Date.Day} - {EndDate.Date.Day} hằng tháng";
                             lblEveryMonth.Visible = true;
                         }
                         else
                         {
                             lblEveryMonth.Location = new System.Drawing.Point(177, 81);
                             lblEveryMonth.Text = $"Lặp lại vào ngày " +
-                                $"{recurrringEvt.Start.Date.Day} hằng tháng";
+                                $"{StartDate.Date.Day} hằng tháng";
                             lblEveryMonth.Visible = true;
                         }    
                             break;
                     case "Năm": 
                         pnRepeatDays.Enabled = false;
                         
-                        if (recurrringEvt.Start.Date != recurrringEvt.End.Date)
+                        if (StartDate.Date != EndDate.Date)
                         {
                             lblEveryMonth.Location = new System.Drawing.Point(130, 81);
                             lblEveryMonth.Text = $"Lặp lại vào ngày " +
-                                $"{recurrringEvt.Start.Date.Day}/{recurrringEvt.Start.Date.Month} - " +
-                                $"{recurrringEvt.End.Date.Day}/{recurrringEvt.End.Date.Month} hằng năm";
+                                $"{StartDate.Date.Day}/{StartDate.Date.Month} - " +
+                                $"{EndDate.Date.Day}/{EndDate.Date.Month} hằng năm";
                             lblEveryMonth.Visible = true;
                         }
                         else
                         {
                             lblEveryMonth.Location = new System.Drawing.Point(177, 81);
                             lblEveryMonth.Text = $"Lặp lại vào ngày " +
-                                $"{recurrringEvt.Start.Date.Day} hằng năm";
+                                $"{StartDate.Date.Day} hằng năm";
                             lblEveryMonth.Visible = true;
                         }
                         break;

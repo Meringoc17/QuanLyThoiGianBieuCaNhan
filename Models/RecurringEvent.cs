@@ -10,7 +10,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
 {
     [Serializable]
-    public class RecurringEvent : EventBase
+    public class RecurringEvent : EventBase, ISerializable
     {
         public int RepeatIntervalDays { get; set; } = -1;// Lặp lại mỗi X đơn vị
         public string RepeatUnit { get; set; }     // "Ngày", "Tuần", ...
@@ -63,7 +63,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             this.End = e.End;
             this.Type = e.Type;
             this.Priority = e.Priority;
-            this.Status = e.Status;
             this.RepeatIntervalDays = e.RepeatIntervalDays;
             this.RepeatUnit = e.RepeatUnit;
             this.Days = e.Days;
@@ -72,14 +71,13 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             this.DaNhacNho = e.DaNhacNho;
         }
 
-        public RecurringEvent(string tt, DateTime start, DateTime end, string type, string prio, bool status)
+        public RecurringEvent(string tt, DateTime start, DateTime end, string type, string prio)
         {
             this.Title = tt;
             this.Start = start;
             this.End = end;
             this.Type = type;
             this.Priority = prio;
-            this.Status = status;
         }
 
         // Tiện cho việc tự Generate sk lặp lại
@@ -177,6 +175,10 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             return $"Lặp lại mỗi {RepeatIntervalDays} {RepeatUnit}";
         }
 
+        public override string DisplayDetails()
+        {
+            return "";
+        }
 
         public static DayOfWeek DayConverter(string d)
         {
@@ -256,9 +258,9 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         }
 
         public static RecurringEvent Create(string tt, DateTime start, DateTime end,
-            string type, string prio, bool status)
+            string type, string prio)
         {
-            return new RecurringEvent(tt, start, end, type, prio, status);
+            return new RecurringEvent(tt, start, end, type, prio);
         }
     }
 

@@ -6,21 +6,17 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
     [Serializable]
     public class OneTimeEvent : EventBase, ISerializable
     {
-      
         public OneTimeEvent() { }
 
-     
         public OneTimeEvent(string tt, DateTime start, DateTime end,
-            string type, string prio, bool status)
+            string type, string prio)
         {
             this.Title = tt;
             this.Start = start;
             this.End = end;
             this.Type = type;
             this.Priority = prio;
-            this.Status = status;
         }
-
 
         public OneTimeEvent(EventBase e)
         {
@@ -49,15 +45,15 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             // Nếu có thêm field riêng của OneTimeEvent, thêm vào đây
         }
 
-        public override string ToString()
+        public override string DisplayDetails()
         {
             return $"[One-Time Event] {Title} - {Start:g} to {End:g}";
         }
 
         public static OneTimeEvent Create(string tt, DateTime start, DateTime end,
-            string type, string prio, bool status)
+            string type, string prio)
         {
-            return new OneTimeEvent(tt, start, end, type, prio, status);
+            return new OneTimeEvent(tt, start, end, type, prio);
         }
     }
 }
