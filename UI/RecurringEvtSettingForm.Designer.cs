@@ -318,12 +318,12 @@
             // 
             // btn_Reset
             // 
-            this.btn_Reset.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Reset.Location = new System.Drawing.Point(181, 12);
+            this.btn_Reset.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Reset.Location = new System.Drawing.Point(181, 16);
             this.btn_Reset.Name = "btn_Reset";
-            this.btn_Reset.Size = new System.Drawing.Size(36, 39);
+            this.btn_Reset.Size = new System.Drawing.Size(34, 33);
             this.btn_Reset.TabIndex = 5;
-            this.btn_Reset.Text = "⟳";
+            this.btn_Reset.Text = "🔄";
             this.btn_Reset.UseVisualStyleBackColor = true;
             this.btn_Reset.Click += new System.EventHandler(this.btn_Reset_Click);
             // 

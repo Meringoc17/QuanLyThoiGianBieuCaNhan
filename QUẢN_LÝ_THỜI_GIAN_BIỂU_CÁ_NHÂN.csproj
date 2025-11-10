@@ -54,7 +54,9 @@
     <Compile Include="Exceptions\EventException.cs" />
     <Compile Include="Exceptions\OTEvtException.cs" />
     <Compile Include="Exceptions\RcEvtException.cs" />
+    <Compile Include="Exceptions\RemoveEvtException.cs" />
     <Compile Include="Exceptions\UserException.cs" />
+    <Compile Include="Interfaces\IObserverEvt.cs" />
     <Compile Include="Interfaces\ISerializer.cs" />
     <Compile Include="Models\CompositeEvent.cs" />
     <Compile Include="Models\Schedule.cs" />

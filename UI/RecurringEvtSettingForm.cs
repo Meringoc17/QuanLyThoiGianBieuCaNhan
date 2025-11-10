@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,9 +12,17 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
 {
     public partial class RecurringEvtSettingForm : Form
     {
-        RecurringEvent recurrringEvt = new RecurringEvent();
-        public delegate void RecurringEventSavedHandler(RecurringEvent e);
-        public event RecurringEventSavedHandler OnRecurrEvtSaved;
+        private RecurringEvent recurrringEvt;
+
+        public delegate void RecurringEvtDtSavedHandler(int intervalday, string unit,
+            List<DayOfWeek> selectedDays, DateTime finalEnd, int occurence);
+        public event RecurringEvtDtSavedHandler OnRecurrEvtDtSaved;
+
+        int RcIntervalDay;
+        string RcRepeatUnit;
+        List<DayOfWeek> RcSelectedDaysForWeek = new List<DayOfWeek>();
+        DateTime RcFinalEnd;
+        int RcOccurence = 0;
 
         public RecurringEvtSettingForm(RecurringEvent r)
         {
@@ -34,17 +41,18 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
                 txtBox_NumTimeUnit.Text = recurrringEvt.RepeatIntervalDays.ToString();
             }
 
-            if (string.IsNullOrEmpty(recurrringEvt.RepeatUnit))
+            if (!string.IsNullOrEmpty(recurrringEvt.RepeatUnit))
             {
                 for (int i = 0; i < cLB_UnitTimeSelect.Items.Count; i++)
                 {
                     if (cLB_UnitTimeSelect.Items[i].ToString() == recurrringEvt.RepeatUnit)
                     {
                         cLB_UnitTimeSelect.SetItemChecked(i, true);
+                        break;
                     }
                 }
             }
-            
+
             if (pnRepeatDays.Enabled)
             {
 
@@ -54,8 +62,16 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
 
         private void btn_Done_Click(object sender, EventArgs e)
         {
-            recurrringEvt.RepeatIntervalDays = int.Parse(txtBox_NumTimeUnit.Text);
-            recurrringEvt.RepeatUnit = cLB_UnitTimeSelect.CheckedItems[0].ToString();
+            //recurrringEvt.RepeatIntervalDays = int.Parse(txtBox_NumTimeUnit.Text);
+            if (string.IsNullOrEmpty(txtBox_NumTimeUnit.Text))
+            {
+                MessageBox.Show("Vui lòng điền số ngày lặp lại!", "Điền thiếu thông tin", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
+            }
+            RcIntervalDay = int.Parse(txtBox_NumTimeUnit.Text);
+
+            //recurrringEvt.RepeatUnit = cLB_UnitTimeSelect.CheckedItems[0].ToString();
+            RcRepeatUnit = cLB_UnitTimeSelect.CheckedItems[0].ToString();
 
             int i = 0;
             if (pnRepeatDays.Enabled == true)
@@ -64,7 +80,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
                 {
                     if (ctrl is CheckBox cb && cb.Checked && cb.Text != "Cả Tuần")
                     {
-                        recurrringEvt.Days.Add(RecurringEvent.DayConverter(cb.Text));
+                        //recurrringEvt.Days.Add(RecurringEvent.DayConverter(cb.Text));
+                        RcSelectedDaysForWeek.Add(RecurringEvent.DayConverter(cb.Text));
                         i++;
                     }
                 }
@@ -78,29 +95,28 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             {
                 if (txtBox_Times.Text != null && txtBox_Times.Text != "")
                 {
-                    recurrringEvt.Occurrences = int.Parse(txtBox_Times.Text.Trim());   
+                    //recurrringEvt.Occurrences = int.Parse(txtBox_Times.Text.Trim());
+                    RcOccurence = int.Parse(txtBox_Times.Text.Trim());
                 }
                 else
                 {
                     throw new Exception("Chưa điền số lần nhắc !");
                 }
             }
-            else 
-            { 
-
-            }
 
             if (cB_Never.Checked == true)
             {
-                recurrringEvt.EndDate = DateTime.MaxValue;
+                //recurrringEvt.EndDate = DateTime.MaxValue;
+                RcFinalEnd = DateTime.MaxValue;
             }
 
             if (cB_Overday.Checked == true)
             {
-                recurrringEvt.EndDate = dtPicker_DaySelect.Value;
+                //recurrringEvt.EndDate = dtPicker_DaySelect.Value;
+                RcFinalEnd = dtPicker_DaySelect.Value;
             }
 
-            OnRecurrEvtSaved?.Invoke(recurrringEvt);
+            OnRecurrEvtDtSaved?.Invoke(RcIntervalDay, RcRepeatUnit, RcSelectedDaysForWeek, RcFinalEnd, RcOccurence);
 
             this.Close();
         }

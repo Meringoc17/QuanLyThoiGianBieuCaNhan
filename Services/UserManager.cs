@@ -92,8 +92,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine("⚠️ Lỗi khi load dữ liệu người dùng: " + ex.Message);
                 users.Users = new List<User>();
+                throw new Exception("⚠️ Lỗi khi load dữ liệu người dùng: " + ex.Message);
             }
         }
 

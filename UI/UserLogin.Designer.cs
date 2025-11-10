@@ -31,7 +31,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserLogin));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picboxSchedIcon = new System.Windows.Forms.PictureBox();
             this.UsernameLbl = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.SignIn_lbl = new System.Windows.Forms.Label();
@@ -41,23 +41,22 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             this.btnSignUp = new System.Windows.Forms.Button();
             this.panelLogin = new System.Windows.Forms.Panel();
             this.ckBox_KeepLogIn = new System.Windows.Forms.CheckBox();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.lbl_LoginError = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picboxSchedIcon)).BeginInit();
             this.panelLogin.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // picboxSchedIcon
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(21, 88);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(134, 128);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.picboxSchedIcon.Image = ((System.Drawing.Image)(resources.GetObject("picboxSchedIcon.Image")));
+            this.picboxSchedIcon.InitialImage = ((System.Drawing.Image)(resources.GetObject("picboxSchedIcon.InitialImage")));
+            this.picboxSchedIcon.Location = new System.Drawing.Point(21, 88);
+            this.picboxSchedIcon.Name = "picboxSchedIcon";
+            this.picboxSchedIcon.Size = new System.Drawing.Size(134, 128);
+            this.picboxSchedIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picboxSchedIcon.TabIndex = 0;
+            this.picboxSchedIcon.TabStop = false;
             // 
             // UsernameLbl
             // 
@@ -119,6 +118,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             this.pwdTxtbox.Name = "pwdTxtbox";
             this.pwdTxtbox.Size = new System.Drawing.Size(277, 28);
             this.pwdTxtbox.TabIndex = 6;
+            this.pwdTxtbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.pwdTxtbox_KeyDown);
             // 
             // btnSignUp
             // 
@@ -153,17 +153,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             this.ckBox_KeepLogIn.TabIndex = 11;
             this.ckBox_KeepLogIn.Text = "Remember Me";
             this.ckBox_KeepLogIn.UseVisualStyleBackColor = true;
-            this.ckBox_KeepLogIn.CheckedChanged += new System.EventHandler(this.ckBox_KeepLogIn_CheckedChanged);
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(17, 267);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(138, 20);
-            this.linkLabel1.TabIndex = 10;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Forgot Password?";
             // 
             // label1
             // 
@@ -196,11 +185,10 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             this.ClientSize = new System.Drawing.Size(789, 304);
             this.Controls.Add(this.lbl_LoginError);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.btnSignUp);
             this.Controls.Add(this.SignIn_lbl);
             this.Controls.Add(this.btn_Input);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.picboxSchedIcon);
             this.Controls.Add(this.panelLogin);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -208,7 +196,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             this.Name = "UserLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản Lý Thời Gian Biểu Cá Nhân";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picboxSchedIcon)).EndInit();
             this.panelLogin.ResumeLayout(false);
             this.panelLogin.PerformLayout();
             this.ResumeLayout(false);
@@ -218,7 +206,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox picboxSchedIcon;
         private System.Windows.Forms.Label UsernameLbl;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label SignIn_lbl;
@@ -227,7 +215,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
         private System.Windows.Forms.TextBox pwdTxtbox;
         private System.Windows.Forms.Button btnSignUp;
         private System.Windows.Forms.Panel panelLogin;
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.CheckBox ckBox_KeepLogIn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbl_LoginError;

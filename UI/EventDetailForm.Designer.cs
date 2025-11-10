@@ -59,7 +59,9 @@
             this.ClientSize = new System.Drawing.Size(455, 365);
             this.Controls.Add(this.lblDetail);
             this.Controls.Add(this.lBEvtDetail);
+            this.MaximizeBox = false;
             this.Name = "EventDetailForm";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Chi tiết sự kiện";
             this.ResumeLayout(false);

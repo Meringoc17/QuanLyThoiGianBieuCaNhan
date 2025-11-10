@@ -42,6 +42,7 @@
             this.txtBoxPhoneNum = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lblError = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnSignUp.SuspendLayout();
             this.SuspendLayout();
@@ -130,7 +131,7 @@
             // 
             // btn_Done
             // 
-            this.btn_Done.Location = new System.Drawing.Point(770, 337);
+            this.btn_Done.Location = new System.Drawing.Point(770, 330);
             this.btn_Done.Name = "btn_Done";
             this.btn_Done.Size = new System.Drawing.Size(110, 55);
             this.btn_Done.TabIndex = 8;
@@ -187,12 +188,24 @@
             this.lblError.Text = "Báo lỗi ở đây !";
             this.lblError.Visible = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label1.Location = new System.Drawing.Point(655, 38);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(225, 21);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Điền thông tin đầy đủ tại đây ~";
+            // 
             // UserRegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(898, 413);
+            this.ClientSize = new System.Drawing.Size(898, 400);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblError);
             this.Controls.Add(this.btn_Done);
             this.Controls.Add(this.pictureBox1);
@@ -227,5 +240,6 @@
         private System.Windows.Forms.Label lblError;
         private System.Windows.Forms.TextBox txtBoxPhoneNum;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }
