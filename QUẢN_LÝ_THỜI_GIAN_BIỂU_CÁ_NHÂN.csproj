@@ -55,6 +55,7 @@
     <Compile Include="Exceptions\RcEvtException.cs" />
     <Compile Include="Exceptions\RemoveEvtException.cs" />
     <Compile Include="Exceptions\UserException.cs" />
+    <Compile Include="Interfaces\IObserverEvt.cs" />
     <Compile Include="Interfaces\ISerializer.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\EventBase.cs" />

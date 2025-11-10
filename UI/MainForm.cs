@@ -85,50 +85,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
             try
             {
-                // Gán BindingList vào DataGridView
-                allEvents.ListChanged += (s, e) =>
-                {
-                    if (e.ListChangedType == ListChangedType.ItemAdded)
-                    {
-                        EventBase added = allEvents[e.NewIndex];
-                        if (!currentUser_Sched.Events.Contains(added))
-                        {
-                            currentUser_Sched.AddEvent(added);
-                        }
-
-                    }
-                    else if (e.ListChangedType == ListChangedType.ItemDeleted)
-                    {
-                        // Cập nhật theo index
-                        if (e.NewIndex >= 0 && e.NewIndex < currentUser_Sched.Events.Count)
-                        {
-                            currentUser_Sched.Events.Clear();
-                            foreach (EventBase eventBase in allEvents)
-                            {
-                                currentUser_Sched.AddEventSched(eventBase);
-                            }
-                        }
-                        statusStrip_Update();
-                        if (File.Exists(scheduleFilePath))
-                        {
-                            try
-                            {
-                                using (FileStream fs = new FileStream(scheduleFilePath, FileMode.Create))
-                                {
-                                    BinaryFormatter bf = new BinaryFormatter();
-                                    bf.Serialize(fs, currentUser_Sched); // ✅ Serialize nguyên Schedule
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show($"Lỗi khi lưu file lịch: {ex.Message}", "Lỗi lưu dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                allEvents = new BindingList<EventBase>(new List<EventBase>());
-                                throw new DataFileException("Lỗi khi đọc file lịch.", ex);
-                            }
-                        }
-
-                    }
-                };
+                allEvents.ListChanged += AllEvents_ListChangedSafe;
             }
             catch (Exception ex)
             {
@@ -198,9 +155,36 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
         }
 
-
+        private void SaveSchedule()
+        {
+            try
+            {
+                using (FileStream fs = new FileStream(scheduleFilePath, FileMode.Create))
+                {
+                    var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                    bf.Serialize(fs, currentUser_Sched);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lưu file sự kiện: " + ex.Message);
+                allEvents = new BindingList<EventBase>(new List<EventBase>());
+                throw new DataFileException("Lỗi khi đọc file lịch.", ex);
+            }
+        }
 
         //------------------------------code cho sự kiện lịch ---------------------------------
+        private void AllEvents_ListChangedSafe(object sender, ListChangedEventArgs e)
+        {
+            if (e.ListChangedType == ListChangedType.ItemAdded)
+            {
+                EventBase added = allEvents[e.NewIndex];
+                if (!currentUser_Sched.Events.Contains(added))
+                {
+                    currentUser_Sched.AddEvent(added);
+                }
+            }
+        }
         /// <summary>
         /// Khởi tạo 42 ô label trong bảng lịch
         /// </summary>
@@ -208,7 +192,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
         private void dgvEvents_AutoFormat()
         {
             dgvEvents.AutoGenerateColumns = true;
-            dgvEvents.DataSource = null;
             dgvEvents.DataSource = allEvents;
             dgvEvents.Columns["Start"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
             dgvEvents.Columns["End"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
@@ -780,18 +763,40 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                     if (row.DataBoundItem is EventBase ev)
                         toRemove.Add(ev);
                 }
-                foreach (EventBase ev in toRemove)
+
+                allEvents.ListChanged -= AllEvents_ListChangedSafe;
+
+                if (toRemove.Count > 1)
                 {
-                    allEvents.Remove(ev);
+                    for (int i = toRemove.Count - 1; i > 0; i--)
+                    {
+                        allEvents.Remove(toRemove[i]);
+                        currentUser_Sched.Events.Remove(toRemove[i]);
+                    }
+                    allEvents.Remove(toRemove[0]);
+                }
+                else if (toRemove.Count == 1)
+                {
+                    allEvents.Remove(toRemove[0]);
                 }
 
-                allEvents.ResetBindings(); // buộc DataGridView refresh một lần duy nhất
-                statusStrip_Update();
+                dgvEvents.DataSource = null;
+                dgvEvents.DataSource = allEvents;
+                dgvEvents_AutoFormat();
+                dgvEvents.ClearSelection();
 
+                // 🔹 Cập nhật status + lưu file
+                statusStrip_Update();
+                SaveSchedule();
+
+                // 🔹 Gắn lại sự kiện
+                allEvents.ListChanged += AllEvents_ListChangedSafe;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Xóa sự kiện không thành công!\n" + ex.Message);
+                throw new RemoveEvtException("Đã gặp phải lỗi trong lúc xóa sự kiện!\n" +
+                    "Hãy xem lại toolStripButtonXoa_Click/evt_ListChanged", ex);
             }
         }
 
