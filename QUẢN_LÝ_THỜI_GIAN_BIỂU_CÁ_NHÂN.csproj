@@ -58,6 +58,7 @@
     <Compile Include="Exceptions\RemoveEvtException.cs" />
     <Compile Include="Exceptions\UserException.cs" />
     <Compile Include="Interfaces\IEventStrategy.cs" />
+    <Compile Include="Interfaces\IRecurrenceStrategy.cs" />
     <Compile Include="Interfaces\ISerializer.cs" />
     <Compile Include="Models\Catergory.cs" />
     <Compile Include="Models\Schedule.cs" />
@@ -74,6 +75,8 @@
     <Compile Include="Services\ReminderService.cs" />
     <Compile Include="Services\ScheduleService.cs" />
     <Compile Include="Services\UserManager.cs" />
+    <Compile Include="Strategies\DailyRecurrenceStrategy.cs" />
+    <Compile Include="Strategies\WeeklyByDaysStrategy.cs" />
     <Compile Include="UI\EventDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
