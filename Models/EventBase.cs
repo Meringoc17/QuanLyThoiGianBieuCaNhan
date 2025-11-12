@@ -25,8 +25,10 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         public bool Status { get; set; }
         public bool DaNhacNho { get; set; }
         public List<Category> Categories { get; set; } = new List<Category>();
+
         public Reminder Reminder { get; set; }
         public bool EnableReminder { get; set; }
+
 
         public EventBase()
         {
@@ -75,11 +77,58 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             string s = "Tiêu đề: " + Title;
             s += "\nBắt đầu: " + Start.ToString("dd/MM/yyyy HH:mm");
             s += "\nKết thúc: " + End.ToString("dd/MM/yyyy HH:mm");
-            s += "\nHạng mục: " + Type;
+            s += "\nHạng mục: ";
+
+            // Duyệt qua từng Category và nối chúng thành một chuỗi
+            string categoryNames = "";
+            foreach (Category category in Categories)
+            {
+                if (categoryNames.Length > 0)
+                {
+                    categoryNames += ", ";  // Thêm dấu phẩy giữa các tên
+                }
+                categoryNames += category.Name;  // Thêm tên Category vào chuỗi
+            }
+
+            s += categoryNames;
             s += "\nƯu tiên: " + Priority;
             s += "\nTrạng thái: " + (Status ? "Hoàn thành" : "Chưa xong");
             return s;
         }
+
+        public void AddCategory(Category category)
+        {
+            // Kiểm tra xem Category đã có trong danh sách chưa
+            bool categoryExists = false;
+            foreach (Category c in Categories)
+            {
+                if (c == category)  // So sánh đối tượng Category
+                {
+                    categoryExists = true;
+                    break;
+                }
+            }
+
+            // Nếu chưa có, thêm vào danh sách
+            if (!categoryExists)
+            {
+                Categories.Add(category);
+            }
+        }
+
+        public void RemoveCategory(Category category)
+        {
+            // Tìm và xóa Category
+            foreach (Category c in Categories)
+            {
+                if (c == category)
+                {
+                    Categories.Remove(c);
+                    break;
+                }
+            }
+        }
+
 
 
     }

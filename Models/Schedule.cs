@@ -87,5 +87,18 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
                 s.RemoveEvent(e);
             }
         }
+        public int CountEventsInCategory(Category category)
+        {
+            int count = 0;
+            foreach (EventBase eventBase in Events)
+            {
+                if (eventBase.Categories.Contains(category))
+                {
+                    count++;  // Tăng đếm nếu sự kiện có Category này
+                }
+            }
+            return count;
+        }
+
     }
 }

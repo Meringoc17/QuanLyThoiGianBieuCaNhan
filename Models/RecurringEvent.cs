@@ -79,11 +79,11 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             this.End = end;
             this.Type = type;
             this.Priority = prio;
-<<<<<<< HEAD
+
             this.Categories = catergories;
-=======
+
             this.Days = new List<DayOfWeek>();
->>>>>>> 24e8de8642ccaf71422483f724a06905832cfaf6
+
         }
 
         // sinh lần lặp tiếp theo
