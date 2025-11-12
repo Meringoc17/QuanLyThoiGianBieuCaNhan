@@ -70,11 +70,18 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             info.AddValue("Reminder", Reminder);
         }
 
-        public virtual string DisplayInfo()
+        //  Hàm này để decorator override
+        public virtual string DisplayDetails()
         {
-            return $"📅 {Title} | {Start:g} - {End:g} | Ưu tiên: {Priority}";
+            string s = "Tiêu đề: " + Title;
+            s += "\nBắt đầu: " + Start.ToString("dd/MM/yyyy HH:mm");
+            s += "\nKết thúc: " + End.ToString("dd/MM/yyyy HH:mm");
+            s += "\nHạng mục: " + Type;
+            s += "\nƯu tiên: " + Priority;
+            s += "\nTrạng thái: " + (Status ? "Hoàn thành" : "Chưa xong");
+            return s;
         }
 
-        
+
     }
 }

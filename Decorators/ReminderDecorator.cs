@@ -1,26 +1,45 @@
-﻿using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using System.Runtime.Serialization;
+using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Decorators
 {
+    [Serializable]
     public class ReminderDecorator : EventBase
     {
-        private EventBase _eventBase;
+        private EventBase _inner;
 
-        public ReminderDecorator(EventBase eventBase)
+        // ctor bình thường: bọc 1 sự kiện có sẵn
+        public ReminderDecorator(EventBase inner)
         {
-            _eventBase = eventBase;
+            _inner = inner;
         }
 
+        // ctor dùng khi deserialize
+        protected ReminderDecorator(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            _inner = (EventBase)info.GetValue("InnerEvent", typeof(EventBase));
+        }
+
+        // ghi dữ liệu khi serialize
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("InnerEvent", _inner, typeof(EventBase));
+        }
+
+        // trang trí thêm phần nhắc nhở
         public override string DisplayDetails()
         {
-            _eventBase.DisplayDetails();  // Gọi DisplayDetails của sự kiện gốc
-            return $"Reminder: {Reminder.Notify(_eventBase)}";
+            string baseInfo = _inner.DisplayDetails();
+
+            if (_inner.EnableReminder && _inner.Reminder != null)
+            {
+                baseInfo += "\nNhắc trước: " + _inner.Reminder.BeforeStart.ToString();
+            }
+
+            return baseInfo;
         }
     }
-
 }
