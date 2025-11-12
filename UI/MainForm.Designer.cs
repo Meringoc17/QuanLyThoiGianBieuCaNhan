@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.toolStripButtonThem = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSua = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonXoa = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnEvtDetail = new System.Windows.Forms.ToolStripButton();
@@ -42,6 +41,8 @@
             this.côngCụToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsItem_RemoveAllEvt = new System.Windows.Forms.ToolStripMenuItem();
             this.thêmLoạiSựKiệnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmnItem_AccDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.tm_Reminder = new System.Windows.Forms.Timer(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.lbl_SignInName = new System.Windows.Forms.Label();
@@ -89,6 +90,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelRight = new System.Windows.Forms.Panel();
             this.panelunder = new System.Windows.Forms.Panel();
+            this.chlistbox_Categories = new System.Windows.Forms.CheckedListBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.lblAddEvt = new System.Windows.Forms.Label();
@@ -115,8 +117,6 @@
             this.lblSignOut = new System.Windows.Forms.Label();
             this.timer_Time = new System.Windows.Forms.Timer(this.components);
             this.panel3 = new System.Windows.Forms.Panel();
-            this.tàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.xemChiTiếtTàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -143,7 +143,6 @@
             this.toolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButtonThem,
             this.toolStripButtonSua,
             this.toolStripButtonXoa,
             this.toolStripBtnEvtDetail});
@@ -153,16 +152,6 @@
             this.toolStrip.Size = new System.Drawing.Size(1262, 54);
             this.toolStrip.TabIndex = 2;
             this.toolStrip.Text = "ToolBar";
-            // 
-            // toolStripButtonThem
-            // 
-            this.toolStripButtonThem.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonThem.Image")));
-            this.toolStripButtonThem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonThem.Margin = new System.Windows.Forms.Padding(0, 2, 5, 3);
-            this.toolStripButtonThem.Name = "toolStripButtonThem";
-            this.toolStripButtonThem.Size = new System.Drawing.Size(92, 49);
-            this.toolStripButtonThem.Text = "Thêm";
-            this.toolStripButtonThem.Click += new System.EventHandler(this.toolStripButtonThem_Click);
             // 
             // toolStripButtonSua
             // 
@@ -253,6 +242,21 @@
             this.thêmLoạiSựKiệnToolStripMenuItem.Name = "thêmLoạiSựKiệnToolStripMenuItem";
             this.thêmLoạiSựKiệnToolStripMenuItem.Size = new System.Drawing.Size(274, 34);
             this.thêmLoạiSựKiệnToolStripMenuItem.Text = "Thêm Loại sự kiện";
+            // 
+            // tàiKhoảnToolStripMenuItem
+            // 
+            this.tàiKhoảnToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmnItem_AccDetail});
+            this.tàiKhoảnToolStripMenuItem.Name = "tàiKhoảnToolStripMenuItem";
+            this.tàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(102, 29);
+            this.tàiKhoảnToolStripMenuItem.Text = "Tài khoản";
+            // 
+            // tsmnItem_AccDetail
+            // 
+            this.tsmnItem_AccDetail.Name = "tsmnItem_AccDetail";
+            this.tsmnItem_AccDetail.Size = new System.Drawing.Size(268, 34);
+            this.tsmnItem_AccDetail.Text = "Thông tin tài khoản";
+            this.tsmnItem_AccDetail.Click += new System.EventHandler(this.tsmnItem_AccDetail_Click);
             // 
             // tm_Reminder
             // 
@@ -795,6 +799,7 @@
             // panelunder
             // 
             this.panelunder.BackColor = System.Drawing.Color.AliceBlue;
+            this.panelunder.Controls.Add(this.chlistbox_Categories);
             this.panelunder.Controls.Add(this.btnCancel);
             this.panelunder.Controls.Add(this.btnSave);
             this.panelunder.Controls.Add(this.lblAddEvt);
@@ -805,6 +810,20 @@
             this.panelunder.Name = "panelunder";
             this.panelunder.Size = new System.Drawing.Size(1226, 358);
             this.panelunder.TabIndex = 0;
+            // 
+            // chlistbox_Categories
+            // 
+            this.chlistbox_Categories.FormattingEnabled = true;
+            this.chlistbox_Categories.Items.AddRange(new object[] {
+            "Công Việc",
+            "Cá Nhân ",
+            "Lịch Họp",
+            "Giải Trí",
+            "Tiệc (Sinh nhật, Thôi nôi, Đám Cưới,..)"});
+            this.chlistbox_Categories.Location = new System.Drawing.Point(875, 284);
+            this.chlistbox_Categories.Name = "chlistbox_Categories";
+            this.chlistbox_Categories.Size = new System.Drawing.Size(180, 27);
+            this.chlistbox_Categories.TabIndex = 11;
             // 
             // btnCancel
             // 
@@ -842,7 +861,7 @@
             this.lblAddEvt.Name = "lblAddEvt";
             this.lblAddEvt.Size = new System.Drawing.Size(1293, 37);
             this.lblAddEvt.TabIndex = 0;
-            this.lblAddEvt.Text = "Thêm Sự Kiện";
+            this.lblAddEvt.Text = "Thêm/Điều chỉnh Sự Kiện";
             this.lblAddEvt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pn_
@@ -1119,20 +1138,6 @@
             this.panel3.Size = new System.Drawing.Size(595, 32);
             this.panel3.TabIndex = 5;
             // 
-            // tàiKhoảnToolStripMenuItem
-            // 
-            this.tàiKhoảnToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.xemChiTiếtTàiKhoảnToolStripMenuItem});
-            this.tàiKhoảnToolStripMenuItem.Name = "tàiKhoảnToolStripMenuItem";
-            this.tàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(102, 29);
-            this.tàiKhoảnToolStripMenuItem.Text = "Tài khoản";
-            // 
-            // xemChiTiếtTàiKhoảnToolStripMenuItem
-            // 
-            this.xemChiTiếtTàiKhoảnToolStripMenuItem.Name = "xemChiTiếtTàiKhoảnToolStripMenuItem";
-            this.xemChiTiếtTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.xemChiTiếtTàiKhoảnToolStripMenuItem.Text = "Thông tin tài khoản";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
@@ -1187,7 +1192,6 @@
 
         #endregion
         private System.Windows.Forms.ToolStrip toolStrip;
-        private System.Windows.Forms.ToolStripButton toolStripButtonThem;
         private System.Windows.Forms.ToolStripButton toolStripButtonSua;
         private System.Windows.Forms.ToolStripButton toolStripButtonXoa;
         private System.Windows.Forms.ToolStripMenuItem trợGiúpToolStripMenuItem1;
@@ -1272,6 +1276,7 @@
         private System.Windows.Forms.Label lblKetThuc;
         private System.Windows.Forms.Label lblCategory;
         private System.Windows.Forms.ToolStripMenuItem tàiKhoảnToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem xemChiTiếtTàiKhoảnToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmnItem_AccDetail;
+        private System.Windows.Forms.CheckedListBox chlistbox_Categories;
     }
 }

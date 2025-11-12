@@ -36,47 +36,47 @@
             this.txtBoxPass = new System.Windows.Forms.TextBox();
             this.txtBoxConfirmPass = new System.Windows.Forms.TextBox();
             this.lbl_Title = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_Done = new System.Windows.Forms.Button();
             this.pnSignUp = new System.Windows.Forms.Panel();
             this.txtBoxPhoneNum = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lblError = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnSignUp.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_Name
             // 
             this.lbl_Name.AutoSize = true;
-            this.lbl_Name.Font = new System.Drawing.Font("Segoe UI Variable Display", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Name.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Name.ForeColor = System.Drawing.Color.Navy;
             this.lbl_Name.Location = new System.Drawing.Point(18, 30);
             this.lbl_Name.Name = "lbl_Name";
-            this.lbl_Name.Size = new System.Drawing.Size(153, 27);
+            this.lbl_Name.Size = new System.Drawing.Size(149, 27);
             this.lbl_Name.TabIndex = 0;
             this.lbl_Name.Text = "Tên/Username:";
             // 
             // lbl_CreatePass
             // 
             this.lbl_CreatePass.AutoSize = true;
-            this.lbl_CreatePass.Font = new System.Drawing.Font("Segoe UI Variable Display", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_CreatePass.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_CreatePass.ForeColor = System.Drawing.Color.Navy;
-            this.lbl_CreatePass.Location = new System.Drawing.Point(18, 138);
+            this.lbl_CreatePass.Location = new System.Drawing.Point(18, 137);
             this.lbl_CreatePass.Name = "lbl_CreatePass";
-            this.lbl_CreatePass.Size = new System.Drawing.Size(145, 27);
+            this.lbl_CreatePass.Size = new System.Drawing.Size(139, 27);
             this.lbl_CreatePass.TabIndex = 1;
             this.lbl_CreatePass.Text = "Tạo mật khẩu:";
             // 
             // lbl_ConfirmPass
             // 
             this.lbl_ConfirmPass.AutoSize = true;
-            this.lbl_ConfirmPass.Font = new System.Drawing.Font("Segoe UI Variable Display", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_ConfirmPass.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_ConfirmPass.ForeColor = System.Drawing.Color.Navy;
             this.lbl_ConfirmPass.Location = new System.Drawing.Point(18, 188);
             this.lbl_ConfirmPass.Name = "lbl_ConfirmPass";
-            this.lbl_ConfirmPass.Size = new System.Drawing.Size(197, 27);
+            this.lbl_ConfirmPass.Size = new System.Drawing.Size(187, 27);
             this.lbl_ConfirmPass.TabIndex = 2;
             this.lbl_ConfirmPass.Text = "Xác nhận mật khẩu:";
             // 
@@ -117,18 +117,6 @@
             this.lbl_Title.TabIndex = 6;
             this.lbl_Title.Text = "Đăng Ký";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(21, 91);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(173, 193);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
-            // 
             // btn_Done
             // 
             this.btn_Done.Location = new System.Drawing.Point(770, 330);
@@ -168,11 +156,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Variable Display", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Navy;
             this.label2.Location = new System.Drawing.Point(18, 83);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(140, 27);
+            this.label2.Size = new System.Drawing.Size(136, 27);
             this.label2.TabIndex = 7;
             this.label2.Text = "Số điện thoại:";
             // 
@@ -199,6 +187,18 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "Điền thông tin đầy đủ tại đây ~";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(21, 97);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(165, 186);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            // 
             // UserRegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -217,9 +217,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Quản Lý Thời Gian Biểu Cá Nhân";
             this.Load += new System.EventHandler(this.UserSignUp_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnSignUp.ResumeLayout(false);
             this.pnSignUp.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -17,10 +17,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
         public static List<Schedule> Schedules { get; set; } = new List<Schedule>();
         public static User currentUser = new User();
 
-        private static readonly string scheduleFilePath = Path.Combine(
-             Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName,
-              $"schedule_{currentUser.Name}.dat");
-
+        
         public static Schedule ScheduleLoad(User user)
         {
             currentUser = user;
@@ -41,15 +38,31 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             return newSched;
         }
 
-        public static void Save (Schedule s)
+        public static void UserScheduleWipeOut(User user)
         {
-            
+            Schedule s = ScheduleLoad(user);
+            Schedule.RemoveAllEvt(s);
+            Schedules.Remove(s);
+        }
+
+        public static string GetSchedFilePath(User u)
+        {
+            string scheduleFilePath = Path.Combine(
+             Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName,
+              $"schedule_{u.Name}.dat"
+            );
+            return scheduleFilePath;
+        }
+
+        public static void Save(User u, Schedule sched)
+        {
             try
             {
+                string scheduleFilePath = GetSchedFilePath(u);
                 using (FileStream fs = new FileStream(scheduleFilePath, FileMode.Create))
                 {
                     BinaryFormatter bf = new BinaryFormatter();
-                    bf.Serialize(fs, s);
+                    bf.Serialize(fs, sched); // ✅ serialize đúng dữ liệu hiện tại
                 }
             }
             catch (Exception ex)
@@ -58,26 +71,38 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             }
         }
 
-        public static void Load(Schedule currentUser_Sched, BindingList<EventBase> allEvents)
+        public static BindingList<EventBase> Load(User u)
         {
-            if (File.Exists(scheduleFilePath))
+            string scheduleFilePath = GetSchedFilePath(u);
+
+            // Nếu file không tồn tại → trả list rỗng
+            if (!File.Exists(scheduleFilePath))
             {
-                try
+                return new BindingList<EventBase>(new List<EventBase>());
+            }
+
+            try
+            {
+                using (FileStream fs = new FileStream(scheduleFilePath, FileMode.Open))
                 {
-                    using (FileStream fs = new FileStream(scheduleFilePath, FileMode.Open))
-                    {
-                        BinaryFormatter bf = new BinaryFormatter();
-                        currentUser_Sched = (Schedule)bf.Deserialize(fs);
-                    }
-                    allEvents = new BindingList<EventBase>(currentUser_Sched.Events);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Lỗi khi đọc file lịch: {ex.Message}");
-                    allEvents = new BindingList<EventBase>(new List<EventBase>());
+                    BinaryFormatter bf = new BinaryFormatter();
+                    Schedule currentUser_Sched = (Schedule)bf.Deserialize(fs);
+
+                    // 🔹 Luôn đảm bảo list không null
+                    return new BindingList<EventBase>(currentUser_Sched?.Events ?? new List<EventBase>());
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi đọc file lịch: {ex.Message}", "Lỗi đọc dữ liệu",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // 🔹 Trả về danh sách rỗng thay vì null
+                return new BindingList<EventBase>(new List<EventBase>());
+            }
         }
+
+        
     }
 }
 

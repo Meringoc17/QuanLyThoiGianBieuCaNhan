@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
@@ -9,12 +10,13 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         public OneTimeEvent() { }
 
         public OneTimeEvent(string tt, DateTime start, DateTime end,
-            string type, string prio)
+            string type, List<Category> catergories, string prio)
         {
             this.Title = tt;
             this.Start = start;
             this.End = end;
             this.Type = type;
+            this.Categories = catergories;
             this.Priority = prio;
         }
 
@@ -44,12 +46,14 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             base.GetObjectData(info, context);
             // Nếu có thêm field riêng của OneTimeEvent, thêm vào đây
         }
+    }
 
-
+    public class OneTimeEvtFactory
+    {
         public static OneTimeEvent Create(string tt, DateTime start, DateTime end,
-            string type, string prio)
+            string type, List<Category> categories, string prio)
         {
-            return new OneTimeEvent(tt, start, end, type, prio);
+            return new OneTimeEvent(tt, start, end, type, categories, prio);
         }
     }
 }

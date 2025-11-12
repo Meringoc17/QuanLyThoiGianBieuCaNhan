@@ -59,6 +59,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         {
             try
             {
+                e.Reminder = null;
                 Events.Remove(e);
             }
             catch (Exception ex)
@@ -79,6 +80,12 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             }
         }
 
-
+        public static void RemoveAllEvt(Schedule s)
+        {
+            foreach (EventBase e in s.Events)
+            {
+                s.RemoveEvent(e);
+            }
+        }
     }
 }

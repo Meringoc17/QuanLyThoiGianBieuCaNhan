@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Decorators\ReminderDecorator.cs" />
+    <Compile Include="Exceptions\CategoryException.cs" />
     <Compile Include="Exceptions\DataFileException.cs" />
     <Compile Include="Exceptions\EventException.cs" />
     <Compile Include="Exceptions\OTEvtException.cs" />
@@ -58,11 +59,14 @@
     <Compile Include="Exceptions\UserException.cs" />
     <Compile Include="Interfaces\IEventStrategy.cs" />
     <Compile Include="Interfaces\ISerializer.cs" />
+    <Compile Include="Models\Catergory.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\EventBase.cs" />
     <Compile Include="Models\OneTimeEvent.cs" />
     <Compile Include="Models\RecurringEvent.cs" />
     <Compile Include="Models\Reminder.cs" />
+    <Compile Include="Services\CategoryFactory.cs" />
+    <Compile Include="Services\CategoryManager.cs" />
     <Compile Include="Services\EventFactory.cs" />
     <Compile Include="Services\EventManager.cs" />
     <Compile Include="Services\EventSortService.cs" />
@@ -96,6 +100,12 @@
     </Compile>
     <Compile Include="UI\RecurringEvtSettingForm.Designer.cs">
       <DependentUpon>RecurringEvtSettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UserDetailForm.Designer.cs">
+      <DependentUpon>UserDetailForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\UserLogin.cs">
       <SubType>Form</SubType>
@@ -131,6 +141,9 @@
     </Compile>
     <EmbeddedResource Include="UI\RecurringEvtSettingForm.resx">
       <DependentUpon>RecurringEvtSettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserDetailForm.resx">
+      <DependentUpon>UserDetailForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserLogin.resx">
       <DependentUpon>UserLogin.cs</DependentUpon>

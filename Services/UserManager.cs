@@ -199,5 +199,12 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
         {
             return users.Users;
         }
+
+        public static void DeleteUser(User user)
+        {
+            ScheduleService.UserScheduleWipeOut(user);
+            users.Users.Remove(user);
+        }
+        
     }
 }

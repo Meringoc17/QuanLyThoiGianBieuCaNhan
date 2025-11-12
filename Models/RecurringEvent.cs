@@ -71,13 +71,14 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             this.DaNhacNho = e.DaNhacNho;
         }
 
-        public RecurringEvent(string tt, DateTime start, DateTime end, string type, string prio)
+        public RecurringEvent(string tt, DateTime start, DateTime end, string type, List<Category> catergories, string prio)
         {
             this.Title = tt;
             this.Start = start;
             this.End = end;
             this.Type = type;
             this.Priority = prio;
+            this.Categories = catergories;
         }
 
         // Tiện cho việc tự Generate sk lặp lại
@@ -251,11 +252,10 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         {
             return new RecurringEvent(interval, unit, days, endInForm, occ, notified, tt, start, end, type, prio, status);
         }
-
         public static RecurringEvent Create(string tt, DateTime start, DateTime end,
-            string type, string prio)
+            string type, List<Category> categories, string prio)
         {
-            return new RecurringEvent(tt, start, end, type, prio);
+            return new RecurringEvent(tt, start, end, type, categories, prio);
         }
     }
 

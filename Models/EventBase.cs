@@ -13,7 +13,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         private string type;
         private bool status = false;
         private bool daNhac;
-        //private List<string> categories;
+        private List<Category> categories;
         private Reminder reminder;
         private bool enableReminder = false;
   
@@ -24,8 +24,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         public string Priority { get; set; }
         public bool Status { get; set; }
         public bool DaNhacNho { get; set; }
-
-        //public List<string> Categories { get; set; }
+        public List<Category> Categories { get; set; } = new List<Category>();
         public Reminder Reminder { get; set; }
         public bool EnableReminder { get; set; }
 

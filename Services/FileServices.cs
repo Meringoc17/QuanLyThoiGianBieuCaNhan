@@ -54,5 +54,35 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
                 return new Schedule();
             }
         }
+
+        public static void DeleteScheduleFile(User u)
+        {
+            string scheduleFilePath = ScheduleService.GetSchedFilePath(u);
+
+            try
+            {
+                if (File.Exists(scheduleFilePath))
+                {
+                    File.Delete(scheduleFilePath); // 🔥 Xóa vĩnh viễn file
+                    MessageBox.Show($"Đã xóa file lịch của {u.Name} thành công!",
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy file lịch để xóa!",
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show("Không thể xóa file (đang bị sử dụng): " + ex.Message,
+                    "Lỗi IO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi xóa file: " + ex.Message,
+                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

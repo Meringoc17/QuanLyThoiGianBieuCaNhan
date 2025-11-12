@@ -51,7 +51,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             scheduleFilePath = Path.Combine(
              Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName,
               $"schedule_{currentUser.Name}.dat"
-);
+            );
 
             //currentUser_Sched = ScheduleService.ScheduleLoad(currentUser);
 
@@ -143,6 +143,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             dtpEnd.ShowUpDown = false;
 
             dgvEvents_AutoFormat();
+            dgvEvents.CellFormatting += dgvEvents_CellFormatting;
 
             DisplayCalendar(currentMonth);
             foreach (EventBase ev in allEvents)
@@ -189,6 +190,26 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             SaveSchedule();
         }
 
+        private void dgvEvents_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Kiểm tra đúng cột Categories
+            if (dgvEvents.Columns[e.ColumnIndex].Name == "Categories")
+            {
+                // Kiểm tra giá trị trong cell có phải List<Category> không
+                List<Category> list = e.Value as List<Category>;
+                if (list != null)
+                {
+                    // Gộp tên category thành chuỗi (không dùng LINQ)
+                    List<string> names = new List<string>();
+                    foreach (Category c in list)
+                    {
+                        names.Add(c.Name);
+                    }
+                    e.Value = string.Join(", ", names);
+                }
+            }
+        }
+
         /// <summary>
         /// Khởi tạo 42 ô label trong bảng lịch
         /// </summary>
@@ -202,6 +223,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             dgvEvents.Columns["Reminder"].Visible = false;
             dgvEvents.Columns["DaNhacNho"].Visible = false;
             dgvEvents.Columns["EnableReminder"].Visible = false;
+            
 
             // ⚙️ Tạo cột checkbox "Hoàn thành" nếu chưa có
             if (!dgvEvents.Columns.Contains("Status"))
@@ -521,9 +543,16 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             try
             {
                 List<EventBase> temp = new List<EventBase>();
+                List<Category> addtoEvt = new List<Category>();
+                for (int i = 0; i < chlistbox_Categories.SelectedItems.Count; i++)
+                {
+                    Category c = CategoryManager.FindMatchToString(chlistbox_Categories.SelectedItems[i].ToString());
+                    addtoEvt.Add(c);
+                }
                 temp.Add(EventFactory.Create(txtTitle.Text, dtpStart.Value, dtpEnd.Value,
-                            cbCategory.SelectedItem != null ? cbCategory.SelectedItem.ToString() : "Công việc",
-                            cbPriority.SelectedItem.ToString(), cbRepeat.Checked));
+                        cbCategory.SelectedItem != null ? cbCategory.SelectedItem.ToString() : "Công việc",
+                        addtoEvt,
+                        cbPriority.SelectedItem.ToString(), cbRepeat.Checked));
 
                 if (cbRepeat.Checked)
                 {
@@ -698,29 +727,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
             // Thông báo nhỏ để người dùng biết
             MessageBox.Show("Đã hủy nhập sự kiện!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void toolStripButtonThem_Click(object sender, EventArgs e)
-        {
-            txtTitle.Text = "";
-            dtpStart.Value = DateTime.Now;
-            dtpEnd.Value = DateTime.Now;
-            if (cbCategory.Items.Count > 0) cbCategory.SelectedIndex = 0;
-            if (cbPriority.Items.Count > 0) cbPriority.SelectedIndex = 0;
-        }
-
-
-        private void toolStripButtonLuu_Click(object sender, EventArgs e)
-        {
-            string tieuDe = txtTitle.Text;
-            DateTime batDau = dtpStart.Value;
-            DateTime ketThuc = dtpEnd.Value;
-            string loai = cbCategory.SelectedItem != null ? cbCategory.SelectedItem.ToString() : "";
-            string uuTien = cbPriority.SelectedItem != null ? cbPriority.SelectedItem.ToString() : "";
-
-            dgvEvents.Rows.Add(tieuDe, batDau, ketThuc, loai, uuTien);
-
-            MessageBox.Show("Đã lưu sự kiện!");
         }
 
         private void toolStripButtonSua_Click(object sender, EventArgs e)
@@ -1030,6 +1036,23 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
         }
 
+        private void CloseOnUserDeletion(bool e)
+        {
+            if (e)
+            {
+                this.Hide();
+                UserLogin userLogin = new UserLogin();
+                userLogin.ShowDialog();
+                this.Close();
+            }
+            
+        }
+
+        private void SubcribeToUserDetailForm(UserDetailForm u)
+        {
+            u.ToCloseMainForm += CloseOnUserDeletion;
+        }
+
         private void timer_Time_Tick(object sender, EventArgs e)
         {
             // Gọi hàm kiểm tra nhắc nhở
@@ -1118,6 +1141,13 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             {
                 allEvents.RemoveAt(i);
             }
+        }
+
+        private void tsmnItem_AccDetail_Click(object sender, EventArgs e)
+        {
+            UserDetailForm newf = new UserDetailForm(currentUser);
+            SubcribeToUserDetailForm(newf);
+            newf.ShowDialog();
         }
     }
 }
