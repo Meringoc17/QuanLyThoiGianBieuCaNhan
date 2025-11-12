@@ -115,6 +115,8 @@
             this.lblSignOut = new System.Windows.Forms.Label();
             this.timer_Time = new System.Windows.Forms.Timer(this.components);
             this.panel3 = new System.Windows.Forms.Panel();
+            this.tàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xemChiTiếtTàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -221,7 +223,8 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.côngCụToolStripMenuItem,
-            this.trợGiúpToolStripMenuItem1});
+            this.trợGiúpToolStripMenuItem1,
+            this.tàiKhoảnToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
@@ -1116,6 +1119,20 @@
             this.panel3.Size = new System.Drawing.Size(595, 32);
             this.panel3.TabIndex = 5;
             // 
+            // tàiKhoảnToolStripMenuItem
+            // 
+            this.tàiKhoảnToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.xemChiTiếtTàiKhoảnToolStripMenuItem});
+            this.tàiKhoảnToolStripMenuItem.Name = "tàiKhoảnToolStripMenuItem";
+            this.tàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(102, 29);
+            this.tàiKhoảnToolStripMenuItem.Text = "Tài khoản";
+            // 
+            // xemChiTiếtTàiKhoảnToolStripMenuItem
+            // 
+            this.xemChiTiếtTàiKhoảnToolStripMenuItem.Name = "xemChiTiếtTàiKhoảnToolStripMenuItem";
+            this.xemChiTiếtTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.xemChiTiếtTàiKhoảnToolStripMenuItem.Text = "Thông tin tài khoản";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
@@ -1254,5 +1271,7 @@
         private System.Windows.Forms.ComboBox cbPriority;
         private System.Windows.Forms.Label lblKetThuc;
         private System.Windows.Forms.Label lblCategory;
+        private System.Windows.Forms.ToolStripMenuItem tàiKhoảnToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem xemChiTiếtTàiKhoảnToolStripMenuItem;
     }
 }

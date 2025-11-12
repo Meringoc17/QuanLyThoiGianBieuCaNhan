@@ -86,7 +86,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
                 default:
                     break;
                     
-
             }
 
             RecurringEvent recurringEvent = new RecurringEvent(old, newStart, newEnd);

@@ -100,8 +100,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             return SortByPriority(filteredEvents);
         }
 
-
-
     }
 }
 

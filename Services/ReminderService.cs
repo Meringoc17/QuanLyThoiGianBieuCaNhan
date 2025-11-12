@@ -9,27 +9,8 @@ using System.Windows.Forms;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
 {
-    internal class ReminderService: IObservable<EventBase>
+    internal class ReminderService
     {
-        private List<IObserver<EventBase>> observers = new List<IObserver<EventBase>>();
-
-        public IDisposable Subscribe(IObserver<EventBase> observer)
-        {
-            if (!observers.Contains(observer))
-                observers.Add(observer);
-
-            // Cho phép observer hủy đăng ký sau này
-            return new Unsubscriber(observers, observer);
-        }
-
-        public void Trigger(EventBase ev)
-        {
-            foreach (var obs in observers)
-            {
-                obs.OnNext(ev); // 🔔 gửi thông báo
-            }
-        }
-
         public static Reminder CreateReminder (TimeSpan t)
         {
             return new Reminder (t, TimeSpan.Zero,
@@ -107,24 +88,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             throw new NotImplementedException();
         }
 
-    }
-
-    public class Unsubscriber : IDisposable
-    {
-        private List<IObserver<EventBase>> _observers;
-        private IObserver<EventBase> _observer;
-
-        public Unsubscriber(List<IObserver<EventBase>> observers, IObserver<EventBase> observer)
-        {
-            _observers = observers;
-            _observer = observer;
-        }
-
-        public void Dispose()
-        {
-            if (_observers.Contains(_observer))
-                _observers.Remove(_observer);
-        }
     }
 }
 

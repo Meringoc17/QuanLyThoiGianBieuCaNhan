@@ -175,11 +175,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             return $"Lặp lại mỗi {RepeatIntervalDays} {RepeatUnit}";
         }
 
-        public override string DisplayDetails()
-        {
-            return "";
-        }
-
         public static DayOfWeek DayConverter(string d)
         {
             switch (d)

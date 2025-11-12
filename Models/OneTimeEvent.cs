@@ -45,10 +45,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             // Nếu có thêm field riêng của OneTimeEvent, thêm vào đây
         }
 
-        public override string DisplayDetails()
-        {
-            return $"[One-Time Event] {Title} - {Start:g} to {End:g}";
-        }
 
         public static OneTimeEvent Create(string tt, DateTime start, DateTime end,
             string type, string prio)

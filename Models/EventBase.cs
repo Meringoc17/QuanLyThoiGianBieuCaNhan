@@ -75,7 +75,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             return $"📅 {Title} | {Start:g} - {End:g} | Ưu tiên: {Priority}";
         }
 
-        // Phương thức DisplayDetails - có thể được mở rộng trong các lớp con
-        public abstract string DisplayDetails();
+        
     }
 }
