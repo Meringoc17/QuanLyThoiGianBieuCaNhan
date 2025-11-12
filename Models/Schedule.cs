@@ -1,4 +1,5 @@
 using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Exceptions;
+using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -87,17 +88,23 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
                 s.RemoveEvent(e);
             }
         }
-        public int CountEventsInCategory(Category category)
+        
+
+        public List<string> CategoryUsageCount()
         {
-            int count = 0;
-            foreach (EventBase eventBase in Events)
+            List<string> list = new List<string>();
+            foreach (Category category in CategoryManager.AvailableCategories)
             {
-                if (eventBase.Categories.Contains(category))
+                int count = 0;
+
+                foreach (EventBase ev in Events)
                 {
-                    count++;  // Tăng đếm nếu sự kiện có Category này
+                    if (ev.ContainsCategory(category))
+                        count++;
                 }
+                list.Add($"Hạng mục {category} có {count} sự kiện");
             }
-            return count;
+            return list;
         }
 
     }

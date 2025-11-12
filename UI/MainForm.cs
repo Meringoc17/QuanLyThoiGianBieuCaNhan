@@ -52,7 +52,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
              Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName,
               $"schedule_{currentUser.Name}.dat"
             );
-
+            CategoryManager.Load(user);
             //currentUser_Sched = ScheduleService.ScheduleLoad(currentUser);
 
             // 🔹 Tự động load dữ liệu sự kiện của user từ file .dat
@@ -112,11 +112,10 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             tS_Time.Text = "Time: " + dateTime.ToString();
             lbl_SignInName.Text = $"Đang đăng nhập dưới tên {currentUser.Name}";
 
-            foreach (Category category in CategoryManager.AvailableCategories)
+            foreach (Category c in CategoryManager.AvailableCategories)
             {
-
-            }    
-
+                chlistbox_Categories.Items.Add(c.Name);
+            }
         }
 
         protected override void OnLoad(EventArgs e)
@@ -225,10 +224,20 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             dgvEvents.DataSource = allEvents;
             dgvEvents.Columns["Start"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
             dgvEvents.Columns["End"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
+            dgvEvents.Columns["Type"].Visible = false;
             dgvEvents.Columns["Reminder"].Visible = false;
             dgvEvents.Columns["DaNhacNho"].Visible = false;
             dgvEvents.Columns["EnableReminder"].Visible = false;
-            
+
+            if (!dgvEvents.Columns.Contains("Categories"))
+            {
+                DataGridViewTextBoxColumn cateCol = new DataGridViewTextBoxColumn();
+                cateCol.HeaderText = "Hạng mục";
+                cateCol.Name = "Categories";
+                cateCol.ReadOnly = true;
+
+                dgvEvents.Columns.Add(cateCol);
+            }
 
             // ⚙️ Tạo cột checkbox "Hoàn thành" nếu chưa có
             if (!dgvEvents.Columns.Contains("Status"))
@@ -238,6 +247,21 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 chkCol.Name = "Status";
                 chkCol.DataPropertyName = "Status"; // phải trùng property trong EventBase
                 dgvEvents.Columns.Add(chkCol);
+            }
+
+            foreach (DataGridViewRow row in dgvEvents.Rows)
+            {
+                if (row.DataBoundItem is EventBase ev)
+                {
+                    string cateNames = "";
+                    foreach (Category c in ev.Categories)
+                    {
+                        if (cateNames.Length > 0)
+                            cateNames += ", ";
+                        cateNames += c.Name;
+                    }
+                    row.Cells["Categories"].Value = cateNames;
+                }
             }
 
             // ⚙️ Gắn sự kiện thủ công (không dùng lambda)
@@ -549,9 +573,9 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             {
                 List<EventBase> temp = new List<EventBase>();
                 List<Category> addtoEvt = new List<Category>();
-                for (int i = 0; i < chlistbox_Categories.SelectedItems.Count; i++)
+                for (int i = 0; i < chlistbox_Categories.CheckedItems.Count; i++)
                 {
-                    Category c = CategoryManager.FindMatchToString(chlistbox_Categories.SelectedItems[i].ToString());
+                    Category c = CategoryManager.FindMatchToString(chlistbox_Categories.CheckedItems[i].ToString());
                     addtoEvt.Add(c);
                 }
                 temp.Add(EventFactory.Create(txtTitle.Text, dtpStart.Value, dtpEnd.Value,

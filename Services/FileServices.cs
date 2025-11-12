@@ -63,7 +63,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             {
                 if (File.Exists(scheduleFilePath))
                 {
-                    File.Delete(scheduleFilePath); // 🔥 Xóa vĩnh viễn file
+                    File.Delete(scheduleFilePath); // Xóa vĩnh viễn file
                     MessageBox.Show($"Đã xóa file lịch của {u.Name} thành công!",
                         "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

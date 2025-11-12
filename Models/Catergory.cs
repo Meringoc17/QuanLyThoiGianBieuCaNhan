@@ -14,14 +14,14 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
     {
         private string name;
         private string description;
-        public List<EventBase> Events { get; set; }  // Danh sách các sự kiện thuộc Category này
+        //public List<EventBase> Events { get; set; }  // Danh sách các sự kiện thuộc Category này
 
         public string Name { get; set; }
         public string Description { get; set; }
 
         public Category()
         {
-            Events = new List<EventBase>();  // Khởi tạo danh sách Events
+            //Events = new List<EventBase>();  // Khởi tạo danh sách Events
         }
 
         public Category(string n, string des) : this()
@@ -31,10 +31,11 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         }
 
         // Phương thức đếm số sự kiện thuộc Category này
-        public int CountEvents()
+        /*public int CountEvents()
         {
             return Events.Count;  // Trả về số lượng sự kiện
         }
+        */
 
         protected Category(SerializationInfo info, StreamingContext context)
         {
@@ -46,7 +47,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("Description", Description);
-            info.AddValue("Name", name);
+            info.AddValue("Name", Name);
         }
     }
 

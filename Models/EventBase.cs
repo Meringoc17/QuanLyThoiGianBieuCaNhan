@@ -130,7 +130,15 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             }
         }
 
-
+        public bool ContainsCategory(Category category)
+        {
+            foreach (Category c in Categories)
+            {
+                if (c.Name == category.Name)
+                    return true;
+            }
+            return false;
+        }
 
     }
 }
