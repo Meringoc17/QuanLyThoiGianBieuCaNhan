@@ -21,6 +21,12 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
                 lBEvtDetail.Items.Add("Thời gian bắt đầu: " + rc.Start);
                 lBEvtDetail.Items.Add("Thời gian kết thúc: " + rc.End);
                 lBEvtDetail.Items.Add("Loại: " + rc.Type);
+                string cate = string.Empty;
+                foreach (Category c in e.Categories)
+                {
+                    cate += c.Name + ", ";
+                }
+                lBEvtDetail.Items.Add("Hạng mục: ");
                 lBEvtDetail.Items.Add("Ưu tiên: " + rc.Priority);
                 if (rc.Status)
                 {
@@ -55,6 +61,12 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
                 lBEvtDetail.Items.Add("Thời gian bắt đầu: " + e.Start);
                 lBEvtDetail.Items.Add("Thời gian kết thúc: " + e.End);
                 lBEvtDetail.Items.Add("Loại: " + e.Type);
+                string cate = string.Empty;
+                foreach (Category c in e.Categories)
+                {
+                    cate += c.Name + ", ";
+                }
+                lBEvtDetail.Items.Add("Hạng mục: ");
                 lBEvtDetail.Items.Add("Ưu tiên: " + e.Priority);
                 if (e.Status)
                 {

@@ -44,16 +44,17 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             Type = info.GetString("Type");
             Priority = info.GetString("Priority");
 
+
             try
             {
                 Status = info.GetBoolean("Status");
                 DaNhacNho = info.GetBoolean("DaNhacNho");
-                //Categories = (List<string>)info.GetValue("Categories", typeof(List<string>));
+                Categories = (List<Category>)info.GetValue("Categories", typeof(List<Category>));
                 Reminder = (Reminder)info.GetValue("Reminder", typeof(Reminder));
             }
             catch
             {
-                //Categories = new List<string>();
+                Categories = new List<Category>();
             }
         }
 
@@ -67,7 +68,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             info.AddValue("Priority", Priority);
             info.AddValue("Status", Status);
             info.AddValue("DaNhacNho", DaNhacNho);
-            //info.AddValue("Categories", Categories);
+            info.AddValue("Categories", Categories);
             info.AddValue("Reminder", Reminder);
         }
 

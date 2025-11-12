@@ -3,15 +3,37 @@ using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
 {
-    internal class CategoryManager
+    [Serializable]
+    internal class CategoryManager: ISerializable
     {
         public static List<Category> AvailableCategories = new List<Category>();
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("AvailableCategories", AvailableCategories);
+        }
+
+        //  Deserialize – Đọc dữ liệu từ file
+        protected CategoryManager(SerializationInfo info, StreamingContext context)
+        {
+            try
+            {
+                AvailableCategories = (List<Category>)info.GetValue("AvailableCategories", typeof(List<Category>));
+            }
+            catch
+            {
+                AvailableCategories = new List<Category>();
+            }
+        }
+
+        // =============================================================================================================
 
         public void AddToAvailList(Category category) 
         {
@@ -37,12 +59,9 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             catch (Exception ex)
             {
                 MessageBox.Show("Hạng mục này chưa tồn tại!", "Không có hạng mục", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw new CategoryException("Lỗi không tìm được sự kiện", ex);
-            } 
-            finally
-            {
-                throw new CategoryException("");
+                throw new CategoryException("Không tìm được hạng mục");
             }
+            return null;
         }
     }
 }

@@ -815,11 +815,7 @@
             // 
             this.chlistbox_Categories.FormattingEnabled = true;
             this.chlistbox_Categories.Items.AddRange(new object[] {
-            "Công Việc",
-            "Cá Nhân ",
-            "Lịch Họp",
-            "Giải Trí",
-            "Tiệc (Sinh nhật, Thôi nôi, Đám Cưới,..)"});
+            "Công Việc"});
             this.chlistbox_Categories.Location = new System.Drawing.Point(875, 284);
             this.chlistbox_Categories.Name = "chlistbox_Categories";
             this.chlistbox_Categories.Size = new System.Drawing.Size(180, 27);

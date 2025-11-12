@@ -112,6 +112,11 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             tS_Time.Text = "Time: " + dateTime.ToString();
             lbl_SignInName.Text = $"Đang đăng nhập dưới tên {currentUser.Name}";
 
+            foreach (Category category in CategoryManager.AvailableCategories)
+            {
+
+            }    
+
         }
 
         protected override void OnLoad(EventArgs e)
