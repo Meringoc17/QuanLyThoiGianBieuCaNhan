@@ -50,5 +50,36 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
                 result = DialogResult.OK;
             }
         }
+
+        private void btnFixDetail_Click(object sender, EventArgs e)
+        {
+            if (txtboxUsrname.Text != user.Name && txtbox_PhoneNum.Text != user.Phone)
+            {
+                if (!UserManager.IsUsernameExisted(txtboxUsrname.Text))
+                {
+                    MessageBox.Show("Không thể thay đổi tên người dùng tại lúc này. Vui lòng thử lại sau.");
+                }    
+            }
+
+            if (txtbox_PhoneNum.Text != user.Phone)
+            {
+                if (!UserManager.IsPhoneNumExisted(txtbox_PhoneNum.Text))
+                {
+                    user.ResetPhoneNum(txtbox_PhoneNum.Text);
+                    MessageBox.Show("Đã thay đổi số điện thoại!", "Thay đổi số điện thoại", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }    
+            }
+
+            if (txtboxUsrname.Text != user.Name && txtbox_PhoneNum.Text == user.Phone)
+            {
+                if (!UserManager.IsUsernameExisted(txtboxUsrname.Text))
+                {
+                    user.SetUsername(txtboxUsrname.Text);
+                    MessageBox.Show("Đã thay đổi tên người dùng!", "Thay đổi username", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+
+            UserManager.SaveUsersToFile();
+        }
     }
 }

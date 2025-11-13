@@ -119,6 +119,7 @@
             this.btnFixDetail.TabIndex = 7;
             this.btnFixDetail.Text = "Sửa";
             this.btnFixDetail.UseVisualStyleBackColor = true;
+            this.btnFixDetail.Click += new System.EventHandler(this.btnFixDetail_Click);
             // 
             // btnCancel
             // 
@@ -162,6 +163,7 @@
             this.Controls.Add(this.txtbox_PhoneNum);
             this.Controls.Add(this.txtboxUsrname);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "UserDetailForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

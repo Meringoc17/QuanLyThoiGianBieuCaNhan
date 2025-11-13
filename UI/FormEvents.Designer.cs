@@ -80,6 +80,7 @@
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.listEvents);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

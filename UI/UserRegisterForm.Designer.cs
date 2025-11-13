@@ -211,6 +211,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lbl_Title);
             this.Controls.Add(this.pnSignUp);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.Name = "UserRegisterForm";
             this.ShowIcon = false;

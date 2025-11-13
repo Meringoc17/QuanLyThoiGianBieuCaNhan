@@ -7,16 +7,18 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
     [Serializable]
     public class OneTimeEvent : EventBase, ISerializable
     {
-        public OneTimeEvent() { }
+        public OneTimeEvent() 
+        {
 
-        public OneTimeEvent(string tt, DateTime start, DateTime end,
-            string type, List<Category> catergories, string prio)
+        }
+
+        public OneTimeEvent(string tt, DateTime start, DateTime end, List<Category> categories, string prio)
         {
             this.Title = tt;
             this.Start = start;
             this.End = end;
-            this.Type = type;
-            this.Categories = catergories;
+            //this.Type = type;
+            this.Categories = categories ?? new List<Category>();
             this.Priority = prio;
         }
 
@@ -25,13 +27,17 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             this.Title = e.Title;
             this.Start = e.Start;
             this.End = e.End;
-            this.Type = e.Type;
+            //this.Type = e.Type;
             this.Priority = e.Priority;
             this.Status = e.Status;
             this.DaNhacNho = e.DaNhacNho;
             this.EnableReminder = e.EnableReminder;
             this.Reminder = e.Reminder;
+
+            // --- COPY CATEGORIES if present ---
+            this.Categories = e.Categories != null ? new List<Category>(e.Categories) : new List<Category>();
         }
+
 
         // BẮT BUỘC: Constructor dành cho BinaryFormatter khi deserialization
         protected OneTimeEvent(SerializationInfo info, StreamingContext context)
@@ -50,10 +56,9 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
 
     public class OneTimeEvtFactory
     {
-        public static OneTimeEvent Create(string tt, DateTime start, DateTime end,
-            string type, List<Category> categories, string prio)
+        public static OneTimeEvent Create(string tt, DateTime start, DateTime end, List<Category> categories, string prio)
         {
-            return new OneTimeEvent(tt, start, end, type, categories, prio);
+            return new OneTimeEvent(tt, start, end, categories, prio);
         }
     }
 }

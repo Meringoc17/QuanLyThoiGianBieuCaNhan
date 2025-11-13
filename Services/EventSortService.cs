@@ -18,9 +18,16 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
 
             foreach (EventBase current in events)
             {
-                if (current != null && current.Type == selectedType)
+                if (current != null)
                 {
-                    result.Add(current);
+                    foreach (Category category in current.Categories)
+                    {
+                        if (category.Name == selectedType)
+                        {
+                            result.Add(current);
+                            break;
+                        }
+                    }
                 }
             }
 
@@ -63,6 +70,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             return sortedEvents;
         }
 
+
         // Phương thức lấy giá trị ưu tiên từ chuỗi
         private static int GetPriorityValue(string priority)
         {
@@ -78,6 +86,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
                     return 4; // Giá trị mặc định nếu không có ưu tiên hợp lệ
             }
         }
+
 
         // Phương thức kết hợp cả lọc theo loại và ưu tiên
         public static List<EventBase> FilterAndSort(List<EventBase> events, string selectedType, string selectedPriority)

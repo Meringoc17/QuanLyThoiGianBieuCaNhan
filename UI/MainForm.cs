@@ -1,4 +1,5 @@
 ﻿using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Exceptions;
+using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Interfaces;
 using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models;
 using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services;
 using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI;
@@ -29,7 +30,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
         private Schedule currentUser_Sched;
         private string scheduleFilePath;
 
-        private Form dropDownForm;
         private RecurringEvent recurringEvt = new RecurringEvent();
         private BindingList<EventBase> allEvents;
 
@@ -112,10 +112,16 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             tS_Time.Text = "Time: " + dateTime.ToString();
             lbl_SignInName.Text = $"Đang đăng nhập dưới tên {currentUser.Name}";
 
+            CategoryManager.Load(currentUser);
             foreach (Category c in CategoryManager.AvailableCategories)
             {
                 chlistbox_Categories.Items.Add(c.Name);
             }
+
+            foreach (Category c in CategoryManager.AvailableCategories)
+            {
+                cbCategoryFilter.Items.Add(c.Name);
+            }    
         }
 
         protected override void OnLoad(EventArgs e)
@@ -147,7 +153,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             dtpEnd.ShowUpDown = false;
 
             dgvEvents_AutoFormat();
-            dgvEvents.CellFormatting += dgvEvents_CellFormatting;
 
             DisplayCalendar(currentMonth);
             foreach (EventBase ev in allEvents)
@@ -189,8 +194,29 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 {
                     currentUser_Sched.AddEvent(added);
                 }
-            }
 
+                int rowIndex = -1;
+                for (int i = 0; i < dgvEvents.Rows.Count; i++)
+                {
+                    if (dgvEvents.Rows[i].DataBoundItem == added)
+                    {
+                        rowIndex = i;
+                        break;
+                    }
+                }
+
+                if (rowIndex >= 0)
+                {
+                    string cateNames = "";
+                    foreach (Category c in added.Categories)
+                    {
+                        if (cateNames.Length > 0) cateNames += ", ";
+                        cateNames += c.Name;
+                    }
+                    dgvEvents.Rows[rowIndex].Cells["Categories"].Value = cateNames;
+                }
+            }
+            
             SaveSchedule();
         }
 
@@ -223,8 +249,10 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             dgvEvents.AutoGenerateColumns = true;
             dgvEvents.DataSource = allEvents;
             dgvEvents.Columns["Start"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
+            dgvEvents.Columns["Start"].HeaderText = "Bắt đầu";
+
             dgvEvents.Columns["End"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
-            dgvEvents.Columns["Type"].Visible = false;
+            dgvEvents.Columns["End"].HeaderText = "Kết thúc";
             dgvEvents.Columns["Reminder"].Visible = false;
             dgvEvents.Columns["DaNhacNho"].Visible = false;
             dgvEvents.Columns["EnableReminder"].Visible = false;
@@ -378,6 +406,12 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                     lbl.Font = new Font("Segoe UI", 11, FontStyle.Bold);
                 }
 
+                if (date.Date == DateTime.Today && HasEventOnDate(date))
+                {
+                    lbl.BackColor = Color.LightPink;
+                    lbl.ForeColor = Color.DarkBlue;
+                    lbl.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+                }
                 day++;
             }
 
@@ -398,7 +432,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 if (date >= startDate && date <= endDate)
                     return true;
             }
-
             return false;
         }
 
@@ -455,7 +488,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             }
         }
 
-
         /// <summary>
         /// Tăng tháng
         /// </summary>
@@ -475,13 +507,12 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             currentMonth = currentMonth.AddMonths(-1);
             DisplayCalendar(currentMonth);
         }
+        
 
 
         /// <summary>
         /// Load Form
         /// </summary>
-
-
         private void dgvEvents_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
             if (dgvEvents.IsCurrentCellDirty)
@@ -489,6 +520,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 dgvEvents.CommitEdit(DataGridViewDataErrorContexts.Commit);
             }
         }
+
 
         private void dgvEvents_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
@@ -573,14 +605,24 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             {
                 List<EventBase> temp = new List<EventBase>();
                 List<Category> addtoEvt = new List<Category>();
+
                 for (int i = 0; i < chlistbox_Categories.CheckedItems.Count; i++)
                 {
-                    Category c = CategoryManager.FindMatchToString(chlistbox_Categories.CheckedItems[i].ToString());
-                    addtoEvt.Add(c);
+                    string catName = chlistbox_Categories.CheckedItems[i].ToString().Trim();
+                    Category c = CategoryManager.FindMatchToString(catName);
+
+                    if (c != null)
+                    {
+                        addtoEvt.Add(c);
+                        Debug.WriteLine($"✔ Đã thêm category: {c.Name}");
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"⚠ Không tìm thấy category: {catName}");
+                    }
                 }
-                temp.Add(EventFactory.Create(txtTitle.Text, dtpStart.Value, dtpEnd.Value,
-                        cbCategory.SelectedItem != null ? cbCategory.SelectedItem.ToString() : "Công việc",
-                        addtoEvt,
+
+                temp.Add(EventFactory.Create(txtTitle.Text, dtpStart.Value, dtpEnd.Value, addtoEvt,
                         cbPriority.SelectedItem.ToString(), cbRepeat.Checked));
 
                 if (cbRepeat.Checked)
@@ -598,6 +640,12 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
                             if (rc.EnableReminder)
                             {
+                                if (cboBox_TimeUnit.SelectedIndex == -1)
+                                {
+                                    MessageBox.Show("Bạn chưa chọn cài đặt đơn vị thời gian!");
+                                    return;
+                                }  
+                                
                                 int result;
                                 if (int.TryParse(txtTimeb4Event.Text, out result))
                                 {
@@ -611,7 +659,20 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                                 }
                             }
 
-                            allEvents.Add(new RecurringEvent(rc));
+                            //allEvents.Add(new RecurringEvent(rc));
+
+                            IRecurrenceStrategy i = rc.GetStrategy();
+                            List<RecurringEvent> rclist = new List<RecurringEvent>();
+                            if (i != null)
+                            {
+                                rclist = i.Generate(rc);
+                                MessageBox.Show($"Đã tạo {rclist.Count} sự kiện lặp.");
+                            }    
+                            foreach (RecurringEvent r in rclist)
+                            {
+                                allEvents.Add(new RecurringEvent(r));
+                            }    
+
                             DisplayCalendar(currentMonth);
 
                             if (rc.Reminder != null && rc.EnableReminder)
@@ -742,14 +803,14 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
         {
             // Xóa nội dung TextBox
             txtTitle.Text = string.Empty;
-
+            
             // Đặt lại DateTimePicker về ngày hiện tại
             dtpStart.Value = DateTime.Now;
             dtpEnd.Value = DateTime.Now;
 
             // Đặt lại ComboBox về item đầu tiên (nếu có)
-            if (cbCategory.Items.Count > 0)
-                cbCategory.SelectedIndex = 0;
+            if (chlistbox_Categories.Items.Count > 0)
+                chlistbox_Categories.SelectedIndex = 0;
 
             if (cbPriority.Items.Count > 0)
                 cbPriority.SelectedIndex = 0;
@@ -760,14 +821,14 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
         private void toolStripButtonSua_Click(object sender, EventArgs e)
         {
-            if (dgvEvents.CurrentRow != null)
+            if (dgvEvents.CurrentRow != null && dgvEvents.SelectedRows.Count == 1)
             {
                 DataGridViewRow row = dgvEvents.CurrentRow;
 
                 row.Cells[0].Value = txtTitle.Text;
                 row.Cells[1].Value = dtpStart.Value;
                 row.Cells[2].Value = dtpEnd.Value;
-                row.Cells[3].Value = cbCategory.SelectedItem != null ? cbCategory.SelectedItem.ToString() : "";
+                //row.Cells[3].Value = cbCategory.SelectedItem != null ? cbCategory.SelectedItem.ToString() : "";
                 row.Cells[4].Value = cbPriority.SelectedItem != null ? cbPriority.SelectedItem.ToString() : "";
 
                 MessageBox.Show("Đã cập nhật sự kiện!");
@@ -803,18 +864,19 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                 {
                     allEvents.Remove(toRemove[0]);
                 }
+                allEvents.ResetBindings();
 
-                dgvEvents.DataSource = null;
-                dgvEvents.DataSource = allEvents;
-                dgvEvents_AutoFormat();
                 dgvEvents.ClearSelection();
 
                 // 🔹 Cập nhật status + lưu file
                 statusStrip_Update();
+                DisplayCalendar(currentMonth);
                 SaveSchedule();
 
                 // 🔹 Gắn lại sự kiện
                 allEvents.ListChanged += AllEvents_ListChangedSafe;
+
+                ResetDGVCategories();
             }
             catch (Exception ex)
             {
@@ -877,8 +939,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                         Title = txtTitle.Text,
                         Start = dtpStart.Value,
                         End = dtpEnd.Value,
-                        Priority = cbPriority.SelectedItem.ToString(),
-                        Type = cbCategory.SelectedItem != null ? cbCategory.SelectedItem.ToString() : ""
+                        Priority = cbPriority.SelectedItem.ToString()
                     };
 
                     RecurringEvtSettingForm repeatForm = 
@@ -1120,6 +1181,33 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             }
         }
 
+        private void ResetDGVCategories()
+        {
+            try
+            {
+                if (!dgvEvents.Columns.Contains("Categories"))
+                    return;
+
+                foreach (DataGridViewRow row in dgvEvents.Rows)
+                {
+                    if (row.DataBoundItem is EventBase evt && evt.Categories != null)
+                    {
+                        string cateNames = "";
+                        foreach (Category c in evt.Categories)
+                        {
+                            if (!string.IsNullOrEmpty(cateNames)) cateNames += ", ";
+                            cateNames += c.Name;
+                        }
+                        row.Cells["Categories"].Value = cateNames;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new CategoryException("Đã gặp phải lỗi liên quan đến Category: " + ex.Message);
+            }
+        }
+
         // ---------------------- Phần lọc sự kiện-----------------------
         private void cbPrioSort_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1136,6 +1224,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             string selectedPriority = cbPrioSort.SelectedItem?.ToString();
             List<EventBase> filteredSortedEvents = EventSortService.FilterAndSort(currentUser_Sched.Events, selectedType, selectedPriority);
             dgvEvents.DataSource = new BindingList<EventBase>(filteredSortedEvents);
+            ResetDGVCategories();
         }
 
         private void UpdateEventDataSource()
@@ -1151,6 +1240,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
             List<EventBase> filteredSortedEvents = EventSortService.FilterAndSort(currentUser_Sched.Events, selectedType, selectedPriority);
             dgvEvents.DataSource = new BindingList<EventBase>(filteredSortedEvents);
+            ResetDGVCategories();
         }
 
         private void btnResetDGV_Click(object sender, EventArgs e)
@@ -1158,10 +1248,11 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             // Đặt lại giá trị ComboBox về mặc định (ví dụ, không chọn gì)
             cbPrioSort.SelectedIndex = -1; // Không chọn gì
             cbCategoryFilter.SelectedIndex = -1; // Không chọn gì
-            cbCategory.Text = "Hạng mục";
+            cbCategoryFilter.Text = "Hạng mục";
             cbPrioSort.Text = "Ưu tiên";
             // Hiển thị lại tất cả sự kiện
             UpdateEventDataSource();
+            ResetDGVCategories();
         }
 
         private void tsItem_RemoveAllEvt_Click(object sender, EventArgs e)
@@ -1170,6 +1261,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             {
                 allEvents.RemoveAt(i);
             }
+            statusStrip_Update();
+            DisplayCalendar(currentMonth);
         }
 
         private void tsmnItem_AccDetail_Click(object sender, EventArgs e)
@@ -1177,6 +1270,39 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             UserDetailForm newf = new UserDetailForm(currentUser);
             SubcribeToUserDetailForm(newf);
             newf.ShowDialog();
+        }
+
+        private void toolstripCateViewer_Click(object sender, EventArgs e)
+        {
+            CategoryConfigForm configForm = new CategoryConfigForm(currentUser);
+            SubcribeToCateForm(configForm);
+            configForm.ShowDialog();
+        }
+
+        private void SubcribeToCateForm (CategoryConfigForm configForm)
+        {
+            configForm.OnCategoryListChanging += ChangeCateClBox;
+        }
+
+        private void ChangeCateClBox (bool e)
+        {
+            if (e)
+            {
+                chlistbox_Categories.Items.Clear();
+                cbCategoryFilter.Items.Clear();
+                cbCategoryFilter.Text = "Hạng mục";
+                foreach (Category c in CategoryManager.AvailableCategories)
+                {
+                    chlistbox_Categories.Items.Add(c.Name);
+                    cbCategoryFilter.Items.Add(c.Name);
+                }
+            }    
+        }
+
+        private void tsmiCountEvtInCate_Click(object sender, EventArgs e)
+        {
+            CategoryEvtCountForm categoryEvtCountForm = new CategoryEvtCountForm(currentUser_Sched);
+            categoryEvtCountForm.ShowDialog();
         }
     }
 }

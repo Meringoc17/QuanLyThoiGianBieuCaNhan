@@ -17,7 +17,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         //public List<EventBase> Events { get; set; }  // Danh sách các sự kiện thuộc Category này
 
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string Description { get; set; } = "";
 
         public Category()
         {

@@ -1,95 +1,78 @@
 ﻿using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Interfaces;
+using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Windows.Forms;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Strategies
 {
     [Serializable]
-    public class WeeklyByDaysStrategy : IRecurrenceStrategy, ISerializable
+    public class WeeklyByDaysStrategy : IRecurrenceStrategy
     {
         private int _intervalWeeks;
         private List<DayOfWeek> _days;
 
-        public WeeklyByDaysStrategy(int intervalWeeks, List<DayOfWeek> days)
-        {
-            if (intervalWeeks <= 0)
-            {
-                _intervalWeeks = 1;
-            }
-            else
-            {
-                _intervalWeeks = intervalWeeks;
-            }
+        public WeeklyByDaysStrategy() { }
 
-            if (days == null)
-            {
-                _days = new List<DayOfWeek>();
-            }
-            else
-            {
-                _days = days;
-            }
-        }
-
-        // ctor dùng khi deserialize
-        protected WeeklyByDaysStrategy(SerializationInfo info, StreamingContext context)
+        public List<RecurringEvent> Generate(RecurringEvent e)
         {
-            _intervalWeeks = info.GetInt32("IntervalWeeks");
-            _days = (List<DayOfWeek>)info.GetValue("Days", typeof(List<DayOfWeek>));
-        }
+            List<RecurringEvent> result = new List<RecurringEvent>();
+            if (e == null) return result;
 
-        public List<DateTime> Generate(DateTime start, DateTime? endDate, int? occurrences)
-        {
-            List<DateTime> result = new List<DateTime>();
+            DateTime current = e.Start;
             int count = 0;
 
-            List<DayOfWeek> sortedDays = new List<DayOfWeek>();
-            int i;
-            for (i = 0; i < _days.Count; i++)
+            // Xác định số lần tối đa
+            int occurrences = (e.Occurrences.HasValue && e.Occurrences.Value > 0)
+                ? e.Occurrences.Value
+                : int.MaxValue;
+
+            // Xác định ngày dừng
+            DateTime stopDate = (e.EndDate != DateTime.MinValue)
+                ? e.EndDate.Value
+                : e.Start.AddDays((e.RepeatIntervalDays > 0 ? e.RepeatIntervalDays : 1) * 7 * 4); // mặc định 4 tuần
+
+            // Days rỗng → mặc định ngày bắt đầu
+            if (e.Days == null || e.Days.Count == 0)
+                e.Days = new List<DayOfWeek> { current.DayOfWeek };
+
+            // Sắp xếp thứ tự ngày trong tuần (Sun = 7)
+            for (int i = 0; i < e.Days.Count - 1; i++)
             {
-                sortedDays.Add(_days[i]);
-            }
-            sortedDays.Sort();
-
-            DateTime weekStart = start.Date;
-
-            // nếu không có endDate và không có occurrences thì dừng sau 52 tuần để tránh loop vô hạn
-            int safeWeek = 0;
-            int safeWeekLimit = 52;
-
-            while (true)
-            {
-                for (i = 0; i < sortedDays.Count; i++)
+                for (int j = i + 1; j < e.Days.Count; j++)
                 {
-                    DayOfWeek d = sortedDays[i];
-                    DateTime candidate = GetDateOfWeekday(weekStart, d, start);
-
-                    if (candidate < start)
+                    int di = (int)e.Days[i] == 0 ? 7 : (int)e.Days[i];
+                    int dj = (int)e.Days[j] == 0 ? 7 : (int)e.Days[j];
+                    if (di > dj)
                     {
-                        continue;
+                        DayOfWeek tmp = e.Days[i];
+                        e.Days[i] = e.Days[j];
+                        e.Days[j] = tmp;
                     }
+                }
+            }
 
-                    result.Add(candidate);
+            while (current <= stopDate && count < occurrences)
+            {
+                foreach (DayOfWeek day in e.Days)
+                {
+                    int diff = ((int)day - (int)current.DayOfWeek + 7) % 7;
+                    DateTime next = current.AddDays(diff);
+
+                    if (next < e.Start) continue;
+                    if (next > stopDate) continue; // dùng continue chứ không break
+
+                    DateTime nextEnd = next.Add(e.End - e.Start);
+                    result.Add(e.CloneWithNewDate(next, nextEnd));
                     count++;
 
-                    if (occurrences.HasValue && count >= occurrences.Value)
-                    {
+                    if (count >= occurrences)
                         return result;
-                    }
-
-                    if (endDate.HasValue && candidate > endDate.Value)
-                    {
-                        return result;
-                    }
                 }
 
-                weekStart = weekStart.AddDays(7 * _intervalWeeks);
-                safeWeek++;
-                if (!endDate.HasValue && !occurrences.HasValue && safeWeek >= safeWeekLimit)
-                {
-                    break;
-                }
+                int interval = e.RepeatIntervalDays > 0 ? e.RepeatIntervalDays : 1;
+                current = current.AddDays(7 * interval);
             }
 
             return result;
@@ -123,11 +106,5 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Strategies
             return text;
         }
 
-        // serialize
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("IntervalWeeks", _intervalWeeks);
-            info.AddValue("Days", _days);
-        }
     }
 }

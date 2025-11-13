@@ -34,13 +34,11 @@
             this.toolStripButtonSua = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonXoa = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnEvtDetail = new System.Windows.Forms.ToolStripButton();
-            this.trợGiúpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.câuHỏiThườngGặpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hướngDẫnSửDụngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.côngCụToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsItem_RemoveAllEvt = new System.Windows.Forms.ToolStripMenuItem();
-            this.thêmLoạiSựKiệnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolstripCateViewer = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCountEvtInCate = new System.Windows.Forms.ToolStripMenuItem();
             this.tàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmnItem_AccDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.tm_Reminder = new System.Windows.Forms.Timer(this.components);
@@ -90,7 +88,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelRight = new System.Windows.Forms.Panel();
             this.panelunder = new System.Windows.Forms.Panel();
-            this.chlistbox_Categories = new System.Windows.Forms.CheckedListBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.lblAddEvt = new System.Windows.Forms.Label();
@@ -103,8 +100,8 @@
             this.lblAdditional = new System.Windows.Forms.Label();
             this.cB_ReminderOn = new System.Windows.Forms.CheckBox();
             this.pn_MainAdd = new System.Windows.Forms.Panel();
+            this.chlistbox_Categories = new System.Windows.Forms.CheckedListBox();
             this.lblAddEvtPnl = new System.Windows.Forms.Label();
-            this.cbCategory = new System.Windows.Forms.ComboBox();
             this.lblTieuDe = new System.Windows.Forms.Label();
             this.txtTitle = new System.Windows.Forms.TextBox();
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
@@ -146,7 +143,7 @@
             this.toolStripButtonSua,
             this.toolStripButtonXoa,
             this.toolStripBtnEvtDetail});
-            this.toolStrip.Location = new System.Drawing.Point(0, 33);
+            this.toolStrip.Location = new System.Drawing.Point(0, 36);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip.Size = new System.Drawing.Size(1262, 54);
@@ -183,28 +180,6 @@
             this.toolStripBtnEvtDetail.Text = "Xem chi tiết sự kiện";
             this.toolStripBtnEvtDetail.Click += new System.EventHandler(this.toolStripBtnEvtDetail_Click);
             // 
-            // trợGiúpToolStripMenuItem1
-            // 
-            this.trợGiúpToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.câuHỏiThườngGặpToolStripMenuItem,
-            this.hướngDẫnSửDụngToolStripMenuItem});
-            this.trợGiúpToolStripMenuItem1.Name = "trợGiúpToolStripMenuItem1";
-            this.trợGiúpToolStripMenuItem1.Size = new System.Drawing.Size(94, 29);
-            this.trợGiúpToolStripMenuItem1.Text = "Trợ Giúp";
-            // 
-            // câuHỏiThườngGặpToolStripMenuItem
-            // 
-            this.câuHỏiThườngGặpToolStripMenuItem.Image = global::QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Properties.Resources.fish;
-            this.câuHỏiThườngGặpToolStripMenuItem.Name = "câuHỏiThườngGặpToolStripMenuItem";
-            this.câuHỏiThườngGặpToolStripMenuItem.Size = new System.Drawing.Size(284, 42);
-            this.câuHỏiThườngGặpToolStripMenuItem.Text = "Câu hỏi thường gặp";
-            // 
-            // hướngDẫnSửDụngToolStripMenuItem
-            // 
-            this.hướngDẫnSửDụngToolStripMenuItem.Name = "hướngDẫnSửDụngToolStripMenuItem";
-            this.hướngDẫnSửDụngToolStripMenuItem.Size = new System.Drawing.Size(284, 42);
-            this.hướngDẫnSửDụngToolStripMenuItem.Text = "Hướng dẫn sử dụng";
-            // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
@@ -212,12 +187,11 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.côngCụToolStripMenuItem,
-            this.tàiKhoảnToolStripMenuItem,
-            this.trợGiúpToolStripMenuItem1});
+            this.tàiKhoảnToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1262, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(1262, 36);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip";
             // 
@@ -225,7 +199,8 @@
             // 
             this.côngCụToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsItem_RemoveAllEvt,
-            this.thêmLoạiSựKiệnToolStripMenuItem});
+            this.toolstripCateViewer,
+            this.tsmiCountEvtInCate});
             this.côngCụToolStripMenuItem.Name = "côngCụToolStripMenuItem";
             this.côngCụToolStripMenuItem.Size = new System.Drawing.Size(165, 29);
             this.côngCụToolStripMenuItem.Text = "Công cụ bổ sung";
@@ -233,15 +208,23 @@
             // tsItem_RemoveAllEvt
             // 
             this.tsItem_RemoveAllEvt.Name = "tsItem_RemoveAllEvt";
-            this.tsItem_RemoveAllEvt.Size = new System.Drawing.Size(274, 34);
+            this.tsItem_RemoveAllEvt.Size = new System.Drawing.Size(329, 34);
             this.tsItem_RemoveAllEvt.Text = "Xóa toàn bộ sự kiện";
             this.tsItem_RemoveAllEvt.Click += new System.EventHandler(this.tsItem_RemoveAllEvt_Click);
             // 
-            // thêmLoạiSựKiệnToolStripMenuItem
+            // toolstripCateViewer
             // 
-            this.thêmLoạiSựKiệnToolStripMenuItem.Name = "thêmLoạiSựKiệnToolStripMenuItem";
-            this.thêmLoạiSựKiệnToolStripMenuItem.Size = new System.Drawing.Size(274, 34);
-            this.thêmLoạiSựKiệnToolStripMenuItem.Text = "Thêm Loại sự kiện";
+            this.toolstripCateViewer.Name = "toolstripCateViewer";
+            this.toolstripCateViewer.Size = new System.Drawing.Size(329, 34);
+            this.toolstripCateViewer.Text = "Thêm Loại sự kiện";
+            this.toolstripCateViewer.Click += new System.EventHandler(this.toolstripCateViewer_Click);
+            // 
+            // tsmiCountEvtInCate
+            // 
+            this.tsmiCountEvtInCate.Name = "tsmiCountEvtInCate";
+            this.tsmiCountEvtInCate.Size = new System.Drawing.Size(329, 34);
+            this.tsmiCountEvtInCate.Text = "Số Sự kiện cùng Hạng mục";
+            this.tsmiCountEvtInCate.Click += new System.EventHandler(this.tsmiCountEvtInCate_Click);
             // 
             // tàiKhoảnToolStripMenuItem
             // 
@@ -339,7 +322,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Variable Display", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(66, 12);
+            this.label1.Location = new System.Drawing.Point(9, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 24);
             this.label1.TabIndex = 2;
@@ -350,7 +333,7 @@
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(-1, -2);
+            this.pictureBox1.Location = new System.Drawing.Point(249, -2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(58, 52);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -361,13 +344,7 @@
             // 
             this.cbCategoryFilter.Font = new System.Drawing.Font("Segoe UI Variable Display", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCategoryFilter.FormattingEnabled = true;
-            this.cbCategoryFilter.Items.AddRange(new object[] {
-            "Công Việc",
-            "Cá Nhân ",
-            "Lịch Họp",
-            "Giải Trí",
-            "Tiệc (Sinh nhật, Thôi nôi, Đám Cưới,..)"});
-            this.cbCategoryFilter.Location = new System.Drawing.Point(154, 10);
+            this.cbCategoryFilter.Location = new System.Drawing.Point(97, 10);
             this.cbCategoryFilter.Name = "cbCategoryFilter";
             this.cbCategoryFilter.Size = new System.Drawing.Size(134, 29);
             this.cbCategoryFilter.TabIndex = 7;
@@ -799,7 +776,6 @@
             // panelunder
             // 
             this.panelunder.BackColor = System.Drawing.Color.AliceBlue;
-            this.panelunder.Controls.Add(this.chlistbox_Categories);
             this.panelunder.Controls.Add(this.btnCancel);
             this.panelunder.Controls.Add(this.btnSave);
             this.panelunder.Controls.Add(this.lblAddEvt);
@@ -810,16 +786,6 @@
             this.panelunder.Name = "panelunder";
             this.panelunder.Size = new System.Drawing.Size(1226, 358);
             this.panelunder.TabIndex = 0;
-            // 
-            // chlistbox_Categories
-            // 
-            this.chlistbox_Categories.FormattingEnabled = true;
-            this.chlistbox_Categories.Items.AddRange(new object[] {
-            "Công Việc"});
-            this.chlistbox_Categories.Location = new System.Drawing.Point(875, 284);
-            this.chlistbox_Categories.Name = "chlistbox_Categories";
-            this.chlistbox_Categories.Size = new System.Drawing.Size(180, 27);
-            this.chlistbox_Categories.TabIndex = 11;
             // 
             // btnCancel
             // 
@@ -962,8 +928,8 @@
             // 
             this.pn_MainAdd.BackColor = System.Drawing.Color.White;
             this.pn_MainAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pn_MainAdd.Controls.Add(this.chlistbox_Categories);
             this.pn_MainAdd.Controls.Add(this.lblAddEvtPnl);
-            this.pn_MainAdd.Controls.Add(this.cbCategory);
             this.pn_MainAdd.Controls.Add(this.lblTieuDe);
             this.pn_MainAdd.Controls.Add(this.txtTitle);
             this.pn_MainAdd.Controls.Add(this.dtpStart);
@@ -978,6 +944,15 @@
             this.pn_MainAdd.Size = new System.Drawing.Size(715, 211);
             this.pn_MainAdd.TabIndex = 18;
             // 
+            // chlistbox_Categories
+            // 
+            this.chlistbox_Categories.CheckOnClick = true;
+            this.chlistbox_Categories.FormattingEnabled = true;
+            this.chlistbox_Categories.Location = new System.Drawing.Point(506, 137);
+            this.chlistbox_Categories.Name = "chlistbox_Categories";
+            this.chlistbox_Categories.Size = new System.Drawing.Size(181, 27);
+            this.chlistbox_Categories.TabIndex = 11;
+            // 
             // lblAddEvtPnl
             // 
             this.lblAddEvtPnl.AutoSize = true;
@@ -988,21 +963,6 @@
             this.lblAddEvtPnl.Size = new System.Drawing.Size(144, 21);
             this.lblAddEvtPnl.TabIndex = 0;
             this.lblAddEvtPnl.Text = "Thêm sự kiện chính";
-            // 
-            // cbCategory
-            // 
-            this.cbCategory.FormattingEnabled = true;
-            this.cbCategory.Items.AddRange(new object[] {
-            "Công Việc",
-            "Cá Nhân ",
-            "Lịch Họp",
-            "Giải Trí",
-            "Tiệc (Sinh nhật, Thôi nôi, Đám Cưới,..)"});
-            this.cbCategory.Location = new System.Drawing.Point(506, 137);
-            this.cbCategory.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbCategory.Name = "cbCategory";
-            this.cbCategory.Size = new System.Drawing.Size(181, 28);
-            this.cbCategory.TabIndex = 8;
             // 
             // lblTieuDe
             // 
@@ -1190,13 +1150,9 @@
         private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.ToolStripButton toolStripButtonSua;
         private System.Windows.Forms.ToolStripButton toolStripButtonXoa;
-        private System.Windows.Forms.ToolStripMenuItem trợGiúpToolStripMenuItem1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.Timer tm_Reminder;
         private System.Windows.Forms.ToolStripMenuItem côngCụToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tsItem_RemoveAllEvt;
-        private System.Windows.Forms.ToolStripMenuItem câuHỏiThườngGặpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem hướngDẫnSửDụngToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.Label lbl_SignInName;
         private System.Windows.Forms.Panel panel1;
@@ -1234,7 +1190,7 @@
         private System.Windows.Forms.Label lblOccuringIdcColor;
         private System.Windows.Forms.Panel pnBlue;
         private System.Windows.Forms.ToolStripButton toolStripBtnEvtDetail;
-        private System.Windows.Forms.ToolStripMenuItem thêmLoạiSựKiệnToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolstripCateViewer;
         private System.Windows.Forms.Panel pnSortMain;
         private System.Windows.Forms.Label lblFilter;
         private System.Windows.Forms.ComboBox cbPrioSort;
@@ -1261,7 +1217,6 @@
         private System.Windows.Forms.CheckBox cB_ReminderOn;
         private System.Windows.Forms.Panel pn_MainAdd;
         private System.Windows.Forms.Label lblAddEvtPnl;
-        private System.Windows.Forms.ComboBox cbCategory;
         private System.Windows.Forms.Label lblTieuDe;
         private System.Windows.Forms.TextBox txtTitle;
         private System.Windows.Forms.DateTimePicker dtpStart;
@@ -1274,5 +1229,7 @@
         private System.Windows.Forms.ToolStripMenuItem tàiKhoảnToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsmnItem_AccDetail;
         private System.Windows.Forms.CheckedListBox chlistbox_Categories;
+        private System.Windows.Forms.ToolStripMenuItem tsItem_RemoveAllEvt;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCountEvtInCate;
     }
 }

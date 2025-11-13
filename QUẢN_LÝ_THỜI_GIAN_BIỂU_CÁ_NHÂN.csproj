@@ -76,12 +76,20 @@
     <Compile Include="Services\ScheduleService.cs" />
     <Compile Include="Services\UserManager.cs" />
     <Compile Include="Strategies\DailyRecurrenceStrategy.cs" />
+    <Compile Include="Strategies\MonthlyRecurrenceStrategy.cs" />
     <Compile Include="Strategies\WeeklyByDaysStrategy.cs" />
+    <Compile Include="Strategies\YearlyRecurrenceStrategy.cs" />
     <Compile Include="UI\CategoryConfigForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\CategoryConfigForm.Designer.cs">
       <DependentUpon>CategoryConfigForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\CategoryEvtCountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\CategoryEvtCountForm.Designer.cs">
+      <DependentUpon>CategoryEvtCountForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\EventDetailForm.cs">
       <SubType>Form</SubType>
@@ -130,6 +138,9 @@
     </Compile>
     <EmbeddedResource Include="UI\CategoryConfigForm.resx">
       <DependentUpon>CategoryConfigForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\CategoryEvtCountForm.resx">
+      <DependentUpon>CategoryEvtCountForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\EventDetailForm.resx">
       <DependentUpon>EventDetailForm.cs</DependentUpon>

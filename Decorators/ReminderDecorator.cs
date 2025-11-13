@@ -14,7 +14,5 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Decorators
         {
             _inner = inner;
         }
-
-
     }
 }

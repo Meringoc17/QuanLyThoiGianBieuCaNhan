@@ -49,6 +49,11 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             phone = p;
         }
 
+        public void SetUsername (string username)
+        {
+            this.username = username; 
+        }
+
         protected User(SerializationInfo info, StreamingContext context)
         {
             id = info.GetString("Id");

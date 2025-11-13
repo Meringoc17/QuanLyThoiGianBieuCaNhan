@@ -1,4 +1,5 @@
 ﻿using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Interfaces;
+using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Strategies;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -24,9 +25,31 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             this.Days = new List<DayOfWeek>();
         }
 
+        public void RecurrGenerate()
+        {
+            RecurrenceStrategy.Generate(this);
+        }
+
+        public IRecurrenceStrategy GetStrategy()
+        {
+            switch (RepeatUnit.ToLowerInvariant())
+            {
+                case "ngày": return new DailyRecurrenceStrategy();
+                case "tuần": return new WeeklyByDaysStrategy();
+                case "tháng": return new MonthlyRecurrenceStrategy();
+                case "năm": return new YearlyRecurrenceStrategy();
+                default: throw new NotSupportedException($"Không hỗ trợ loại lặp: {RepeatUnit}");
+            }
+        }
+
+        public RecurringEvent CloneWithNewDate(DateTime newStart, DateTime newEnd)
+        {
+            return new RecurringEvent(this, newStart, newEnd);
+        }
+
         public RecurringEvent(int interval, string unit, List<DayOfWeek> days,
-            DateTime endInForm, int occ, bool notified, string tt, DateTime start, DateTime end,
-            string type, string prio, bool status)
+            DateTime endInForm, int occ, bool notified, string tt, DateTime start,
+            DateTime end, string prio, List<Category> cates, bool status)
         {
             this.RepeatIntervalDays = interval;
             this.RepeatUnit = unit;
@@ -37,9 +60,10 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             this.Title = tt;
             this.Start = start;
             this.End = end;
-            this.Type = type;
+            //this.Type = type;
             this.Priority = prio;
             this.Status = status;
+            this.Categories = cates;
         }
 
         public RecurringEvent(EventBase e)
@@ -48,7 +72,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             this.Title = e.Title;
             this.Start = e.Start;
             this.End = e.End;
-            this.Type = e.Type;
+            //this.Type = e.Type;
             this.Priority = e.Priority;
             this.Status = e.Status;
             this.Days = new List<DayOfWeek>();
@@ -60,7 +84,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             this.Title = e.Title;
             this.Start = e.Start;
             this.End = e.End;
-            this.Type = e.Type;
+            //this.Type = e.Type;
             this.Priority = e.Priority;
 
             this.RepeatIntervalDays = e.RepeatIntervalDays;
@@ -70,28 +94,29 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             this.Occurrences = e.Occurrences;
 
             this.RecurrenceStrategy = e.RecurrenceStrategy;
+
+            // --- COPY CATEGORIES HERE ---
+            this.Categories = e.Categories != null ? new List<Category>(e.Categories) : new List<Category>();
         }
 
-        public RecurringEvent(string tt, DateTime start, DateTime end, string type, List<Category> catergories, string prio)
+        public RecurringEvent(string tt, DateTime start, DateTime end,
+            List<Category> categories, string prio)
         {
             this.Title = tt;
             this.Start = start;
             this.End = end;
-            this.Type = type;
+            //this.Type = type;
             this.Priority = prio;
-
-            this.Categories = catergories;
-
+            this.Categories = categories ?? new List<Category>();
             this.Days = new List<DayOfWeek>();
-
         }
 
         // sinh lần lặp tiếp theo
         public RecurringEvent(RecurringEvent template, DateTime newStart, DateTime newEnd)
-            : base()
+    : base()
         {
             this.Title = template.Title;
-            this.Type = template.Type;
+            //this.Type = template.Type;
             this.Priority = template.Priority;
             this.Status = false;
 
@@ -111,6 +136,9 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             }
 
             this.RecurrenceStrategy = template.RecurrenceStrategy;
+
+            // --- COPY CATEGORIES HERE ---
+            this.Categories = template.Categories != null ? new List<Category>(template.Categories) : new List<Category>();
         }
 
         // DESERIALIZE
@@ -263,15 +291,16 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
     public class RecurringEvtFactory
     {
         public static RecurringEvent Create(int interval, string unit, List<DayOfWeek> days,
-            DateTime endInForm, int occ, bool notified, string tt, DateTime start, DateTime end,
-            string type, string prio, bool status)
+            DateTime endInForm, int occ, bool notified,
+            string tt, DateTime start, DateTime end, string prio, List<Category> categories , bool status)
         {
-            return new RecurringEvent(interval, unit, days, endInForm, occ, notified, tt, start, end, type, prio, status);
+            return new RecurringEvent(interval, unit, days, endInForm, occ, notified,
+                tt, start, end, prio, categories, status);
         }
         public static RecurringEvent Create(string tt, DateTime start, DateTime end,
-            string type, List<Category> categories, string prio)
+            List<Category> categories, string prio)
         {
-            return new RecurringEvent(tt, start, end, type, categories, prio);
+            return new RecurringEvent(tt, start, end, categories, prio);
         }
     }
 }

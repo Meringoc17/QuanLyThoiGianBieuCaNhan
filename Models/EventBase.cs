@@ -10,7 +10,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         private string title;
         private DateTime start;
         private DateTime end;
-        private string type;
+        //private string type;
         private bool status = false;
         private bool daNhac;
         private List<Category> categories;
@@ -20,19 +20,18 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         public string Title { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
-        public string Type { get; set; }
+        //public string Type { get; set; }
         public string Priority { get; set; }
         public bool Status { get; set; }
         public bool DaNhacNho { get; set; }
         public List<Category> Categories { get; set; } = new List<Category>();
-
         public Reminder Reminder { get; set; }
         public bool EnableReminder { get; set; }
 
 
         public EventBase()
         {
-            //Categories = new List<string>();
+            Categories = new List<Category>();
         }
 
         // Constructor dùng khi Deserialize
@@ -41,7 +40,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             Title = info.GetString("Title");
             Start = info.GetDateTime("Start");
             End = info.GetDateTime("End");
-            Type = info.GetString("Type");
+            //Type = info.GetString("Type");
             Priority = info.GetString("Priority");
 
 
@@ -64,7 +63,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             info.AddValue("Title", Title);
             info.AddValue("Start", Start);
             info.AddValue("End", End);
-            info.AddValue("Type", Type);
+            //info.AddValue("Type", Type);
             info.AddValue("Priority", Priority);
             info.AddValue("Status", Status);
             info.AddValue("DaNhacNho", DaNhacNho);

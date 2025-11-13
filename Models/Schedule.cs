@@ -102,7 +102,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
                     if (ev.ContainsCategory(category))
                         count++;
                 }
-                list.Add($"Hạng mục {category} có {count} sự kiện");
+                list.Add($"Hạng mục {category.Name} có {count} sự kiện");
             }
             return list;
         }

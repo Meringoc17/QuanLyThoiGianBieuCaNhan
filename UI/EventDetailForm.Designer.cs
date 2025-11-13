@@ -59,6 +59,7 @@
             this.ClientSize = new System.Drawing.Size(455, 365);
             this.Controls.Add(this.lblDetail);
             this.Controls.Add(this.lBEvtDetail);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "EventDetailForm";
             this.ShowIcon = false;

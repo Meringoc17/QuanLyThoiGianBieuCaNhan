@@ -55,21 +55,35 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             AddToAvailList(CategoryFactory.Create(n, des));
         }
 
+        public static void RemoveCategory(string c)
+        {
+            Category x = FindMatchToString(c);
+            if (x != null)
+            {
+                AvailableCategories.Remove(x);
+            }
+        }
+
         public static Category FindMatchToString(string c)
         {
-            try
+            foreach (Category category in AvailableCategories)
             {
-                foreach (Category category in AvailableCategories)
-                {
-                    if (c == category.Name) return category;
-                }
+                if (c.Trim().Equals(category.Name.Trim(), StringComparison.OrdinalIgnoreCase))
+                    return category;
             }
-            catch (Exception ex)
+
+            return null; // Không cần throw ở đây, chỉ return null thôi
+        }
+
+        public static string GetCategoryString(List<Category> cats)
+        {
+            string result = "";
+            foreach (Category c in cats)
             {
-                MessageBox.Show("Hạng mục này chưa tồn tại!", "Không có hạng mục", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw new CategoryException("Không tìm được hạng mục");
+                if (result.Length > 0) result += ", ";
+                result += c.Name;
             }
-            return null;
+            return result;
         }
 
         public static string GetCtgrFilePath(User u)
