@@ -12,12 +12,12 @@ using System.Xml.Serialization;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
 {
-    internal class ScheduleService
+    internal class ScheduleService // Lớp trữ Schedule người dùng
     {
         public static List<Schedule> Schedules { get; set; } = new List<Schedule>();
         public static User currentUser = new User();
 
-        
+        // Load Schedule tương ứng với ng dùng
         public static Schedule ScheduleLoad(User user)
         {
             currentUser = user;
@@ -38,6 +38,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             return newSched;
         }
 
+        // Xóa toàn bộ thông tin trong lịch
         public static void UserScheduleWipeOut(User user)
         {
             Schedule s = ScheduleLoad(user);
@@ -45,6 +46,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             Schedules.Remove(s);
         }
 
+        // lấy địa chỉ file
         public static string GetSchedFilePath(User u)
         {
             string scheduleFilePath = Path.Combine(
@@ -54,6 +56,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             return scheduleFilePath;
         }
 
+        // lưu vào file
         public static void Save(User u, Schedule sched)
         {
             try
@@ -71,6 +74,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             }
         }
 
+        // tải từ file lên
         public static BindingList<EventBase> Load(User u)
         {
             string scheduleFilePath = GetSchedFilePath(u);

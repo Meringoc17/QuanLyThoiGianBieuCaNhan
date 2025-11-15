@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
 {
-    public partial class EventDetailForm : Form
+    public partial class EventDetailForm : Form // hiển thị chi tiết evt  
     {
         public EventDetailForm(EventBase e)
         {

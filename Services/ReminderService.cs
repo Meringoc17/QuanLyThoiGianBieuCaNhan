@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
 {
-    internal class ReminderService
+    internal class ReminderService  // phục vụ Reminder
     {
         public static Reminder CreateReminder (TimeSpan t)
         {
@@ -17,6 +17,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
                     "Chuẩn bị cho sự kiện lặp lại sắp diễn ra!");
         }
 
+        // chuyển đổi đơn vị thgian
         public static TimeSpan UnitConverter(int span, string unit)
         {
             unit = unit.Trim().ToLower();
@@ -44,7 +45,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             }
         }
 
-
+        // ktra đến lúc thông báo chưa?
         public static void CheckReminders(List<EventBase> events)
         {
             // Lấy thời gian hiện tại, bỏ phần giây và mili-giây
@@ -67,25 +68,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
                     }
                 }
             }
-        }
-
-
-        public static Reminder ReminderToggle(EventBase ev, bool enable, TimeSpan t)
-        {
-            if (enable)
-            {
-                ev.EnableReminder = true;
-                Reminder r = new Reminder(
-                    TimeSpan.FromMinutes(1), TimeSpan.Zero,
-                    "Chuẩn bị cho sự kiện lặp lại sắp diễn ra!"
-                );
-                return r;
-            }
-            else 
-            {
-                ev.EnableReminder = false;
-            } 
-            throw new NotImplementedException();
         }
 
     }

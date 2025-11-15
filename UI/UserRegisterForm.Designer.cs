@@ -217,7 +217,6 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Quản Lý Thời Gian Biểu Cá Nhân";
-            this.Load += new System.EventHandler(this.UserSignUp_Load);
             this.pnSignUp.ResumeLayout(false);
             this.pnSignUp.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

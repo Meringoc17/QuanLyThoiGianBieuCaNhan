@@ -12,6 +12,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Strategies
     internal class YearlyRecurrenceStrategy: IRecurrenceStrategy
     {
         public YearlyRecurrenceStrategy() { }
+
+        // Tính số năm để trả lại list sk tương ứng
         public List<RecurringEvent> Generate(RecurringEvent e)
         {
             List<RecurringEvent> result = new List<RecurringEvent>();

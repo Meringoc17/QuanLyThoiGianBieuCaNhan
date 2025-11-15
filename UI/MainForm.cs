@@ -17,7 +17,7 @@ using System.Windows.Forms;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 {
-    public partial class MainForm : Form
+    public partial class MainForm : Form // Hiển thị các chức năng chính
     {
 
         private DateTime currentMonth = DateTime.Today;
@@ -161,11 +161,9 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                     ev.Reminder.OnReminderTriggered += Reminder_OnTriggered;
             }
 
-            GenerateRecurringEventsOnLoad();
-
         }
 
-        private void SaveSchedule()
+        private void SaveSchedule() // Phthuc lưu
         {
             try
             {
@@ -185,7 +183,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
         //------------------------------code cho sự kiện lịch ---------------------------------
 
-        private void AllEvents_ListChangedSafe(object sender, ListChangedEventArgs e)
+        private void AllEvents_ListChangedSafe(object sender, ListChangedEventArgs e) // cập nhật vào list sk của ng dùng
         {
             if (e.ListChangedType == ListChangedType.ItemAdded)
             {
@@ -220,6 +218,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             SaveSchedule();
         }
 
+        // 
         private void dgvEvents_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             // Kiểm tra đúng cột Categories
@@ -244,6 +243,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
         /// Khởi tạo 42 ô label trong bảng lịch
         /// </summary>
         /// 
+
+        // Phthuc chỉnh định dạng DataGridView
         private void dgvEvents_AutoFormat()
         {
             dgvEvents.AutoGenerateColumns = true;
@@ -297,34 +298,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             dgvEvents.CellValueChanged += dgvEvents_CellValueChanged;
         }
 
-        private void GenerateRecurringEventsOnLoad()
-        {
-            List<RecurringEvent> newEvents = new List<RecurringEvent>();
-
-            foreach (EventBase ev in currentUser_Sched.Events)
-            {
-                if (ev is RecurringEvent r)
-                {
-                    while (r.End < DateTime.Now &&
-                          (r.EndDate == DateTime.MinValue || r.EndDate > DateTime.Now) &&
-                          (r.Occurrences == null || r.Occurrences > 0))
-                    {
-                        RecurringEvent newEvt = EventManager.RCEvt_AutoGenerate(currentUser_Sched, r);
-                        if (newEvt == null) break;
-                        newEvents.Add(newEvt);
-
-                        // Cập nhật r để tiếp tục sinh event tiếp theo
-                        r = newEvt;
-                    }
-                }
-            }
-
-            foreach (RecurringEvent ev in newEvents)
-                allEvents.Add(ev);
-
-            DisplayCalendar(currentMonth);
-        }
-
+        // Thêm vào các lbl số ngày trên lịch
         private void InitCalendarGrid()
         {
             tblCalendar.Controls.Clear();
@@ -521,7 +495,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             }
         }
 
-
+        // Đổi màu cột khi Status = true (Đã xong việc)
         private void dgvEvents_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -569,6 +543,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             }
         }
 
+        // Nút <Lưu> sk kèm với phthuc từ lớp Strategy để tạo các sk lặp lại
         private void btnSave_Click(object sender, EventArgs e)
         {
             // 🧩 Kiểm tra dữ liệu đầu vào
@@ -931,7 +906,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                     return;
                 }
 
-                if (string.IsNullOrEmpty(txtRepeatDetail.Text))
+                if (string.IsNullOrEmpty(txtRepeatDetail.Text)) 
                 {
                     // ✅ Nếu hợp lệ thì tạo recurring event và mở form cấu hình
                     this.recurringEvt = new RecurringEvent
@@ -1033,11 +1008,13 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             }
         }
 
+        // Đăng ký event ở RecurringEvtSettingForm
         private void SubscribeToRecurrEvtForm(RecurringEvtSettingForm r)
         {
             r.OnRecurrEvtDtSaved += RecurrEvtSavedHandler;
         }
 
+        // Phương thức nhận thông tin từ RecurringEvtSettingForm và thực hiện
         private void RecurrEvtSavedHandler(int intervalday, string unit,
             List<DayOfWeek> selectedDays, DateTime finalEnd, int occurence)
         {
@@ -1056,17 +1033,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             }
         }
 
-        private void RecurrEvtSavedHandler(RecurringEvent e)
-        {
-            this.recurringEvt = e; // copy toàn bộ object
-            MessageBox.Show($"Đã lưu cấu hình lặp lại: mỗi {e.RepeatIntervalDays} {e.RepeatUnit.ToLower()}");
-            if (recurringEvt.Days != null)
-            {
-                this.txtRepeatDetail.Text = $"{recurringEvt.ToString().Replace("\n", "\r\n")}";
-            }
-
-        }
-
+        // Phthuc đăng xuất
         private void lblSignOut_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
@@ -1093,6 +1060,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
         }
 
+
+        // Phthuc đc dùng để nhận thông tin khi UserDetailForm đóng
         private void CloseOnUserDeletion(bool e)
         {
             if (e)
@@ -1105,11 +1074,13 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             
         }
 
+        // Phthuc đăng ký UserDetailForm
         private void SubcribeToUserDetailForm(UserDetailForm u)
         {
             u.ToCloseMainForm += CloseOnUserDeletion;
         }
 
+        // Thay đổi thgian vào mỗi 1 giây
         private void timer_Time_Tick(object sender, EventArgs e)
         {
             // Gọi hàm kiểm tra nhắc nhở
@@ -1119,6 +1090,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 
         }
 
+        // Bật tắt thông báo
         private void cB_ReminderOn_CheckedChanged(object sender, EventArgs e)
         {
             if (cB_ReminderOn.Checked)
@@ -1133,6 +1105,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             }
         }
 
+        // Mở EventDetailForm để xem chi tiết thông tin sự kiện đc chọn trên datagridview
         private void toolStripBtnEvtDetail_Click(object sender, EventArgs e)
         {
             if (dgvEvents.SelectedRows.Count > 1)
@@ -1148,6 +1121,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             }
         }
 
+        // reset lại cột Hạng mục đúng định dạng
         private void ResetDGVCategories()
         {
             try
@@ -1176,6 +1150,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
         }
 
         // ---------------------- Phần lọc sự kiện-----------------------
+
+        // Mỗi khi thay đổi các combobox lọc/sắp xếp sk, cập nhật lại giao diện
         private void cbPrioSort_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateEventDataSource();
@@ -1185,15 +1161,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             UpdateEventDataSource();
         }
 
-        private void FilterAndSortEvents()
-        {
-            string selectedType = cbCategoryFilter.SelectedItem?.ToString();
-            string selectedPriority = cbPrioSort.SelectedItem?.ToString();
-            List<EventBase> filteredSortedEvents = EventSortService.FilterAndSort(currentUser_Sched.Events, selectedType, selectedPriority);
-            dgvEvents.DataSource = new BindingList<EventBase>(filteredSortedEvents);
-            ResetDGVCategories();
-        }
-
+        // Dùng phương thức để lọc và sắp xếp
         private void UpdateEventDataSource()
         {
             string selectedType = cbCategoryFilter.SelectedItem?.ToString();
@@ -1210,6 +1178,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             ResetDGVCategories();
         }
 
+        // Reset lại datagridview
         private void btnResetDGV_Click(object sender, EventArgs e)
         {
             // Đặt lại giá trị ComboBox về mặc định (ví dụ, không chọn gì)
@@ -1222,6 +1191,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             ResetDGVCategories();
         }
 
+        // Xóa hết sk
         private void tsItem_RemoveAllEvt_Click(object sender, EventArgs e)
         {
             for (int i = allEvents.Count - 1; i >= 0; i--)
@@ -1232,6 +1202,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             DisplayCalendar(currentMonth);
         }
 
+        // Mở Form chi tiết người dùng
         private void tsmnItem_AccDetail_Click(object sender, EventArgs e)
         {
             UserDetailForm newf = new UserDetailForm(currentUser);
@@ -1239,6 +1210,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             newf.ShowDialog();
         }
 
+        // Mở Form xem danh sách Hạng mục của người dùng
         private void toolstripCateViewer_Click(object sender, EventArgs e)
         {
             CategoryConfigForm configForm = new CategoryConfigForm(currentUser);
@@ -1246,11 +1218,14 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             configForm.ShowDialog();
         }
 
+        // Đăng ký vào Form Hạng mục (CategoryConfigForm) nhận thông tin về
         private void SubcribeToCateForm (CategoryConfigForm configForm)
         {
             configForm.OnCategoryListChanging += ChangeCateClBox;
         }
 
+        // Phthuc đc đăng kí vào biến event trg CategoryConfigForm, nhận tham số bool
+        // để xem có thay đổi trg list Hạng mục có sẵn
         private void ChangeCateClBox (bool e)
         {
             if (e)
@@ -1266,6 +1241,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
             }    
         }
 
+        // Mở Form đếm sk trong các hạng mục có sẵn ở Schedule ng dùng
         private void tsmiCountEvtInCate_Click(object sender, EventArgs e)
         {
             CategoryEvtCountForm categoryEvtCountForm = new CategoryEvtCountForm(currentUser_Sched);

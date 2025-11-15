@@ -7,7 +7,7 @@ using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
 {
-    internal class FileService : ISerializer
+    internal class FileService : ISerializer // cho việc đọc/ghi Schedule
     {
         /// <summary>
         /// Serialize đối tượng Schedule và ghi ra file nhị phân

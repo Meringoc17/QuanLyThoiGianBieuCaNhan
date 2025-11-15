@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
 {
-    public partial class CategoryEvtCountForm : Form
+    public partial class CategoryEvtCountForm : Form // Hiển thị số Evt trg từng hạng mục
     {
         public CategoryEvtCountForm(Schedule sc)
         {

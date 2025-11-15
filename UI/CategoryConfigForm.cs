@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
 {
-    public partial class CategoryConfigForm : Form
+    public partial class CategoryConfigForm : Form // Form đại diện cho điều chỉnh Category
     {
         User user;
         public delegate void OnCategoryListChangingHandler(bool callback);
         public event OnCategoryListChangingHandler OnCategoryListChanging;
         private bool isChanged = false;
 
-        public CategoryConfigForm(User user)
+        public CategoryConfigForm(User user) // Constructor khởi tạo form
         {
             InitializeComponent();
             this.user = user;
@@ -40,6 +40,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             }
         }
 
+        // nút <Thêm>: ktra Hạng mục thêm vào
         private void btn_Add_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtBoxName.Text) && !string.IsNullOrEmpty(txtboxDesc.Text))
@@ -64,6 +65,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             }   
         }
 
+        // nút <Xóa> hạng mục
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (lv_AvailCategr.SelectedItems.Count == 1)
@@ -74,6 +76,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             }
         }
 
+        // Khi đóng form sẽ gửi thông tin về cho MainForm refresh
         private void CategoryConfigForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             OnCategoryListChanging?.Invoke(isChanged);

@@ -55,18 +55,19 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             return ($"⏰ Nhắc nhở: {AtTime} trước khi bắt đầu sự kiện '{ev.Title}' vào {ev.Start:g}");
         }
 
-        //  Ghi đè ToString (phục vụ hiển thị trong Console hoặc báo cáo)
+        //  Ghi đè ToString (phục vụ hiển thị trong Form hoặc báo cáo)
         public override string ToString()
         {
             return $"[Reminder] Trước: {BeforeStart.TotalMinutes} phút";
         }
 
-
+        // Kích hoạt thông báo (đc dùng trên MainForm)
         public void Trigger(EventBase ev)
         {
             OnReminderTriggered?.Invoke(this, ev);
         }
 
+        // Lấy khoảng thgian trc khi bắt đầu
         public void SetTimeb4Start(TimeSpan t)
         {
             b4_start = t;

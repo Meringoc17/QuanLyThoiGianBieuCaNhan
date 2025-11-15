@@ -28,14 +28,13 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             txtbox_pwd.Text = user.Password;
         }
 
+        // Xử lý xóa toàn bộ sự kiện trg lịch, đến lịch và người dùng 
         private void lblDeleteAccount_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Bạn chắc chắn muốn xóa tài khoản?\nHành động này sẽ xóa cả file liên quan đến người dùng.", "Xác nhận xóa tài khoản",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (result == DialogResult.OK)
             {
-                
-                Schedule.RemoveAllEvt(ScheduleService.ScheduleLoad(user));
                 ScheduleService.Save(user, ScheduleService.ScheduleLoad(user));
                 FileService.DeleteScheduleFile(user);
                 UserManager.DeleteUser(user);
@@ -53,6 +52,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             }
         }
 
+        // Sửa thông tin ng dùng
         private void btnFixDetail_Click(object sender, EventArgs e)
         {
             if (txtboxUsrname.Text != user.Name && txtbox_PhoneNum.Text != user.Phone)
@@ -82,6 +82,16 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             }
 
             UserManager.SaveUsersToFile();
+        }
+
+        // Hủy sửa đổi tt ng dùng
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            if (txtboxUsrname.Text != user.Name || txtbox_PhoneNum.Text != user.Phone)
+            {
+                txtboxUsrname.Text = user.Name;
+                txtbox_PhoneNum.Text = user.Phone;
+            }
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
 {
     [Serializable]
-    public class User
+    public class User  // Lớp đối tượng người dùng
     {
         private string id;
         private string username;
@@ -19,6 +19,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         public string Name { get { return username; } private set { } }
         public string Password { get { return password; } private set { } }
         public string Phone { get { return phone; } private set { } }
+
+        // Constructor
         public User() { }
         public User(string n, string p)
         {
@@ -26,6 +28,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             password = p;
         }
 
+        // Constructor 
         public User(string name, string pass, string ph)
         {
             username = name;
@@ -34,6 +37,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             
         }
 
+        // ktra số đth
         public static bool IsPhoneNum (string p)
         {
             bool isValid = Regex.IsMatch(p, @"^\+?\d{9,15}$");
@@ -44,11 +48,13 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             return true;
         }
 
+        // đặt số đth
         public void ResetPhoneNum(string p)
         {
             phone = p;
         }
 
+        // đặt tên ng dùng
         public void SetUsername (string username)
         {
             this.username = username; 
@@ -69,12 +75,10 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             info.AddValue("Password", password); // hoặc có thể mã hóa ở đây
             info.AddValue("Phone", phone);
         }
-
     }
 
     internal class UserFactory
     {
-        public UserFactory() { }
         public static User Create (string username, string phonenum, string pass)
         {
             

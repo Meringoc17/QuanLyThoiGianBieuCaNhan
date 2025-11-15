@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
 {
-    public partial class FormEvents : Form
+    public partial class FormEvents : Form // Hiển thị Event trg 1 ngày
     {
         public FormEvents(List<EventBase> events, DateTime date)
         {

@@ -7,10 +7,11 @@ using System.Runtime.Serialization;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Strategies
 {
-    public class DailyRecurrenceStrategy : IRecurrenceStrategy
+    public class DailyRecurrenceStrategy : IRecurrenceStrategy // cho lựa chọn đvi theo ngày
     {
-        public DailyRecurrenceStrategy() {}
+        public DailyRecurrenceStrategy() {} // constructor để khởi tạo đối tượng gán vào thuộc tính của Event
 
+        // Tính số ngày để trả lại list sk
         public List<RecurringEvent> Generate(RecurringEvent e)
         {
             List<RecurringEvent> list = new List<RecurringEvent>();

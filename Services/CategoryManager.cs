@@ -14,7 +14,7 @@ using System.Windows.Forms;
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
 {
     [Serializable]
-    internal class CategoryManager: ISerializable
+    internal class CategoryManager: ISerializable // Lớp ds tĩnh chứa Hạng mục
     {
         public static List<Category> AvailableCategories = new List<Category>();
 
@@ -38,6 +38,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
 
         // =============================================================================================================
 
+        // thêm vào ds bằng đối tượng Hạng mục
         public static void AddToAvailList(Category category) 
         {
             if (!AvailableCategories.Contains(category))
@@ -50,12 +51,14 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             }    
         }
 
+        // thêm vào ds bằng các thuộc tính của hạng mục
         public static void AddNewCateToList(string n, string des)
         {
-            AddToAvailList(CategoryFactory.Create(n, des));
+            AddToAvailList(CategoryFactory.Create(n, des)); // dùng Factory
         }
 
-        public static void RemoveCategory(string c)
+
+        public static void RemoveCategory(string c) // xóa hạng mục
         {
             Category x = FindMatchToString(c);
             if (x != null)
@@ -64,7 +67,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             }
         }
 
-        public static Category FindMatchToString(string c)
+        public static Category FindMatchToString(string c) // tìm hạng mục khớp với string
         {
             foreach (Category category in AvailableCategories)
             {
@@ -75,6 +78,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             return null; // Không cần throw ở đây, chỉ return null thôi
         }
 
+        // lấy string hạng mục
         public static string GetCategoryString(List<Category> cats)
         {
             string result = "";
@@ -86,6 +90,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             return result;
         }
 
+        // trả về string địa chỉ file
         public static string GetCtgrFilePath(User u)
         {
             string ctgrFilePath = Path.Combine(
@@ -95,6 +100,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             return ctgrFilePath;
         }
 
+        // save lại list vào file
         public static void Save(User u)
         {
             try
@@ -112,6 +118,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             }
         }
 
+        // load list từ file
         public static List<Category> Load(User u)
         {
             string ctgrFilePath = GetCtgrFilePath(u);

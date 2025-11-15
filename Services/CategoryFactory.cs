@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
 {
-    internal class CategoryFactory
+    internal class CategoryFactory  // Tạo Category
     {
         public static Category Create (string name, string description)
         {

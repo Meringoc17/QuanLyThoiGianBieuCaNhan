@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
 {
-    internal class EventFactory
+    internal class EventFactory // Lớp factory tạo 2 loại sk
     {
         public static EventBase Create(string tt, DateTime start, DateTime end,
             List<Category> categories, string prio, bool repeat)

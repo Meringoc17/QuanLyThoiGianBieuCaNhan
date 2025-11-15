@@ -1,4 +1,5 @@
-﻿using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models;
+﻿using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Exceptions;
+using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models;
 using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ using System.Windows.Forms;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
 {
-    public partial class UserLogin : Form
+    public partial class UserLogin : Form // Form login
     {
         public UserLogin()
         {
@@ -38,6 +39,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             return new Region(path);
         }
 
+        // Ktra tt đăng nhập
         private void btn_Input_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(pwdTxtbox.Text) || string.IsNullOrEmpty(usnTxtBox.Text))
@@ -68,7 +70,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
                 // new MainForm(user).Show();
                 // this.Hide();
             }
-            catch (Exception ex)
+            catch (Exception ex) // Catch lỗi từ ng dùng
             {
                 lbl_LoginError.Text = "❌ " + ex.Message;
                 lbl_LoginError.ForeColor = Color.Red;
@@ -76,13 +78,14 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             }
         }
 
-
+        // Hiển thị Form đăng ký tt
         private void btnSignUp_Click(object sender, EventArgs e)
         {
             UserRegisterForm userRegisterForm = new UserRegisterForm();
             userRegisterForm.ShowDialog(); 
         }
 
+        
         private void pwdTxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

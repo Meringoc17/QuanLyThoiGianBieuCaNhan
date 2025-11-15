@@ -130,6 +130,7 @@
             this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Hủy";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // lblDeleteAccount
             // 

@@ -15,6 +15,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Strategies
 
         public WeeklyByDaysStrategy() { }
 
+        // Tính số tuần và ngày trg tuần để trả lại list sk tương ứng
         public List<RecurringEvent> Generate(RecurringEvent e)
         {
             List<RecurringEvent> result = new List<RecurringEvent>();

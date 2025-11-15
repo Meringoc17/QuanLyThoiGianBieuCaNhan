@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Strategies
 {
-    internal class MonthlyRecurrenceStrategy: IRecurrenceStrategy
+    internal class MonthlyRecurrenceStrategy: IRecurrenceStrategy // cho lựa chọn đvi theo tháng
     {
         public MonthlyRecurrenceStrategy() { }
 
+        // Tính số tháng để trả lại list sk
         public List<RecurringEvent> Generate(RecurringEvent e)
         {
             List<RecurringEvent> result = new List<RecurringEvent>();

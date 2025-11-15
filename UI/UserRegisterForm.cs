@@ -15,6 +15,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
 {
     public partial class UserRegisterForm : Form
     {
+        // Form đăng ký ng dùng
         public UserRegisterForm()
         {
             InitializeComponent();
@@ -42,8 +43,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             }
         }
 
-        private void UserSignUp_Load(object sender, EventArgs e) { }
-
+        // 
         private void btn_Done_Click(object sender, EventArgs e)
         {
             try
@@ -81,14 +81,22 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
                     return;
                 }
 
+                if (txtBoxPhoneNum.Text.Length != 10)
+                {
+                    ShowError("Vui lòng nhập số điện thoại đủ 10 số!");
+                    return;
+                }    
+
                 // Đăng ký người dùng
                 bool success = UserManager.Register(txtBoxName.Text.Trim(), txtBoxPhoneNum.Text.Trim(), txtBoxPass.Text.Trim());
 
                 if (!success)
                 {
-                    MessageBox.Show("Người dùng đã tồn tại! Vui lòng đăng nhập lại!",
+                    if (UserManager.IsUsernameExisted(txtBoxName.Text) || UserManager.IsPhoneNumExisted(txtBoxPhoneNum.Text))
+                    {
+                        MessageBox.Show("Tên đăng nhập/số điện thoại đã có người sử dụng!\nVui lòng sử dụng tên/SĐT khác",
                                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    this.Close();
+                    }
                 }
                 else
                 {
@@ -104,6 +112,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
             }
         }
 
+        // Thể hiện thbao lỗi lên lbl trên Form
         private void ShowError(string message)
         {
             lblError.ForeColor = Color.Red;

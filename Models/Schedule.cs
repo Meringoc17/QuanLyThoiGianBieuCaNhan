@@ -7,11 +7,12 @@ using System.Runtime.Serialization;
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
 {
     [Serializable]
-    public class Schedule : ISerializable
+    public class Schedule : ISerializable  // Lớp đối tượng chứa list Event  
     {
         public string Owner { get; set; }
         public List<EventBase> Events { get; set; }
 
+        // Constructor
         public Schedule()
         {
             Events = new List<EventBase>();
@@ -44,18 +45,13 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             }
         }
 
-
-        public void AddEventSched(EventBase e)
-        {
-            Events.Add(e);
-        }
-
+        // trả về string
         public override string ToString()
         {
             return $"📅 Lịch của: {Owner}, Tổng sự kiện: {Events.Count}";
         }
 
-
+        // xóa sk
         public void RemoveEvent(EventBase e)
         {
             try
@@ -69,6 +65,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             }
         }
 
+        // thêm sk
         public void AddEvent(EventBase e)
         {
             try
@@ -81,6 +78,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             }
         }
 
+        // gỡ hết sk khỏi lịch
         public static void RemoveAllEvt(Schedule s)
         {
             foreach (EventBase e in s.Events)
@@ -91,7 +89,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             }
         }
         
-
+        // đếm sk cùng hạng mục có trong lịch
         public List<string> CategoryUsageCount()
         {
             List<string> list = new List<string>();
