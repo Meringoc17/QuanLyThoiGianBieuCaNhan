@@ -85,6 +85,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         {
             foreach (EventBase e in s.Events)
             {
+                e.Categories.Clear();
+                e.Reminder = null;
                 s.RemoveEvent(e);
             }
         }

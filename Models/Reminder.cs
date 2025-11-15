@@ -23,9 +23,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
 
         public string Message { get { return mess; } private set {; } }
         // Constructor mặc định (bắt buộc có cho Deserialization)
-        public Reminder()
-        {
-        }
+        public Reminder() {}
 
         // Constructor khởi tạo nhanh
         public Reminder(TimeSpan beforeStart, TimeSpan atTime, string mess)
@@ -62,6 +60,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         {
             return $"[Reminder] Trước: {BeforeStart.TotalMinutes} phút";
         }
+
 
         public void Trigger(EventBase ev)
         {

@@ -57,7 +57,6 @@
     <Compile Include="Exceptions\RcEvtException.cs" />
     <Compile Include="Exceptions\RemoveEvtException.cs" />
     <Compile Include="Exceptions\UserException.cs" />
-    <Compile Include="Interfaces\IEventStrategy.cs" />
     <Compile Include="Interfaces\IRecurrenceStrategy.cs" />
     <Compile Include="Interfaces\ISerializer.cs" />
     <Compile Include="Models\Catergory.cs" />

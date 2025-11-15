@@ -34,9 +34,11 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.UI
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (result == DialogResult.OK)
             {
-                UserManager.DeleteUser(user);
+                
+                Schedule.RemoveAllEvt(ScheduleService.ScheduleLoad(user));
                 ScheduleService.Save(user, ScheduleService.ScheduleLoad(user));
                 FileService.DeleteScheduleFile(user);
+                UserManager.DeleteUser(user);
                 UserManager.SaveUsersToFile();
                 
                 MessageBox.Show("Xóa người dùng thành công! Trở về màn hình đăng nhập...");

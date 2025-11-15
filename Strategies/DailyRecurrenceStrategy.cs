@@ -9,15 +9,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Strategies
 {
     public class DailyRecurrenceStrategy : IRecurrenceStrategy
     {
-        private int _intervalDays;
-
         public DailyRecurrenceStrategy() {}
-
-        // ctor dùng khi deserialize
-        protected DailyRecurrenceStrategy(SerializationInfo info, StreamingContext context)
-        {
-            _intervalDays = info.GetInt32("IntervalDays");
-        }
 
         public List<RecurringEvent> Generate(RecurringEvent e)
         {
@@ -65,10 +57,5 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Strategies
             return "Lặp lại mỗi X ngày";
         }
 
-        // serialize
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("IntervalDays", _intervalDays);
-        }
     }
 }

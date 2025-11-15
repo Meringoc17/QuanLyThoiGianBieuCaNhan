@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models.User" Collapsed="true">
+    <Position X="3.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAACAAAAABAAAAUgAAgAAAAiAAAAIgAAAgA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models.UserFactory" Collapsed="true">
+    <Position X="5.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models.Category" Collapsed="true">
+    <Position X="3.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAIAAAAAQgAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Catergory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models.EventBase">
+    <Position X="0.75" Y="1" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>gAcAAIQGQCQAQEBkAAAAAgBwAAAAUAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\EventBase.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Reminder" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Categories" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models.OneTimeEvent" Collapsed="true">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\OneTimeEvent.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models.OneTimeEvtFactory" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\OneTimeEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models.RecurringEvent" Collapsed="true">
+    <Position X="3.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BACQAAAQAABAAAAEAAAAAAAgAAQAABAgRAAAAAAUAAA=</HashCode>
+      <FileName>Models\RecurringEvent.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models.RecurringEvtFactory" Collapsed="true">
+    <Position X="5.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\RecurringEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models.Schedule" Collapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAgBEAQAAAAAgAgAAAAABAAAAgAAAAAA=</HashCode>
+      <FileName>Models\Schedule.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models.Reminder" Collapsed="true">
+    <Position X="3.5" Y="5.5" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models.Reminder.ReminderTriggeredHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\Reminder.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAACAEAACAABAEgAAAICAgAAAAAABAAAAAIAgAAAA=</HashCode>
+      <FileName>Models\Reminder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Strategies.DailyRecurrenceStrategy" Collapsed="true">
+    <Position X="12" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAgABAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Strategies\DailyRecurrenceStrategy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Strategies.MonthlyRecurrenceStrategy" Collapsed="true">
+    <Position X="12" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Strategies\MonthlyRecurrenceStrategy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Strategies.WeeklyByDaysStrategy" Collapsed="true">
+    <Position X="12" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAABAAAgAAAAAAAAAAAAAAAAAAAAAIEAAAAA=</HashCode>
+      <FileName>Strategies\WeeklyByDaysStrategy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Strategies.YearlyRecurrenceStrategy" Collapsed="true">
+    <Position X="12" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Strategies\YearlyRecurrenceStrategy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services.UserList" Collapsed="true">
+    <Position X="7.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAACAAAAAAAAAAAAAAAAAgAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Services\UserManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services.UserManager" Collapsed="true">
+    <Position X="7.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAACAAAAQAmAAAAEAAAoAAAAAAABAAAgABAQAAEAAAA=</HashCode>
+      <FileName>Services\UserManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services.ScheduleService" Collapsed="true">
+    <Position X="9.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgIAAAAAAAACAAAgAAAAAAEAAAAAAAAIAAABAAAA=</HashCode>
+      <FileName>Services\ScheduleService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services.ReminderService" Collapsed="true">
+    <Position X="5.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAIAEAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Services\ReminderService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services.EventManager" Collapsed="true">
+    <Position X="1" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Services\EventManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services.EventSortService" Collapsed="true">
+    <Position X="3.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAEAAAAEAAAAAAAAQAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\EventSortService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services.EventFactory" Collapsed="true">
+    <Position X="5.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\EventFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services.FileService" Collapsed="true">
+    <Position X="12" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Services\FileServices.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services.CategoryFactory" Collapsed="true">
+    <Position X="8" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\CategoryFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services.CategoryManager" Collapsed="true">
+    <Position X="5.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAgIAAAAAEAAAAACAAAgAgAAAAEDAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\CategoryManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Interfaces.IRecurrenceStrategy" Collapsed="true">
+    <Position X="10" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Interfaces\IRecurrenceStrategy.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

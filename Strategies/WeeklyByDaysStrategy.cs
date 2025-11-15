@@ -78,19 +78,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Strategies
             return result;
         }
 
-        private DateTime GetDateOfWeekday(DateTime weekStart, DayOfWeek target, DateTime start)
-        {
-            int diff = (int)target - (int)weekStart.DayOfWeek;
-            if (diff < 0)
-            {
-                diff += 7;
-            }
-
-            DateTime day = weekStart.AddDays(diff);
-            day = day.Add(start.TimeOfDay);
-            return day;
-        }
-
         public string Describe()
         {
             string text = "Lặp lại mỗi " + _intervalWeeks + " tuần vào: ";

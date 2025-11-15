@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
 {
     [Serializable]
-    public abstract class EventBase : ISerializable
+    public abstract class EventBase : ISerializable  // Lớp abstract sk để cho 2 lớp sk 1 lần và sk lặp lại kế thừa
     {
         private string title;
         private DateTime start;
@@ -29,7 +29,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         public bool EnableReminder { get; set; }
 
 
-        public EventBase()
+        public EventBase() // Constructor mặc định
         {
             Categories = new List<Category>();
         }
@@ -96,6 +96,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             return s;
         }
 
+        // Thêm Hạng mục
         public void AddCategory(Category category)
         {
             // Kiểm tra xem Category đã có trong danh sách chưa
@@ -116,6 +117,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             }
         }
 
+        // Xóa hạng mục
         public void RemoveCategory(Category category)
         {
             // Tìm và xóa Category
@@ -129,6 +131,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             }
         }
 
+        // Ktra hạng mục này có trg sk chưa ?
         public bool ContainsCategory(Category category)
         {
             foreach (Category c in Categories)

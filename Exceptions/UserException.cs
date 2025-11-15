@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Exceptions
 {
-    internal class UserException: Exception
+    internal class UserException: Exception // Ngoại lệ người dùng
     {
         public UserException(string message): base(message) { }
 

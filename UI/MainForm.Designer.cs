@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.toolStripButtonSua = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonXoa = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnEvtDetail = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -140,25 +139,14 @@
             this.toolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButtonSua,
             this.toolStripButtonXoa,
             this.toolStripBtnEvtDetail});
-            this.toolStrip.Location = new System.Drawing.Point(0, 36);
+            this.toolStrip.Location = new System.Drawing.Point(0, 33);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip.Size = new System.Drawing.Size(1262, 54);
             this.toolStrip.TabIndex = 2;
             this.toolStrip.Text = "ToolBar";
-            // 
-            // toolStripButtonSua
-            // 
-            this.toolStripButtonSua.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonSua.Image")));
-            this.toolStripButtonSua.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonSua.Margin = new System.Windows.Forms.Padding(5, 2, 5, 3);
-            this.toolStripButtonSua.Name = "toolStripButtonSua";
-            this.toolStripButtonSua.Size = new System.Drawing.Size(78, 49);
-            this.toolStripButtonSua.Text = "Sửa";
-            this.toolStripButtonSua.Click += new System.EventHandler(this.toolStripButtonSua_Click);
             // 
             // toolStripButtonXoa
             // 
@@ -191,7 +179,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1262, 36);
+            this.menuStrip1.Size = new System.Drawing.Size(1262, 33);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip";
             // 
@@ -216,7 +204,7 @@
             // 
             this.toolstripCateViewer.Name = "toolstripCateViewer";
             this.toolstripCateViewer.Size = new System.Drawing.Size(329, 34);
-            this.toolstripCateViewer.Text = "Thêm Loại sự kiện";
+            this.toolstripCateViewer.Text = "Thêm/Xóa Hạng mục";
             this.toolstripCateViewer.Click += new System.EventHandler(this.toolstripCateViewer_Click);
             // 
             // tsmiCountEvtInCate
@@ -231,7 +219,7 @@
             this.tàiKhoảnToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmnItem_AccDetail});
             this.tàiKhoảnToolStripMenuItem.Name = "tàiKhoảnToolStripMenuItem";
-            this.tàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(102, 29);
+            this.tàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(102, 32);
             this.tàiKhoảnToolStripMenuItem.Text = "Tài khoản";
             // 
             // tsmnItem_AccDetail
@@ -378,12 +366,11 @@
             this.cbPrioSort.Font = new System.Drawing.Font("Segoe UI Variable Display", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbPrioSort.FormattingEnabled = true;
             this.cbPrioSort.Items.AddRange(new object[] {
-            "Cao",
-            "Trung bình",
-            "Thấp"});
+            "Thấp đến Cao",
+            "Cao đến Thấp"});
             this.cbPrioSort.Location = new System.Drawing.Point(179, 11);
             this.cbPrioSort.Name = "cbPrioSort";
-            this.cbPrioSort.Size = new System.Drawing.Size(123, 29);
+            this.cbPrioSort.Size = new System.Drawing.Size(127, 29);
             this.cbPrioSort.TabIndex = 3;
             this.cbPrioSort.Text = "Ưu tiên";
             this.cbPrioSort.SelectedIndexChanged += new System.EventHandler(this.cbCategoryFilter_SelectedIndexChanged);
@@ -1148,7 +1135,6 @@
 
         #endregion
         private System.Windows.Forms.ToolStrip toolStrip;
-        private System.Windows.Forms.ToolStripButton toolStripButtonSua;
         private System.Windows.Forms.ToolStripButton toolStripButtonXoa;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.Timer tm_Reminder;

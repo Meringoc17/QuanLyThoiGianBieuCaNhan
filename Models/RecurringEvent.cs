@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
 {
     [Serializable]
-    public class RecurringEvent : EventBase, ISerializable
+    public class RecurringEvent : EventBase, ISerializable   // sk lặp lại
     {
     
         public int RepeatIntervalDays { get; set; } = -1;
@@ -17,20 +17,20 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         public int? Occurrences { get; set; } = 0;
         public string DaysInVN { get; set; }
 
-        // Phần mới: Strategy
+        // Thuộc tính Interface tự tạo sk lặp lại theo RepeatUnit: Ngày, Tuần, Tháng, Năm
         public IRecurrenceStrategy RecurrenceStrategy { get; set; }
 
-        public RecurringEvent()
+        public RecurringEvent()  // Constructor mặc định tạo List chứa ngày trg Tuần
         {
             this.Days = new List<DayOfWeek>();
         }
 
-        public void RecurrGenerate()
+        public void RecurrGenerate()  // Phthuc khởi tạo sk tùy vào lchọn lặp lại
         {
             RecurrenceStrategy.Generate(this);
         }
 
-        public IRecurrenceStrategy GetStrategy()
+        public IRecurrenceStrategy GetStrategy() // Phthuc lấy lớp Strategy dựa trên Đvi thgian, gắn vào thuộc tính Evt
         {
             switch (RepeatUnit.ToLowerInvariant())
             {
@@ -47,8 +47,9 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             return new RecurringEvent(this, newStart, newEnd);
         }
 
+        // Constructor lấy từng thuộc tính
         public RecurringEvent(int interval, string unit, List<DayOfWeek> days,
-            DateTime endInForm, int occ, bool notified, string tt, DateTime start,
+            DateTime endInForm, int occ, bool notified, string tt, DateTime start,  
             DateTime end, string prio, List<Category> cates, bool status)
         {
             this.RepeatIntervalDays = interval;
@@ -66,52 +67,50 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             this.Categories = cates;
         }
 
+        // Constructor copy 1 sk gốc
         public RecurringEvent(EventBase e)
         {
             this.DaNhacNho = e.DaNhacNho;
             this.Title = e.Title;
             this.Start = e.Start;
             this.End = e.End;
-            //this.Type = e.Type;
             this.Priority = e.Priority;
             this.Status = e.Status;
             this.Days = new List<DayOfWeek>();
         }
 
+        // Constructor copy 1 sk lặp lại 
         public RecurringEvent(RecurringEvent e)
         {
             this.DaNhacNho = e.DaNhacNho;
             this.Title = e.Title;
             this.Start = e.Start;
             this.End = e.End;
-            //this.Type = e.Type;
             this.Priority = e.Priority;
-
             this.RepeatIntervalDays = e.RepeatIntervalDays;
             this.RepeatUnit = e.RepeatUnit;
             this.Days = e.Days != null ? new List<DayOfWeek>(e.Days) : new List<DayOfWeek>();
             this.EndDate = e.EndDate;
             this.Occurrences = e.Occurrences;
-
             this.RecurrenceStrategy = e.RecurrenceStrategy;
 
             // --- COPY CATEGORIES HERE ---
             this.Categories = e.Categories != null ? new List<Category>(e.Categories) : new List<Category>();
         }
 
+        // Constructor copy các thuộc tính gốc
         public RecurringEvent(string tt, DateTime start, DateTime end,
             List<Category> categories, string prio)
         {
             this.Title = tt;
             this.Start = start;
             this.End = end;
-            //this.Type = type;
             this.Priority = prio;
             this.Categories = categories ?? new List<Category>();
             this.Days = new List<DayOfWeek>();
         }
 
-        // sinh lần lặp tiếp theo
+        // dùng để sinh lần lặp tiếp theo cho phthuc các lớp thực thi IRecurrenceStrategy
         public RecurringEvent(RecurringEvent template, DateTime newStart, DateTime newEnd)
     : base()
         {
@@ -174,14 +173,16 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             info.AddValue("RecurrenceStrategy", this.RecurrenceStrategy, typeof(IRecurrenceStrategy));
         }
 
-        private int ThuVN(DayOfWeek dow)
+        // Chuyển đổi từ ngày trg tuần về số
+        private int ThuVN(DayOfWeek dow) 
         {
             int v = (int)dow;
             if (v == 0) v = 7;
             return v;
-        }
+        } 
 
-        private void SortDaysByWeek(List<DayOfWeek> list)
+        // Sắp xếp lại ds ngày trg tuần đã chọn
+        private void SortDaysByWeek(List<DayOfWeek> list)  
         {
             int i;
             int j;
@@ -199,6 +200,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             }
         }
 
+        // Trả về string về chi tiết lặp lại đã chọn (dùng trên txtbox MainForm)
         public override string ToString()
         {
             // nếu đã có strategy thì trả về mô tả của strategy
@@ -241,6 +243,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             return "Lặp lại mỗi " + this.RepeatIntervalDays + " " + this.RepeatUnit;
         }
 
+        // Chuyển đổi từ ngày trg tuần từ string sang kdl DayOfWeek
         public static DayOfWeek DayConverter(string d)
         {
             switch (d)
@@ -264,6 +267,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             }
         }
 
+        // Chuyển đổi DayOW sang string tiếng Việt
         public static string FromDOWtoDaysInVN(DayOfWeek d)
         {
             switch (d)
@@ -288,6 +292,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
         }
     }
 
+    // Lớp Factory cho khởi tạo SK lặp lại
     public class RecurringEvtFactory
     {
         public static RecurringEvent Create(int interval, string unit, List<DayOfWeek> days,

@@ -10,40 +10,30 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
 {
     [Serializable]
-    public class Category : ISerializable
+    public class Category : ISerializable  // Lớp đối tượng Hạng mục
     {
         private string name;
         private string description;
-        //public List<EventBase> Events { get; set; }  // Danh sách các sự kiện thuộc Category này
 
         public string Name { get; set; }
         public string Description { get; set; } = "";
 
-        public Category()
-        {
-            //Events = new List<EventBase>();  // Khởi tạo danh sách Events
-        }
+        public Category() {} // Constructor
 
-        public Category(string n, string des) : this()
+        public Category(string n, string des) : this() // Constructor có tham số
         {
             this.Name = n;
             this.Description = des;
         }
 
-        // Phương thức đếm số sự kiện thuộc Category này
-        /*public int CountEvents()
-        {
-            return Events.Count;  // Trả về số lượng sự kiện
-        }
-        */
-
+        //Deserialize
         protected Category(SerializationInfo info, StreamingContext context)
         {
             Name = info.GetString("Name");
             Description = info.GetString("Description");
         }
 
-        // Ghi dữ liệu vào SerializationInfo
+        // Ghi dữ liệu vào SerializationInfo, Serialize
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("Description", Description);

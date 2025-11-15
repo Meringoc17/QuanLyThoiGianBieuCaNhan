@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Exceptions
 {
-    internal class RcEvtException: ApplicationException
+    internal class RcEvtException: ApplicationException // Lquan đến sk lặp
     {
         public RcEvtException(string message): base(message) { }
 

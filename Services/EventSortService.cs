@@ -1,6 +1,7 @@
 ﻿using QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
 {
@@ -55,19 +56,50 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
             return result;
         }
 
+
+
         // Phương thức sắp xếp sự kiện theo ưu tiên
-        public static List<EventBase> SortByPriority(List<EventBase> events)
+        public static List<EventBase> SortByPriority(List<EventBase> events, string priority)
         {
-            List<EventBase> sortedEvents = new List<EventBase>(events);
+            List<EventBase> sorted = new List<EventBase>(events);
 
-            sortedEvents.Sort((e1, e2) =>
+            if (priority == "Thấp đến Cao")
             {
-                int priority1 = GetPriorityValue(e1.Priority);
-                int priority2 = GetPriorityValue(e2.Priority);
-                return priority1.CompareTo(priority2);
-            });
+                for (int i = 1; i < sorted.Count; i++)
+                {
+                    EventBase key = sorted[i];
+                    int j = i - 1;
 
-            return sortedEvents;
+                    // So sánh priority qua giá trị numeric
+                    while (j >= 0 && GetPriorityValue(sorted[j].Priority) > GetPriorityValue(key.Priority))
+                    {
+                        sorted[j + 1] = sorted[j];
+                        j--;
+                    }
+
+                    sorted[j + 1] = key;
+                }
+            }
+            else if (priority == "Cao đến Thấp")
+            {
+                for (int i = 1; i < sorted.Count; i++)
+                {
+                    EventBase key = sorted[i];
+                    int j = i - 1;
+
+                    // So sánh priority qua giá trị numeric
+                    while (j >= 0 && GetPriorityValue(sorted[j].Priority) < GetPriorityValue(key.Priority))
+                    {
+                        sorted[j + 1] = sorted[j];
+                        j--;
+                    }
+
+                    sorted[j + 1] = key;
+                }
+
+            }    
+
+            return sorted;
         }
 
 
@@ -76,14 +108,14 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
         {
             switch (priority)
             {
-                case "Cao":
+                case "Thấp":
                     return 1;
                 case "Trung bình":
                     return 2;
-                case "Thấp":
+                case "Cao":
                     return 3;
                 default:
-                    return 4; // Giá trị mặc định nếu không có ưu tiên hợp lệ
+                    return 4;
             }
         }
 
@@ -99,14 +131,8 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
                 filteredEvents = FilterByType(filteredEvents, selectedType);
             }
 
-            // Lọc sự kiện theo ưu tiên nếu có ưu tiên được chọn
-            if (!string.IsNullOrEmpty(selectedPriority))
-            {
-                filteredEvents = FilterByPriority(filteredEvents, selectedPriority);
-            }
-
-            // Sắp xếp sự kiện theo ưu tiên (ưu tiên cao lên đầu)
-            return SortByPriority(filteredEvents);
+            // Sắp xếp sự kiện theo ưu tiên (trả về ds đã sắp xếp Thấp -> Cao/Cao -> Thấp)
+            return SortByPriority(filteredEvents, selectedPriority);
         }
 
     }

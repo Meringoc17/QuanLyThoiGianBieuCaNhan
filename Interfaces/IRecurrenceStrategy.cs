@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Interfaces
 {
-    public interface IRecurrenceStrategy
+    public interface IRecurrenceStrategy // Des. Pattern Strategy: Daily, Weekly, Monthly, Yearly
     {
         List<RecurringEvent> Generate(RecurringEvent recurringEvent);
         string Describe();

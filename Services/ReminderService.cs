@@ -62,7 +62,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Services
                     // So sánh theo phút thay vì giây
                     if (now == remindTime)
                     {
-                        ev.Reminder.Trigger(ev);
+                        ev.Reminder.Trigger(ev); // Kích hoạt thông báo
                         ev.DaNhacNho = true;
                     }
                 }

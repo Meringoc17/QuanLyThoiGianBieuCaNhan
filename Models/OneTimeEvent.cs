@@ -7,11 +7,9 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
     [Serializable]
     public class OneTimeEvent : EventBase, ISerializable
     {
-        public OneTimeEvent() 
-        {
+        public OneTimeEvent() { } // Constructor mặc định
 
-        }
-
+        // Constructor có các tham số truyền vào
         public OneTimeEvent(string tt, DateTime start, DateTime end, List<Category> categories, string prio)
         {
             this.Title = tt;
@@ -22,6 +20,7 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             this.Priority = prio;
         }
 
+        // Constructor có tham số EventBase
         public OneTimeEvent(EventBase e)
         {
             this.Title = e.Title;
@@ -52,8 +51,10 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN.Models
             base.GetObjectData(info, context);
             // Nếu có thêm field riêng của OneTimeEvent, thêm vào đây
         }
+
     }
 
+    // Lớp Factory tạo OneTimeEvt
     public class OneTimeEvtFactory
     {
         public static OneTimeEvent Create(string tt, DateTime start, DateTime end, List<Category> categories, string prio)

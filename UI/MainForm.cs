@@ -1012,39 +1012,6 @@ namespace QUẢN_LÝ_THỜI_GIAN_BIỂU_CÁ_NHÂN
                         row.DefaultCellStyle.ForeColor = Color.Red;
                         row.DefaultCellStyle.BackColor = Color.MistyRose;
 
-                        List<RecurringEvent> newEvents = new List<RecurringEvent>();
-                        List<RecurringEvent> removeOldEvts = new List<RecurringEvent>();
-
-                        foreach (EventBase re in currentUser_Sched.Events)
-                        {
-                            if (re is RecurringEvent r)
-                            {
-                                RecurringEvent newEvt = EventManager.rcEvt_EndGenLoop(currentUser_Sched, r);
-                                if (newEvt != null)
-                                    newEvents.Add(newEvt);
-                                if (r.End < DateTime.Now)
-                                    removeOldEvts.Add(r);
-                            }
-
-                        }
-
-                        // ✅ Add vào cả Schedule lẫn UI BindingList
-                        foreach (RecurringEvent ev in newEvents)
-                        {
-                            allEvents.Add(ev);
-                        }
-
-                        foreach (RecurringEvent ev in removeOldEvts)
-                        {
-                            allEvents.Remove(ev);
-                        }
-
-                        if (newEvents.Count > 0)
-                        {
-                            DisplayCalendar(currentMonth); // cập nhật lịch
-                            allEvents.ResetBindings();     // cập nhật bảng
-                        }
-
                     }
                     else if (now >= startTime && now <= endTime)
                     {
